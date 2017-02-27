@@ -1,0 +1,11 @@
+div{
+    margin: 0;
+    padding: 0;
+}
+
+.gnb{
+    background: url(../images/common/img_01.jpg) no-repeat left top;
+    width: 640px;
+    height: 461px;
+    display: block;
+}
