@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Created by .ignore support plugin (hsz.mobi)
 ### Example user template template
 ### Example user template
@@ -8,5 +9,6 @@
 out
 gen
 
-/node_modules/
 dist/
+.idea/
+node_modules/
