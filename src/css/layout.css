@@ -9,3 +9,6 @@ div{
     height: 461px;
     display: block;
 }
+.highlight{
+    border: 1px solid #000;
+}

@@ -13,11 +13,6 @@ module.exports = {
         path: resolve(__dirname, 'dist'),
         filename: 'modules/[name].js'
     },
-    resolve: {
-        alias: {
-            'bxslider': resolve(__dirname, 'node_modules/bxslider/dist/jquery.bxslider.js')
-        }
-    },
     devServer: {
         port: 9002, compress: true,
         hot: true,
@@ -48,14 +43,15 @@ module.exports = {
                         ['env', {targets: {browsers: ['last 2 versions', '> 10%', 'ie 9']}}]
                     ]
                 }}
-            ], exclude: /node_modules/},
+            ], exclude: /(node_modules|src\/tpl\/|src\/unit-test\/)/ },
             {test: /\.css$/, use: [
                 {loader: 'style-loader'},
                 {loader: 'css-loader', options: {sourceMap: false, publicPath: '../'}},
                 {loader: 'postcss-loader', options:{plugins: function () { return [require('autoprefixer')]}}}
             ]},
             {test: /\.(jpe?g|gif|png)$/, use:[{loader: 'file-loader', options: {name: 'images/[folder]/[name].[ext]'}}]},
-            {test: /\.html$/, use: [{loader: 'html-loader', options: {attrs: ['img:src']}}]},
+            {test: /\.html$/, use: [{loader: 'html-loader', options: {attrs: ['img:src']}}],
+                exclude: /(node_modules|src\/tpl\/|src\/unit-test\/)/},
             {test: require.resolve('jquery'), loader: 'expose-loader?$!expose-loader?jQuery!expose-loader?window.$!expose-loader?window.jQuery'}
         ]
     }

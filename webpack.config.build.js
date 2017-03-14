@@ -45,7 +45,7 @@ module.exports = {
     ],
     resolve: {
         alias: {
-            'bxslider': resolve(__dirname, 'node_modules/bxslider/dist/jquery.bxslider.js')
+            // 'bxslider': resolve(__dirname, 'node_modules/bxslider/dist/jquery.bxslider.js')
         }
     },
     module: {
@@ -57,7 +57,7 @@ module.exports = {
                     ]
                 }},
                 {loader: 'webpack-strip', options: {strip: ['console.log']}}
-            ], exclude: /node_modules/},
+            ], exclude: /(node_modules|src\/tpl\/|src\/unit-test\/)/},
 
             {test: /\.css$/, use: ExtractCSS.extract({
                     fallback: 'style-loader',
