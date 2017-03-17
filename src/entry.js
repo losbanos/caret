@@ -2,7 +2,9 @@ import './css/basic.css';
 import './css/layout.css';
 
 import './modules/common/sly';
-import textSelect from './modules/io/TextSelect';
+
+import SortText from './modules/common/SortText';
+import TextSelect from './modules/actions/TextSelect';
 
 if(process.env.NODE_ENV !=='production') {
     // require('index.html');
@@ -10,8 +12,8 @@ if(process.env.NODE_ENV !=='production') {
 
 $(document).ready(function () {
 	let $ta = $('#text_area'),
-		texts = $ta.text().replace(/(\r\n|\r|\n)/g, '<br />').replace(/(\s{2,}|$\s{2,})/, '');
+		texts = SortText.init($ta.text());
 
-	textSelect.init($ta.html(texts));
+	TextSelect.init($ta.html(texts));
 });
 

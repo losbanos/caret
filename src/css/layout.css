@@ -1,14 +1,278 @@
-div{
-    margin: 0;
-    padding: 0;
+div,h1,h2,h3,h4,h5,h6, ul, ol, li, p, textarea, button{
+    margin: 0; padding: 0;
 }
+div, textarea, input, span, h1,h2,h3,h4,h5,h6, ul, li{
+    font-family: '굴림', gulim, dotum, Verdana, sans-serif;
+    color: black;
+    font-size: 12px;
+}
+textarea{
+    padding: 5px;
+    resize: vertical;
+    border: 1px solid #eee;
+}
+button{
+    border:none;
+    cursor: pointer;
+}
+ul, ol, li{list-style: none;}
+a:link,
+a:hover{
+    text-decoration: none;
+    color: #000;
+}
+.root{
+    text-align: center;
+}
+.gutter{
+    width: 1000px;
+    margin: 0 auto;
+    text-align: left;
+}
+.mast-head{
+    width: 100%; height: 50px;
+    background-color: #efefef;
+    overflow: hidden;
+}
+h1{
+    float: left;
+    width: 98px; height: 50px;
+    background: url("../images/logo.png")no-repeat left top;
+    text-indent: -9999px;
+    overflow: hidden;
+}
+h2{
+    float: left;
+    margin-left: 14px; margin-top: 12px;
+    font-size: 20px; line-height: 1.0;
+}
+h2 span{
+    font-size: 15px;
+}
+.mast-head .gutter{
+    overflow: hidden;
+}
+.main-head{
+    padding: 18px;
+    margin-top: 10px;
+    border: 1px solid #e9e9e9;
+}
+.main-title-row{
+    overflow: hidden;
+    /*border-bottom: 1px solid #e9e9e9;*/
+}
+    .main-title-row h4{
+        float: left;
+        font-weight: bold;
+    }
+    .main-title-row .user-info{
+        float: right;
+    }
+    .main-title-comment{
+        clear: both;
+        font-size: 12px;
+    }
+    .main-title-comment:before{
+        content: '';
+        display: block;
+        width: 100%; height: 1px;
+        margin: 12px 0;
+        background-color: #e9e9e9;
+    }
 
-.gnb{
-    background: url(../images/common/img_01.jpg) no-repeat left top;
-    width: 640px;
-    height: 461px;
-    display: block;
+.contents{
+    margin-top: 10px;
+    overflow: hidden;
+    border:1px solid #e9e9e9;
+    border-top:0 none;
 }
+    .contents-head{
+        height: 40px;
+        padding: 0 20px;
+        background-color: #000;
+        color: #fff;
+        overflow: hidden;
+    }
+        .contents-head h4{
+            float: left;
+            color: #fff;
+            line-height: 40px;
+        }
+        .contents-head span{
+            float: right;
+            color: #929292;
+            line-height: 40px;
+        }
+    .contents-body{
+        overflow: hidden;
+    }
+        .text-area{
+            float: left;
+            width: 691px; height: 600px;
+            overflow-y: auto;
+            padding: 20px 24px 60px;
+            line-height: 80px;
+        }
+        .comment-area{
+            float: right;
+            width: 239px;
+            padding: 8px 10px;
+        }
+            .comment-area h5{
+                font-weight: bold;
+            }
+            .comment-area li{
+                margin-top: 10px;
+                /*position: relative;*/
+                background-color: #eee;
+            }
+            .comment-head{
+                line-height: 25px;
+            }
+            .comment-head p{
+                float: left;
+                margin-left: 6px;
+                /*height: 25px;*/
+                color: red;
+            }
+            .comment-area li button{
+                float: right;
+                display: block;
+                width: 50px; height: 25px;
+                right: 0; top: 0;
+                border: 0 none;
+                background: url("../images/btn_remove.png")no-repeat left top;
+                text-indent: -9999px;
+                cursor: pointer;
+            }
+            .comment-area .comment-text {
+                padding: 8px 8px 8px;
+                clear: both;
+                line-height: 1.4;
+            }
+
+.controller{
+    height: 184px;
+}
+    .controller .gutter{
+        overflow: hidden;
+        background-color: #eee;
+    }
+    .controller .gutter-in{
+        padding: 10px;
+    }
+    .controller .col{
+        float: left;
+        overflow: hidden;
+    }
+    .correction{
+        width: 315px;
+        /*height: 144px;*/
+    }
+        .correction-head{
+            overflow: hidden;
+            line-height: 25px;
+        }
+        .correction-head h6{
+            float: left;
+        }
+        .correction-head button{
+            float: right;
+            display: block;
+            width: 50px;height: 25px;
+            background: url("../images/btn_apply.png")no-repeat left top;
+            text-indent: -9999px;
+            border: 0;
+        }
+        .correction-body textarea{
+            width: 305px;
+            height: 129px;
+            overflow-y: auto;
+        }
+    .func-tab{
+        margin-left: 10px;
+    }
+        .tab-tit{
+            height: 42px;
+        }
+        .tab-tit a{
+            float: left;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 80px; height: 42px;
+            border-left: 1px solid #eee;
+            background-color: #bbb; color: #fff;
+            text-align: center;
+        }
+        .tab-tit .active,
+        .tab-tit a:hover{
+            background-color: #fff;
+            color: black;
+        }
+        .tab-contents{
+            clear: both;
+            width: 404px; height: 123px;
+            border-top:1px solid #ccc;
+            background-color: #fff;
+            overflow-y: auto;
+        }
+.caret-box{
+    float: left;
+    margin-left: 10px;
+    width: 240px; height: 164px;
+}
+    .paragraph-caret{
+        overflow: hidden;
+    }
+    .paragraph-caret button{
+        float: left;
+        display: block;
+        height: 30px; width: 93px;
+        background-color: #888;
+        line-height: 30px;
+        color: #fff;
+        margin-left: 5px;
+    }
+    .paragraph-caret button:first-child{
+        width: 142px;
+        margin-left: 0;
+    }
+    .marking-caret{
+        clear: both;
+        margin-top: 10px;
+        margin-left: -4px;
+        margin-bottom: -4px;
+    }
+    .marking-caret button{
+        display: block;
+        float: left;
+        width: 45px; height: 40px;
+        margin-left: 3px;
+        margin-bottom: 4px;
+        background: url("../images/btn_caret.png")no-repeat left top;
+        overflow: hidden;
+
+    }
+    .marking-caret button:nth-child(2){ background-position-y: -40px; }
+    .marking-caret button:nth-child(3){ background-position-y: -80px; }
+    .marking-caret button:nth-child(4){ background-position-y: bottom; }
+    .marking-caret button:nth-child(5){ background-position-y: bottom; }
+    .marking-caret button:nth-child(6){ background-position-y: -120px; }
+    .marking-caret button:nth-child(7){ background-position-y: -160px; }
+    .marking-caret button:nth-child(8){ background-position-y: -200px; }
+    .marking-caret button:nth-child(9){ background-position-y: -240px; }
+    .marking-caret button:nth-child(10){ background-position-y: -280px;}
+.net{
+    clear: both;
+}
+    .net button{
+        width: 118px;
+        height: 30px;
+        margin-top: 10px;
+        color: #fff; background-color: #888;
+        text-align: center;
+    }
 .highlight{
     border: 1px solid #000;
 }

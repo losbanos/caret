@@ -3,6 +3,7 @@ const {resolve} = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const WebpackBrowserPlugin = require('webpack-browser-plugin');
 
+process.noDeprecation = true
 module.exports = {
     devtool: 'eval-source-map',
     entry: {
@@ -11,7 +12,7 @@ module.exports = {
     },
     output: {
         path: resolve(__dirname, 'dist'),
-        filename: 'modules/[name].js'
+        filename: 'modules/[name].[hash].js'
     },
     devServer: {
         port: 9002, compress: true,
@@ -50,7 +51,10 @@ module.exports = {
                 {loader: 'postcss-loader', options:{plugins: function () { return [require('autoprefixer')]}}}
             ]},
             {test: /\.(jpe?g|gif|png)$/, use:[{loader: 'file-loader', options: {name: 'images/[folder]/[name].[ext]'}}]},
-            {test: /\.html$/, use: [{loader: 'html-loader', options: {attrs: ['img:src']}}],
+            {test: /\.html$/, use: [
+                // {loader: 'html-loader', options: {attrs: ['img:src']}},
+                {loader: 'raw-loader'}
+                ],
                 exclude: /(node_modules|src\/tpl\/|src\/unit-test\/)/},
             {test: require.resolve('jquery'), loader: 'expose-loader?$!expose-loader?jQuery!expose-loader?window.$!expose-loader?window.jQuery'}
         ]

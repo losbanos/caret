@@ -1,8 +1,13 @@
+import uuid from 'uuid';
+
 const c = {
+	$target: '',
 	init ($target) {
-		this.$ta = $target;
+		this.$target = $target;
+
 		$target.click(function () {
 			let sp = document.createElement('span');
+			sp.id = uuid.v1();
 			sp.className = 'highlight';
 
 			let sel = window.getSelection();
@@ -17,7 +22,7 @@ const c = {
 		})
 	},
 	destory() {
-		this.$ta.off('click');
+		this.$target.off('click');
 	}
 };
 
