@@ -21,6 +21,9 @@ a:hover{
     text-decoration: none;
     color: #000;
 }
+::selection{background: transparent;color:red;}
+::-moz-selection{background: transparent;color:red;}
+
 .root{
     text-align: center;
 }
@@ -71,6 +74,7 @@ h2 span{
     .main-title-comment{
         clear: both;
         font-size: 12px;
+        line-height: 1.5;
     }
     .main-title-comment:before{
         content: '';

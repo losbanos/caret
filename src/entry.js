@@ -4,7 +4,7 @@ import './css/layout.css';
 import './modules/common/sly';
 
 import SortText from './modules/common/SortText';
-import TextSelect from './modules/actions/TextSelect';
+import SelectText from './modules/actions/SelectText';
 
 if(process.env.NODE_ENV !=='production') {
     // require('index.html');
@@ -12,8 +12,9 @@ if(process.env.NODE_ENV !=='production') {
 
 $(document).ready(function () {
 	let $ta = $('#text_area'),
-		texts = SortText.init($ta.text());
+		texts = SortText.init($ta.text())
+	;
+	SelectText.init($ta.html(texts));
 
-	TextSelect.init($ta.html(texts));
 });
 
