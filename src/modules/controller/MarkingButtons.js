@@ -20,7 +20,7 @@ const c = {
 			target = 'single';
 		}
 
-		this.$buttons.filter(function (i, n) {
+		this.$buttons.filter(function () {
 			return this.getAttribute('class') == target;
 		}).removeAttr('disabled').addClass('cursor');
 
@@ -33,7 +33,6 @@ const c = {
 			let $cur = $(model.getCurrentItem().node);
 			$cur.addClass(mark_id);
 
-			console.log('cur = ',$cur);
 			c.$buttons.attr('disabled', true).removeClass('cursor');
 			c.$carets.off('click');
 
@@ -45,5 +44,5 @@ const c = {
 	deactivate() {
 		this.$carets.off('click');
 	}
-}
+};
 module.exports = c;
