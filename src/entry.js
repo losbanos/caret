@@ -4,7 +4,7 @@ import './css/layout.css';
 import './modules/common/sly';
 
 import SortText from './modules/common/SortText';
-import SelectText from './modules/actions/SelectText';
+import SelectText from './modules/textview/SelectText';
 
 if(process.env.NODE_ENV !=='production') {
     // require('index.html');

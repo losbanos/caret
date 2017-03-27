@@ -23,7 +23,7 @@ const c = {
 						range.surroundContents(sp);
 						sel.removeAllRanges();
 						sel.addRange(range);
-						Model.addItem({id: sp.id, text: sel_text, node: sp, marked: false})
+						Model.addItem({id: sp.id, text: sel_text, node: sp, marked: false});
 						sel.removeAllRanges()
 					}
 					catch(e) {
@@ -33,7 +33,10 @@ const c = {
 					}
 				}
 			}
-		});
+		})
+			.on('focusout', function () {
+				console.log('ok out')
+			})
 
 	},
 	destory() {

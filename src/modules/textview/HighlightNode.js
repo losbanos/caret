@@ -13,7 +13,7 @@ const HighlightNode = {
 
 	},
 	destory () {
-
+		console.log('ab');
 	}
 };
 module.exports = HighlightNode;
