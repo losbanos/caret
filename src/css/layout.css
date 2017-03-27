@@ -13,6 +13,8 @@ textarea{
 }
 button{
     border:none;
+}
+.cursor{
     cursor: pointer;
 }
 ul, ol, li{list-style: none;}
@@ -114,9 +116,9 @@ h2 span{
     }
         .text-area{
             float: left;
-            width: 691px; height: 600px;
+            width: 691px; height: 500px;
             overflow-y: auto;
-            padding: 20px 24px 60px;
+            padding: 20px 24px 40px;
             line-height: 80px;
         }
         .text-area br{
@@ -228,7 +230,7 @@ h2 span{
             background-color: #fff;
             overflow-y: auto;
         }
-.caret-box{
+.btn-box{
     float: left;
     margin-left: 10px;
     width: 240px; height: 164px;
@@ -244,6 +246,7 @@ h2 span{
         line-height: 30px;
         color: #fff;
         margin-left: 5px;
+        opacity: 0.5;
     }
     .paragraph-caret button:first-child{
         width: 142px;
@@ -254,6 +257,7 @@ h2 span{
         margin-top: 10px;
         margin-left: -4px;
         margin-bottom: -4px;
+        overflow: hidden;
     }
     .marking-caret button{
         display: block;
@@ -263,7 +267,7 @@ h2 span{
         margin-bottom: 4px;
         background: url("../images/btn_caret.png")no-repeat left top;
         overflow: hidden;
-
+        opacity: 0.5;
     }
     .marking-caret button:nth-child(2){ background-position-y: -40px; }
     .marking-caret button:nth-child(3){ background-position-y: -80px; }
@@ -274,6 +278,12 @@ h2 span{
     .marking-caret button:nth-child(8){ background-position-y: -200px; }
     .marking-caret button:nth-child(9){ background-position-y: -240px; }
     .marking-caret button:nth-child(10){ background-position-y: -280px;}
+
+    .marking-caret .cursor,
+    .paragraph-caret .cursor{
+        opacity: 1;
+    }
+
 .net{
     clear: both;
 }

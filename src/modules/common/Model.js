@@ -1,3 +1,9 @@
+import _ from 'lodash';
+/**
+ *
+ * @param items { Array }
+ * 				Structure: {id: {String}, text: {String}, node: {DOM Element}, marked: {Boolean}
+ */
 const model = {
 	items: [],
 	removeItem (idx) {
@@ -11,18 +17,20 @@ const model = {
 	},
 	getNonMarked () {
 		return this.items.filter(function (n, i) {
-			return !n.marked
+			return n.marked == false;
 		})
 	},
-	markingItem (id) {
-
+	removeNonMarkedItem(id) {
+		return _.remove(this.items, function (n) {
+			return n.marked == false;
+		});
 	},
 	removeAllItems() {
-
+		this.items.splice(0, this.items.length);
 	},
 	getCurrentItem() {
 		return this.items[this.items.length -1 ];
-	}
+	},
 };
 
 export default model;
