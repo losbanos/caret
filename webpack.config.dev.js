@@ -50,7 +50,7 @@ module.exports = {
                 {loader: 'css-loader', options: {sourceMap: false, publicPath: '../'}},
                 {loader: 'postcss-loader', options:{plugins: function () { return [require('autoprefixer')]}}}
             ]},
-            {test: /\.(jpe?g|gif|png)$/, use:[{loader: 'file-loader', options: {name: 'images/[folder]/[name].[ext]'}}]},
+            {test: /\.(jpe?g|gif|png)$/, use:[{loader: 'file-loader', options: {name: '[folder]/[name].[ext]'}}]},
             {test: /\.html$/, use: [
                 // {loader: 'html-loader', options: {attrs: ['img:src']}},
                 {loader: 'raw-loader'}
