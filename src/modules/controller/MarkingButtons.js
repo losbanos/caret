@@ -21,7 +21,7 @@ const c = {
 		}
 
 		this.$buttons.filter(function () {
-			return this.getAttribute('class') == target;
+			return this.getAttribute('class') === target;
 		}).removeAttr('disabled').addClass('cursor');
 
 		this.$carets.on('click', 'button', function (ev) {
@@ -30,8 +30,9 @@ const c = {
 			let $this = $(this),
 				mark_id = $this.attr('id')
 			;
-			let $cur = $(model.getCurrentItem().node);
-			$cur.addClass(mark_id);
+			let cur = model.getCurrentItem();
+			$(cur.node).addClass(mark_id);
+			model.setCurrentItemToMarked();
 
 			c.$buttons.attr('disabled', true).removeClass('cursor');
 			c.$carets.off('click');

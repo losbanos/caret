@@ -16,13 +16,13 @@ const model = {
 		return this.items[idx];
 	},
 	getNonMarked () {
-		return this.items.filter(function (n, i) {
-			return n.marked == false;
+		return this.items.filter(function (n) {
+			return n.marked === false;
 		})
 	},
 	removeNonMarkedItem(id) {
 		return _.remove(this.items, function (n) {
-			return n.marked == false;
+			return n.marked === false;
 		});
 	},
 	removeAllItems() {
@@ -31,6 +31,13 @@ const model = {
 	getCurrentItem() {
 		return this.items[this.items.length -1 ];
 	},
+	setCurrentItemToMarked(id) {
+		this.getCurrentItem().marked = true;
+	},
+	setItemToMarked(cur) {
+		let item = _.find(this.items, {id: cur.id});
+		item.marked = true;
+	}
 };
 
 export default model;

@@ -294,6 +294,55 @@ h2 span{
         color: #fff; background-color: #888;
         text-align: center;
     }
+
 .highlight{
+    position: relative;
     border: 1px solid #000;
+
+}
+.highlight:before,
+.highlight:after{
+    content: '';
+    position: absolute;left: 0; top: 0;
+    overflow: hidden;
+}
+.paragraph{
+
+}
+.removeletter{
+    text-decoration: line-through;
+}
+.removeletter:after{
+    background: url("../images/ico_caret.png")no-repeat right -20px;
+    width: 13px; height: 12px;
+}
+.stitch:before{
+    top: -16px;
+    height: 16px;
+    border-top: 2px solid #df0000;
+    border-radius: 40px 40px / 40px;
+}
+.cancel{
+    background-image: none;
+    text-decoration: line-through;
+}
+.spacing:after{
+    background: url("../images/ico_caret.png")no-repeat left top;
+    width: 9px; height: 6px;
+}
+.period:after{
+    background: url("../images/ico_caret.png")no-repeat left -50px;
+    width: 9px; height: 14px;
+}
+.comma:after{
+    background: url("../images/ico_caret.png")no-repeat left -70px;
+    width: 9px; height: 15px;
+}
+.indent:before{
+    background: url("../images/ico_caret.png")no-repeat left -90px;
+    width: 5px; height: 19px;
+}
+.linebreak:after{
+    background: url("../images/ico_caret.png")no-repeat right -110px;
+    width: 12px; height: 17px;
 }
