@@ -4,10 +4,14 @@ const HighlightNode = {
 	el: '',
 	items: [],
 	create () {
-		let sp = document.createElement('span');
+		let sp = document.createElement('span'),
+			ico = document.createElement('i')
+		;
+
 		sp.id = uuid.v1();
 		sp.className = 'highlight';
 		this.el = sp;
+
 		return sp;
 	},
 	setAttributes(obj) {

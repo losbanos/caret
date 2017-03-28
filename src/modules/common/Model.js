@@ -34,8 +34,6 @@ const model = {
 	},
 	setCurrentItemToMarked(id) {
 		this.getCurrentItem().marked = true;
-		console.log('----------------')
-		console.log('model items = ',this.getCurrentItem());
 	},
 	setItemToMarked(cur) {
 		let item = _.find(this.items, {id: cur.id});

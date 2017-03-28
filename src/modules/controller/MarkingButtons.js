@@ -36,6 +36,10 @@ const c = {
 			;
 			$cur.addClass(mark_id).removeClass('highlight');
 			if(h > 20 ) { $cur.addClass('multi-line'); }
+			/*HighlightNode 에서 처리하도록 수정 필요 */
+			if(!$cur.children('.icon').length && mark_id === 'removeletter'){
+				$cur.append($('<i />',{class:'icon'}));
+			}
 
 			model.setCurrentItemToMarked();
 
