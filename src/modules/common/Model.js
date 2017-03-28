@@ -3,6 +3,7 @@ import _ from 'lodash';
  *
  * @param items { Array }
  * 				Structure: {id: {String}, text: {String}, node: {DOM Element}, marked: {Boolean}
+ *
  */
 const model = {
 	items: [],
@@ -33,6 +34,7 @@ const model = {
 	},
 	setCurrentItemToMarked(id) {
 		this.getCurrentItem().marked = true;
+		console.log(this.items);
 	},
 	setItemToMarked(cur) {
 		let item = _.find(this.items, {id: cur.id});
