@@ -30,13 +30,17 @@ const c = {
 			let $this = $(this),
 				mark_id = $this.attr('id')
 			;
-			let cur = model.getCurrentItem();
-			$(cur.node).addClass(mark_id);
+			let cur = model.getCurrentItem(),
+				$cur = $(cur.node),
+				h = $cur.height()
+			;
+			$cur.addClass(mark_id).removeClass('highlight');
+			if(h > 20 ) { $cur.addClass('multi-line'); }
+
 			model.setCurrentItemToMarked();
 
 			c.$buttons.attr('disabled', true).removeClass('cursor');
 			c.$carets.off('click');
-
 		})
 	},
 	handleMark(ev) {
