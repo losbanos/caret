@@ -1,5 +1,6 @@
 import '../addons/Utils';
 import model from '../common/Model';
+import highlightNode from '../textview/HighlightNode';
 
 const c = {
 	$carets: '',
@@ -23,41 +24,45 @@ const c = {
 		this.$buttons.filter(function () {
 			return this.getAttribute('class') === target;
 		}).removeAttr('disabled').addClass('cursor');
+		console.log(this.$carets);
+		this.$carets.one('click', 'button', function (ev) {
 
-		this.$carets.on('click', 'button', function (ev) {
 			$.preventActions(ev);
 
 			let $this = $(this),
 				mark_id = $this.attr('id')
 			;
-			let cur = model.getCurrentItem(),
-				$cur = $(cur.node),
+			let cur = highlightNode.getCurrentItem(),
+				$cur = $(cur.el),
 				h = $cur.height()
 			;
+
 			$cur.addClass(mark_id).removeClass('highlight');
-			if(h > 20 ) { $cur.addClass('multi-line'); }
+			if (h > 20) {
+				$cur.addClass('multi-line');
+			}
 
 			/* <-- HighlightNode 에서 처리하도록 수정 필요 */
-			if(!$cur.children('.icon').length && mark_id === 'removeletter'){
-				$cur.append($('<i />',{class:'icon'}));
+			if (!$cur.children('.icon').length && mark_id === 'removeletter') {
+				$cur.append($('<i />', {class: 'icon'}));
 			}
 			/* end --> */
-			if(mark_id==='paragraph') {
+			if (mark_id === 'paragraph') {
 				let $line = $('<span />', {class: 'paragraph-line'}),
 					$ta = $('#text_area')
 				;
 
 				$line.appendTo($ta)
-				.css({top: $cur.position().top + $ta.scrollTop() , height: $cur.height()})
-				.attr('id', cur.id);
+					.css({top: $cur.position().top + $ta.scrollTop(), height: $cur.height()})
+					.attr('id', cur.id);
 
 				let tx = $cur.html();
 				$cur.replaceWith(tx);
-			}
-			$cur.on('click', function () {
+				$cur = $line;
+			};
 
-			});
-			model.setCurrentItemToMarked();
+			// highlightNode.add($cur);
+			highlightNode.setCurrentItemToMarked();
 
 			c.$buttons.attr('disabled', true).removeClass('cursor');
 			c.$carets.off('click');

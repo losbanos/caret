@@ -23,8 +23,10 @@ a:hover{
     text-decoration: none;
     color: #000;
 }
-::selection{background: transparent;color:red;}
-::-moz-selection{background: transparent;color:red;}
+::selection{background: transparent;color:red;
+    font-weight: bold;}
+::-moz-selection{background: transparent;color:red;
+    font-weight: bold;}
 
 .root{
     text-align: center;
@@ -151,6 +153,9 @@ h2 span{
                 width: 10px; height:92px;
                 border: 2px solid #df0000;
                 border-left: none;
+            }
+            .linear{
+                background-color: #fffd71;
             }
             .removeletter:before,
             .removeletter:after{

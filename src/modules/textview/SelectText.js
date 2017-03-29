@@ -1,4 +1,3 @@
-import Model from '../common/Model';
 import HighLightNode from './HighlightNode';
 import MarkingButtons from '../controller/MarkingButtons';
 
@@ -7,11 +6,9 @@ const c = {
 	init ($target) {
 		this.$target = $target;
 		$target.mousedown(function () {
-			if (Model.items.length) c.removeNonMarked();
+			if (HighLightNode.items.length) c.removeNonMarked();
 		})
-		.click(function () {
-			c.mark();
-		})
+		.on('click', function () { c.mark(); })
 	},
 	mark () {
 		let sp = HighLightNode.create(),
@@ -28,7 +25,7 @@ const c = {
 					range.surroundContents(sp);
 					sel.removeAllRanges();
 					sel.addRange(range);
-					Model.addItem({id: sp.id, text: sel_text, node: sp, marked: false});
+					HighLightNode.add({id: sp.id, text: sel_text, el: sp, marked: false});
 					sel.removeAllRanges();
 
 					c.activateController(sel_text);
@@ -45,7 +42,7 @@ const c = {
 		this.$target.off('click');
 	},
 	removeNonMarked () {
-		Model.removeNonMarkedItem().forEach(function (n) {
+		HighLightNode.removeNonMarked().forEach(function (n) {
 			let $n = $('#'+n.id),
 				text = $n.html()
 			;
@@ -55,7 +52,7 @@ const c = {
 	},
 	activateController(selected_text) {
 		let is_multi_mark = selected_text.length ? 1: 0;
-
+		console.log('activateController');
 		MarkingButtons.activate(is_multi_mark);
 	},
 	deactivateController() {
