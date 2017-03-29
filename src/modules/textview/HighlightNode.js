@@ -12,7 +12,7 @@ const h = {
 		sp.className = 'highlight';
 		this.el = sp;
 
-		// $(sp).on('click', this.clicked);
+		$(sp).on('click', this.clicked.bind(sp));
 		return sp;
 	},
 
@@ -20,7 +20,13 @@ const h = {
 		return this.items.push($el);
 	},
 	clicked() {
-		console.log('clicked by create Element')
+		let $this = $(this);
+		$this.replaceWith($this.text());
+
+		// _.remove(h.items, function (n) {
+		// 	if( n.id === $this.attr('id')){
+		// 	}
+		// });
 	},
 	getCurrentItem() {
 		return this.items[this.items.length -1 ];
