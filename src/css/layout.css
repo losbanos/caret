@@ -255,10 +255,28 @@ h2 span{
                 cursor: pointer;
             }
             .comment-area .comment-text {
+                position: relative;
                 padding: 8px 8px 8px;
                 clear: both;
                 line-height: 1.4;
             }
+                .comment-text > div{
+                    position: absolute;
+                }
+                .comment-text textarea,
+                .comment-text .view{
+                    /*display: none;*/
+                    left: 0; top: 0;
+                }
+                .comments .edit textarea{
+                    z-index: 2;
+                    background-color: #fff;
+                    width: 100%; min-height: 240px;
+                    overflow: hidden;
+                }
+                .comments .edit .view{
+                    z-index: 0;
+                }
 
         /* Controller */
         .controller{

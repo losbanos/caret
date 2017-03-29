@@ -5,6 +5,7 @@ import './modules/common/Sly';
 import MarkButtons from './modules/controller/MarkingButtons';
 import SortText from './modules/common/SortText';
 import SelectText from './modules/textview/SelectText';
+import Comment from './modules/comment/Comment';
 
 if (process.env.NODE_ENV !== 'production') {
 	// require('index.html');
@@ -16,6 +17,6 @@ $(document).ready(function () {
 	;
 	MarkButtons.init();
 	SelectText.init($ta.html(texts));
-
+	Comment.init();
 });
 

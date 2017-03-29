@@ -4,7 +4,6 @@ import highlightNode from '../textview/HighlightNode';
 const c = {
 	$carets: '',
 	$buttons: '',
-	$targetCarets: '',
 	init () {
 		this.$carets = $('#caret_box');
 		this.$buttons = this.$carets.find('button').attr('disabled', true);
@@ -48,22 +47,26 @@ const c = {
 				let $line = $('<span />', {class: 'paragraph-line'}),
 					$ta = $('#text_area')
 				;
-
 				$line.appendTo($ta)
 					.css({top: $cur.position().top + $ta.scrollTop(), height: $cur.height()})
 					.attr('id', cur.id);
 
 				let tx = $cur.html();
 				$cur.replaceWith(tx);
+
+				highlightNode.add({id: cur.id, el: $line});
 			}
 
-			// highlightNode.add($cur);
 			highlightNode.setCurrentItemToMarked();
+			highlightNode.setType(mark_id);
 
 			c.$buttons.attr('disabled', true).removeClass('cursor');
 			c.$carets.off('click');
+
+			highlightNode.openEdit(mark_id)
 		})
 	},
+
 	handleMark(ev) {
 
 	},

@@ -1,6 +1,8 @@
 import uuid from 'uuid';
 import _ from 'lodash';
 
+import Comment from '../comment/Comment';
+
 const h = {
 	el: '',
 	items: [],
@@ -16,17 +18,26 @@ const h = {
 		return sp;
 	},
 
-	add ($el) {
-		return this.items.push($el);
+	add (obj) {
+		let origin = _.find(this.items, function (n) {
+			return n.id === obj.id
+		})
+		if(origin) {
+			$.extend(true, obj)
+		}
+		else {
+			this.items.push(obj);
+		}
+		return this.items;
 	},
 	clicked() {
 		let $this = $(this);
 		$this.replaceWith($this.text());
 
-		// _.remove(h.items, function (n) {
-		// 	if( n.id === $this.attr('id')){
-		// 	}
-		// });
+		_.remove(h.items, function (n) {
+			if( n.id === $this.attr('id')){
+			}
+		});
 	},
 	getCurrentItem() {
 		return this.items[this.items.length -1 ];
@@ -36,11 +47,14 @@ const h = {
 			return n.marked === false;
 		})
 	},
-	removeItem (idx) {
-		return this.items.splice(idx, 1);
+	removeItem (id) {
+		return _.remove(this.items, function (n) {
+			return n.id === id;
+		})
 	},
 	removeNonMarked() {
 		let removed = _.remove(this.items, function (n) {
+
 			return n.marked === false;
 		});
 		return removed;
@@ -49,7 +63,7 @@ const h = {
 
 	},
 	setType (type) {
-
+		this.getCurrentItem().type = type;
 	},
 	setCurrentItemToMarked() {
 		this.getCurrentItem().marked = true;
@@ -57,17 +71,32 @@ const h = {
 	setItemToMarked(cur) {
 		let item = _.find(this.items, {id: cur.id});
 		item.marked = true;
+	},
+
+	openEdit(mark_id) {
+		let cur = this.getCurrentItem();
+		let data = {
+			id:'comment_'+cur.id,
+			index: this.items.length
+		}
+		switch (mark_id) {
+			case 'cancel':
+				Comment.add(data);
+				break;
+			case 'spacing':
+				break;
+			case 'paragraph':
+				break;
+			case 'linear':
+				break;
+		}
+	},
+	openComment() {
+
+	},
+	openCorrection() {
+
 	}
 };
-function MarkNode() {
-	let sp = document.createElement('span'),
-		ico = document.createElement('i')
-	;
 
-	sp.id = uuid.v1();
-	sp.className = 'highlight';
-	this.el = sp;
-
-	return sp;
-}
 module.exports = h;

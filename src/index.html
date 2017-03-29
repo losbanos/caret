@@ -50,29 +50,20 @@
                             of the place. Therefore, the uncomfortable feeling of people is the first cause of this issue.
                         </div>
                         <div class="comment-area">
-                            <script type="text/x-template" id="tpl_comment"></script>
                             <h5>Comment</h5>
-                            <ul>
-                                <li id="comment_1">
-                                    <div class="comment-head">
-                                        <p>1.</p>
-                                        <button type="button" class="btn-remove-comment">삭제</button>
-                                    </div>
-                                    <div class="comment-text">
-                                        How is earning money related to waste issues around cities? you either need to rewrite this so that the reader can understand, or simply just paraphrase the topic question.
-                                    </div>
-                                </li>
-                                <li id="comment_2">
-                                    <div class="comment-head">
-                                        <p>2.</p>
-                                        <button type="button" class="btn-remove-comment">삭제</button>
-                                    </div>
-                                    <div class="comment-text">
-                                        This whole paragraph is not structured logically. Have a look at the last sentence of this paragraph I've wrote.
-
-                                        [Main point] not practicing waste sorting, reckless use of non-renewable resources → [Explanation] lack of environmental awareness due to living a busy life → [Relevant examples] plastics and papers jumbled together etc → [Result] the problem mentioned at a main point leads to health, environmental risks and infrastructure disruption.
-                                    </div>
-                                </li>
+                            <ul id="comments" class="comments">
+                                <script type="text/x-template" id="tpl_comment">
+                                    <li id="{{id}}">
+                                        <div class="comment-head">
+                                            <p>{{index}}.</p>
+                                            <button type="button" class="btn-remove-comment">삭제</button>
+                                        </div>
+                                        <div class="comment-text">
+                                            <div class="view"></div>
+                                            <textarea></textarea>
+                                        </div>
+                                    </li>
+                                </script>
                             </ul>
                             <label for="ta_comment" class="ass-lbl">Comment TextArea</label>
                             <textarea id="ta_comment" class="ta-comment"></textarea>
