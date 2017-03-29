@@ -17,7 +17,6 @@ const h = {
 	},
 
 	add ($el) {
-		console.log('node el = ', this.items.length);
 		return this.items.push($el);
 	},
 	clicked() {
@@ -38,7 +37,6 @@ const h = {
 		let removed = _.remove(this.items, function (n) {
 			return n.marked === false;
 		});
-		console.log('removed = ',removed)
 		return removed;
 	},
 	setAttributes(obj) {

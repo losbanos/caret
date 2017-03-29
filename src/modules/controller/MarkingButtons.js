@@ -1,5 +1,4 @@
 import '../addons/Utils';
-import model from '../common/Model';
 import highlightNode from '../textview/HighlightNode';
 
 const c = {
@@ -24,9 +23,8 @@ const c = {
 		this.$buttons.filter(function () {
 			return this.getAttribute('class') === target;
 		}).removeAttr('disabled').addClass('cursor');
-		console.log(this.$carets);
-		this.$carets.one('click', 'button', function (ev) {
 
+		this.$carets.on('click', 'button', function (ev) {
 			$.preventActions(ev);
 
 			let $this = $(this),
@@ -41,7 +39,6 @@ const c = {
 			if (h > 20) {
 				$cur.addClass('multi-line');
 			}
-
 			/* <-- HighlightNode 에서 처리하도록 수정 필요 */
 			if (!$cur.children('.icon').length && mark_id === 'removeletter') {
 				$cur.append($('<i />', {class: 'icon'}));
@@ -58,8 +55,7 @@ const c = {
 
 				let tx = $cur.html();
 				$cur.replaceWith(tx);
-				$cur = $line;
-			};
+			}
 
 			// highlightNode.add($cur);
 			highlightNode.setCurrentItemToMarked();
@@ -73,6 +69,7 @@ const c = {
 	},
 	deactivate() {
 		this.$carets.off('click');
+		this.$buttons.attr('disabled', true).removeClass('cursor');
 	}
 };
 module.exports = c;

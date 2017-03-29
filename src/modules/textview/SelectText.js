@@ -6,7 +6,10 @@ const c = {
 	init ($target) {
 		this.$target = $target;
 		$target.mousedown(function () {
-			if (HighLightNode.items.length) c.removeNonMarked();
+			if (HighLightNode.items.length){
+				c.removeNonMarked();
+				c.deactivateController();
+			}
 		})
 		.on('click', function () { c.mark(); })
 	},
@@ -52,11 +55,10 @@ const c = {
 	},
 	activateController(selected_text) {
 		let is_multi_mark = selected_text.length ? 1: 0;
-		console.log('activateController');
 		MarkingButtons.activate(is_multi_mark);
 	},
 	deactivateController() {
-
+		MarkingButtons.deactivate();
 	}
 };
 
