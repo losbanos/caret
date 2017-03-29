@@ -36,11 +36,27 @@ const c = {
 			;
 			$cur.addClass(mark_id).removeClass('highlight');
 			if(h > 20 ) { $cur.addClass('multi-line'); }
-			/*HighlightNode 에서 처리하도록 수정 필요 */
+
+			/* <-- HighlightNode 에서 처리하도록 수정 필요 */
 			if(!$cur.children('.icon').length && mark_id === 'removeletter'){
 				$cur.append($('<i />',{class:'icon'}));
 			}
+			/* end --> */
+			if(mark_id==='paragraph') {
+				let $line = $('<span />', {class: 'paragraph-line'}),
+					$ta = $('#text_area')
+				;
 
+				$line.appendTo($ta)
+				.css({top: $cur.position().top + $ta.scrollTop() , height: $cur.height()})
+				.attr('id', cur.id);
+
+				let tx = $cur.html();
+				$cur.replaceWith(tx);
+			}
+			$cur.on('click', function () {
+
+			});
 			model.setCurrentItemToMarked();
 
 			c.$buttons.attr('disabled', true).removeClass('cursor');

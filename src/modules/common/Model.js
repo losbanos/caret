@@ -7,6 +7,7 @@ import _ from 'lodash';
  */
 const model = {
 	items: [],
+	counter: 0,
 	removeItem (idx) {
 		return this.items.splice(idx, 1);
 	},
@@ -21,7 +22,7 @@ const model = {
 			return n.marked === false;
 		})
 	},
-	removeNonMarkedItem(id) {
+	removeNonMarkedItem() {
 		return _.remove(this.items, function (n) {
 			return n.marked === false;
 		});
@@ -32,7 +33,11 @@ const model = {
 	getCurrentItem() {
 		return this.items[this.items.length -1 ];
 	},
-	setCurrentItemToMarked(id) {
+	getCounter() {
+		this.counter = this.items.length;
+		return this.counter
+	},
+	setCurrentItemToMarked() {
 		this.getCurrentItem().marked = true;
 	},
 	setItemToMarked(cur) {
