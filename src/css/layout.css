@@ -224,8 +224,9 @@ h2 span{
         /* Comment */
         .comment-area{
             float: right;
-            width: 239px;
+            width: 239px; height: 542px;
             padding: 8px 10px;
+            overflow-y: auto;
         }
             .comment-area h5{
                 font-weight: bold;
@@ -241,7 +242,6 @@ h2 span{
             .comment-head p{
                 float: left;
                 margin-left: 6px;
-                /*height: 25px;*/
                 color: red;
             }
             .comment-area li button{
@@ -260,22 +260,24 @@ h2 span{
                 clear: both;
                 line-height: 1.4;
             }
-                .comment-text > div{
-                    position: absolute;
-                }
                 .comment-text textarea,
                 .comment-text .view{
-                    /*display: none;*/
-                    left: 0; top: 0;
+                    display: none;
+                    width: 214px;
+                    width: calc(100% - 10px);
+                    width: -webkit-calc(100% - 10px);
+                    margin: 0; padding: 5px 5px;
+                    min-height: 130px;
+                }
+                .comment-text textarea{
+                    border: 0 none;
+                    background-color: #fff;
                 }
                 .comments .edit textarea{
-                    z-index: 2;
-                    background-color: #fff;
-                    width: 100%; min-height: 240px;
-                    overflow: hidden;
+                    display: block;
                 }
                 .comments .edit .view{
-                    z-index: 0;
+                    display: none;
                 }
 
         /* Controller */

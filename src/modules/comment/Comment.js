@@ -1,5 +1,8 @@
 import Mustache from 'mustache';
+
+import '../addons/Utils';
 import './CommentBox';
+import highlightNode from '../textview/HighlightNode';
 
 const c = {
 	items: [],
@@ -12,9 +15,19 @@ const c = {
 	add (data) {
 		let comm = Mustache.render(this.template, data);
 		this.$container.append(comm);
+		this.edit(data.id);
 	},
 	edit (id) {
-		$(id).addClass('edit');
+		let $li = $('#' + id);
+		$li.comment({
+			$removeBtn: $li.find('button'),
+			$view: $li.find('.view'),
+			$ta: $li.find('textarea'),
+			onRemove: function (id) {
+				$('#' + id).recoverText();
+				console.log(highlightNode.items);
+			}
+		})
 	},
 	active() {
 

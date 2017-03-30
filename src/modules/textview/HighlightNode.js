@@ -21,7 +21,7 @@ const h = {
 	add (obj) {
 		let origin = _.find(this.items, function (n) {
 			return n.id === obj.id
-		})
+		});
 		if(origin) {
 			$.extend(true, obj)
 		}
@@ -78,7 +78,7 @@ const h = {
 		let data = {
 			id:'comment_'+cur.id,
 			index: this.items.length
-		}
+		};
 		switch (mark_id) {
 			case 'cancel':
 				Comment.add(data);
@@ -100,3 +100,4 @@ const h = {
 };
 
 module.exports = h;
+

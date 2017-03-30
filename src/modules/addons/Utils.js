@@ -1,6 +1,6 @@
 ;(function ($, win, doc) {
 	'use strict';
-	var $win = $(win), $doc = $(doc);
+	let $win = $(win), $doc = $(doc);
 	$.preventActions = function (ev) {
 		ev = ev || window.event;
 		if (ev.stopPropagation && ev.preventDefault) {
@@ -11,10 +11,10 @@
 			ev.cancelBubble = true;
 			ev.returnValue = false;
 		}
-	}
+	};
 
 	$.fn.modal = function (settings) {
-		var options = $.extend(true, {
+		let options = $.extend(true, {
 			modal: '#modal',
 			modalBody: '#modal_body',
 			overlay: '#overlay',
@@ -25,16 +25,16 @@
 		}, settings || {});
 
 		return this.each(function () {
-			var $owner = $(this),
+			let $owner = $(this),
 				$body = $('body')
 			;
 
-			var c = {
+			let c = {
 				$modal: $(options.modal),
 				$modalBody: $(options.modalBody),
 				$overlay: $(options.overlay),
 				$close: $(options.close),
-				$template: $(options.template).html(),
+				template: $(options.template).html(),
 				init: function () {
 					$owner.click( function (ev) {
 						$.preventActions(ev);
@@ -43,7 +43,7 @@
 					})
 				},
 				show: function () {
-					var w = $win.width(),
+					let w = $win.width(),
 						h = $win.height()
 					;
 					$body.css('overflow', 'hidden');
@@ -54,17 +54,34 @@
 					// this.$overlay.click(function () { c.hide(); })
 				},
 				renderContent: function (id) {
-					var cur;
+					let cur;
 					$.each(data, function (i, n) { if (n.id === id){ cur = n; return false; } });
-					this.$modalBody.html(Mustache.render(c.$template, cur));
+					this.$modalBody.html(Mustache.render(c.template, cur));
 				},
 				hide: function () {
 					$body.css('overflow', '');
 					this.$modal.hide();
 					if(options.hasOverlay) this.$overlay.hide();
 				}
-			}
+			};
 			c.init();
+		})
+	};
+	$.fn.recoverText = function (settings) {
+		let options = $.extend(true, {
+			method: 'replaceWith' // or remove
+		}, settings || {});
+
+		return this.each(function () {
+			let $owner = $(this),
+				text = $owner.html()
+			;
+			if(options.method === 'replace'){
+				$owner[options.method](text);
+			}
+			else {
+				$owner.after(text)[options.method]();
+			}
 		})
 	}
 })(jQuery, window, document);
