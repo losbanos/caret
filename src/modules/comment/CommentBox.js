@@ -1,9 +1,6 @@
-String.prototype.convertLineBreakToBR = function () {
-	if(!this.length) return '';
-	return this.replace(/(\r\n|\r|\n)/g, '<br />');
-}
+import '../addons/Utils';
 
-;(function ($, win, doc) {
+;(function ($) {
 	'use strict';
 	$.fn.comment = function (settings) {
 		let options = $.extend(true, {
@@ -28,14 +25,15 @@ String.prototype.convertLineBreakToBR = function () {
 						if(status==='view') {
 							$owner.addClass(options.activeClass);
 							$ta.html($view.html());
+							// $ta.focus();
 							status = 'edit';
 						}
 					});
 					$ta.on('focusout', function () {
-						status = 'view';
-						$owner.removeClass(options.activeClass);
-						$view.html($ta.val().convertLineBreakToBR());
-						if(!$view.text().length){ c.remove(); }
+						// status = 'view';
+						// $owner.removeClass(options.activeClass);
+						// $view.html($ta.val().convertLineBreakToBR());
+						// if(!$view.text().length){ c.remove(); }
 					});
 					$ta.on('keydown', function (ev) {
 						if(ev.which === 13 && ev.ctrlKey) {
@@ -63,6 +61,7 @@ String.prototype.convertLineBreakToBR = function () {
 					}
 					else {
 						$owner.addClass(options.activeClass);
+						// $ta.focus();
 					}
 
 					return c;
@@ -73,4 +72,4 @@ String.prototype.convertLineBreakToBR = function () {
 			$owner.data('comment', c);
 		})
 	}
-})(jQuery, window, document);
+})(jQuery);

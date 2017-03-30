@@ -2,7 +2,7 @@
 	'use strict';
 
 	$.fn.tab = function (settings) {
-		var options = $.extend(true, {
+		let options = $.extend(true, {
 			triggers: 'a',
 			triggerAttr: 'href',
 			contents: '.tab-content',
@@ -11,11 +11,11 @@
 		}, settings || {});
 
 		return this.each(function () {
-			var $owner = $(this);
+			let $owner = $(this);
 
-			var c = {
+			let c = {
 				init: function () {
-					var triggers = options.triggers,
+					let triggers = options.triggers,
 						triggerType = $.type(triggers)
 					;
 					if(triggerType === 'array' && triggers.length) triggers = triggers.join(',');

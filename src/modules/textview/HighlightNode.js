@@ -2,14 +2,13 @@ import uuid from 'uuid';
 import _ from 'lodash';
 
 import Comment from '../comment/Comment';
+import Correction from '../correction/Correction';
 
 const h = {
 	el: '',
 	items: [],
 	create () {
-		let sp = document.createElement('span'),
-			ico = document.createElement('i')
-		;
+		let sp = document.createElement('span');
 		sp.id = uuid.v1();
 		sp.className = 'highlight';
 		this.el = sp;
@@ -82,6 +81,7 @@ const h = {
 		switch (mark_id) {
 			case 'cancel':
 				Comment.add(data);
+				Correction.activate(cur.id);
 				break;
 			case 'spacing':
 				break;
@@ -90,9 +90,6 @@ const h = {
 			case 'linear':
 				break;
 		}
-	},
-	openComment() {
-
 	},
 	openCorrection() {
 

@@ -29,9 +29,6 @@ const c = {
 			}
 		})
 	},
-	active() {
-
-	},
 	remove () {
 
 	}

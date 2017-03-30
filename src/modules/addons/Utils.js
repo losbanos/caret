@@ -1,5 +1,11 @@
 ;(function ($, win, doc) {
 	'use strict';
+
+	String.prototype.convertLineBreakToBR = function () {
+		if(!this.length) return '';
+		return this.replace(/(\r\n|\r|\n)/g, '<br />');
+	};
+
 	let $win = $(win), $doc = $(doc);
 	$.preventActions = function (ev) {
 		ev = ev || window.event;
