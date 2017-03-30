@@ -1,3 +1,8 @@
+String.prototype.convertLineBreakToBR = function () {
+	if(!this.length) return '';
+	return this.replace(/(\r\n|\r|\n)/g, '<br />');
+}
+
 ;(function ($, win, doc) {
 	'use strict';
 	$.fn.comment = function (settings) {
@@ -29,9 +34,17 @@
 					$ta.on('focusout', function () {
 						status = 'view';
 						$owner.removeClass(options.activeClass);
-						$view.text($ta.val());
+						$view.html($ta.val().convertLineBreakToBR());
 						if(!$view.text().length){ c.remove(); }
 					});
+					$ta.on('keydown', function (ev) {
+						if(ev.which === 13 && ev.ctrlKey) {
+							status = 'view';
+							$owner.removeClass(options.activeClass);
+							$view.html($ta.val().convertLineBreakToBR());
+							if(!$view.text().length){ c.remove(); }
+						}
+					})
 					options.$removeBtn.one('click', this.remove);
 
 					return c;

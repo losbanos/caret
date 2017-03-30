@@ -25,9 +25,7 @@ const c = {
 			$ta: $li.find('textarea'),
 			onRemove: function (id) {
 				$('#' + id).recoverText();
-				console.log('before = ',highlightNode.items)
 				highlightNode.removeItem(id);
-				console.log('after = ',highlightNode.items)
 			}
 		})
 	},
