@@ -262,16 +262,19 @@ h2 span{
             }
                 .comment-text textarea,
                 .comment-text .view{
-                    display: none;
                     width: 214px;
                     width: calc(100% - 10px);
                     width: -webkit-calc(100% - 10px);
                     margin: 0; padding: 5px 5px;
-                    min-height: 130px;
                 }
                 .comment-text textarea{
+                    display: none;
                     border: 0 none;
                     background-color: #fff;
+                    min-height: 130px;
+                }
+                .comments .view{
+                    display: block;
                 }
                 .comments .edit textarea{
                     display: block;

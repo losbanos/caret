@@ -21,9 +21,6 @@
 				init() {
 					$owner.on('click', '.comment-text', function () {
 						if(status==='view') {
-							// $owner.removeClass(options.activeClass);
-							// $view.html($ta.hide().text());
-							// status='view';
 							$owner.addClass(options.activeClass);
 							$ta.html($view.html());
 							status = 'edit';
@@ -32,27 +29,34 @@
 					$ta.on('focusout', function () {
 						status = 'view';
 						$owner.removeClass(options.activeClass);
-						$view.html($ta.text());
+						$view.text($ta.val());
+						if(!$view.text().length){ c.remove(); }
 					});
-					options.$removeBtn.one('click', function () {
-						if($.type(options.onRemove) === 'function') {
-							let ids = $owner.attr('id').replace('comment_', '');
-							$owner.remove();
-							options.onRemove.call($owner, ids);
-						}
-					})
+					options.$removeBtn.one('click', this.remove);
 
+					return c;
+				},
+				remove () {
+					$owner.remove();
+					if($.type(options.onRemove) === 'function') {
+						let ids = $owner.attr('id').replace('comment_', '');
+						options.onRemove.call($owner, ids);
+					}
+					return c;
 				},
 				show() {
 					if($view.text().length) {
-
+						$owner.removeClass(options.activeClass);
 					}
-				},
-				remove () {
+					else {
+						$owner.addClass(options.activeClass);
+					}
 
+					return c;
 				}
 			};
-			c.init();
+			c.init().show();
+
 			$owner.data('comment', c);
 		})
 	}

@@ -15,9 +15,9 @@ const c = {
 	add (data) {
 		let comm = Mustache.render(this.template, data);
 		this.$container.append(comm);
-		this.edit(data.id);
+		this.activateComment(data.id);
 	},
-	edit (id) {
+	activateComment (id) {
 		let $li = $('#' + id);
 		$li.comment({
 			$removeBtn: $li.find('button'),
@@ -25,7 +25,9 @@ const c = {
 			$ta: $li.find('textarea'),
 			onRemove: function (id) {
 				$('#' + id).recoverText();
-				console.log(highlightNode.items);
+				console.log('before = ',highlightNode.items)
+				highlightNode.removeItem(id);
+				console.log('after = ',highlightNode.items)
 			}
 		})
 	},

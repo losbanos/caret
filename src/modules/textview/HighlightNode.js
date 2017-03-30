@@ -99,5 +99,5 @@ const h = {
 	}
 };
 
-module.exports = h;
+export default h;
 
