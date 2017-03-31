@@ -30,9 +30,10 @@ const c = {
 				mark_id = $this.attr('id')
 			;
 			let cur = highlightNode.getCurrentItem(),
-				$cur = $(cur.el),
+				$cur = cur.el,
 				h = $cur.height()
 			;
+			console.log('cur = ',$cur, 'cur id = ', $cur.attr('id'));
 
 			$cur.addClass(mark_id).removeClass('highlight');
 			if (h > 20) {
@@ -51,8 +52,27 @@ const c = {
 					.css({top: $cur.position().top + $ta.scrollTop(), height: $cur.height()})
 					.attr('id', cur.id);
 
-				let tx = $cur.html();
-				$cur.replaceWith(tx);
+				let	$spans = $cur.find('span, br'),
+					text = ''
+				;
+				if($spans.length) {
+					$spans.each(function () {
+						let $this = $(this);
+						let t = '';
+						if($this.is('br')) {
+							t = '<br>';
+						}
+						else {
+							t = $this.html();
+						}
+						text += t
+					});
+				}
+				else {
+				    text = $cur.html();
+				}
+
+				$cur.replaceWith(text);
 
 				highlightNode.add({id: cur.id, el: $line});
 			}

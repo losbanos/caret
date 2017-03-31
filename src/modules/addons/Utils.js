@@ -2,8 +2,12 @@
 	'use strict';
 
 	String.prototype.convertLineBreakToBR = function () {
-		if(!this.length) return '';
-		return this.replace(/(\r\n|\r|\n)/g, '<br />');
+		if(!this.length) return false;
+		return this.replace(/(\r\n|\r|\n)/g, '<br>');
+	};
+	String.prototype.parseToTag = function () {
+		if(!this.length) return false;
+		return this.replace(/<br\s?\/?>/ig,'_').replace(/(.)/g, '<span>$1</span>').replace(/\<span\>\_\<\/span\>/g, '<br>');
 	};
 
 	let $win = $(win), $doc = $(doc);

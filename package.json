@@ -4,7 +4,7 @@
   "description": "Webpack Config Setting",
   "main": "entry.js",
   "scripts": {
-    "dev": "webpack-dev-server -d --config webpack.config.dev.js --colors",
+    "dev": "webpack-dev-server --inline -d --config webpack.config.dev.js --colors",
     "build": "webpack --config webpack.config.build.js --colors"
   },
   "repository": {

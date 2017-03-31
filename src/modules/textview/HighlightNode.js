@@ -5,16 +5,17 @@ import Comment from '../comment/Comment';
 import Correction from '../correction/Correction';
 
 const h = {
-	el: '',
+	$el: '',
 	items: [],
 	create () {
 		let sp = document.createElement('span');
 		sp.id = uuid.v1();
 		sp.className = 'highlight';
-		this.el = sp;
+		let $sp = $(sp);
 
+		this.$el = $sp;
 		$(sp).on('click', this.clicked.bind(sp));
-		return sp;
+		return $sp;
 	},
 
 	add (obj) {
@@ -28,6 +29,15 @@ const h = {
 			this.items.push(obj);
 		}
 		return this.items;
+	},
+	parse ($el) {
+		if($el.text().length) {
+			let r = $el.html().parseToTag();
+			$el.html(r);
+
+			$el.find('span').first().addClass('f').end().last().addClass('e');
+		}
+		return $el;
 	},
 	clicked() {
 		let $this = $(this);

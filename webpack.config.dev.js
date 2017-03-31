@@ -3,7 +3,7 @@ const {resolve} = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const WebpackBrowserPlugin = require('webpack-browser-plugin');
 
-process.noDeprecation = true
+process.noDeprecation = true;
 module.exports = {
     devtool: 'eval-source-map',
     entry: {
@@ -21,6 +21,9 @@ module.exports = {
             "Access-Control-Allow-Origin": "*",
             "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, PATCH, OPTIONS",
             "Access-Control-Allow-Headers": "X-Requested-With, content-type, Authorization"
+        },
+        watchOptions: {
+            poll: 300
         }
     },
     plugins: [
