@@ -201,8 +201,7 @@ h2 span{
             .stitch.multi-line:after{
                 width: 100%;left: 0;
             }
-            .cancel:before,
-            .cancel:after{
+            .cancel span:before{
                 top: 5px;left: 0;
                 height: 2px; width: 100%;
                 background-color: #df0000;
