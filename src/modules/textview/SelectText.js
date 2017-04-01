@@ -31,7 +31,6 @@ const c = {
 					;
 					if(sel_text) {
 						$sp = HighLightNode.parse(sc, ec, $sp);
-						$sp = $('#'+$sp.attr('id'));
 					}
 					else {
 						range.surroundContents($sp.get(0));
@@ -39,7 +38,7 @@ const c = {
 					sel.removeAllRanges();
 					sel.addRange(range);
 
-					HighLightNode.add({id: $sp.attr('id'), text: sel_text, el: $sp, marked: false});
+					HighLightNode.add({id: $sp.attr('id'), text: sel_text, el: $('#'+$sp.attr('id')), marked: false});
 					sel.removeAllRanges();
 
 					c.activateController(sel_text);

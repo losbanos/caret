@@ -46,31 +46,30 @@ const c = {
 			/* end --> */
 			if (mark_id === 'paragraph') {
 				let $line = $('<span />', {class: 'paragraph-line'}),
-					$ta = $('#text_area')
+					$ta = $('#text_area'),
+					ty = $ta.scrollTop()
 				;
+				let h = $cur.children('.e').position().top;
 				$line.appendTo($ta)
-					.css({top: $cur.position().top + $ta.scrollTop(), height: $cur.height()})
+					.css({top: $cur.position().top + ty, height: h})
 					.attr('id', cur.id);
 
 				let	$spans = $cur.find('span, br'),
 					text = ''
 				;
-				if($spans.length) {
-					$spans.each(function () {
-						let $this = $(this);
-						let t = '';
-						if($this.is('br')) {
-							t = '<br>';
-						}
-						else {
-							t = $this.html();
-						}
-						text += t
-					});
-				}
-				else {
-				    text = $cur.html();
-				}
+                if($spans.length) {
+                    $spans.each(function () {
+                        let $this = $(this);
+                        let t = '';
+                        if($this.is('br')) {
+                            t = '<br>';
+                        }
+                        else {
+                            t = $this.removeClass('f e').prop('outerHTML');
+                        }
+                        text += t
+                    });
+                }
 
 				$cur.replaceWith(text);
 
