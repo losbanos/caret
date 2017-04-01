@@ -37,13 +37,28 @@ const h = {
         ec.setAttribute('class', 'e');
         let $sc = $(sc);
         let result = $sc.nextUntil(ec).add($sc).add(ec);
-        result = result.wrapAll($el);
-        return $el;
-        $($(sc).nextUntil(ec)).wrapAll($sp);
-		if($el.text().length) {
-			$el.find('span').first().addClass('f').end().last().addClass('e');
+        try{
+			result.each(function (i, n) {
+				let $this = $(this);
+				let eid = $el.attr('id');
+				let pid = $this.parent('span').length ? $this.parent().attr('id'): eid;
+
+				if($this.parent('span').length) {
+					if(pid!==eid) {
+						sc.setAttribute('class', '');
+						ec.setAttribute('class', '');
+						throw new Error('nested select');
+					}
+				}
+			});
+            result = result.wrapAll($el);
+            return $el;
 		}
-		return $el;
+		catch(e) {
+        	alert('Not Selectable');
+        	console.log(e);
+		}
+        return false;
 	},
 	recover (sc, ec, $el) {
 

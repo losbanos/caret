@@ -31,6 +31,7 @@ const c = {
 					;
 					if(sel_text) {
 						$sp = HighLightNode.parse(sc, ec, $sp);
+						$sp = $('#'+$sp.attr('id'));
 					}
 					else {
 						range.surroundContents($sp.get(0));
@@ -41,11 +42,11 @@ const c = {
 					HighLightNode.add({id: $sp.attr('id'), text: sel_text, el: $sp, marked: false});
 					sel.removeAllRanges();
 
-					// c.activateController(sel_text);
+					c.activateController(sel_text);
 				}
 				catch (e) {
 					console.warn(e);
-					alert('선택 할 수 없습니다');
+					if($sp) alert('Not Selectable');
 					sel.removeAllRanges()
 				}
 			}
