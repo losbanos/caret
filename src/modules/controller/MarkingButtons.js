@@ -33,7 +33,7 @@ const c = {
 				$cur = cur.el,
 				h = $cur.height()
 			;
-			console.log('cur = ',$cur, 'cur id = ', $cur.attr('id'));
+			// console.log('cur = ',$cur, 'cur id = ', $cur.attr('id'));
 
 			$cur.addClass(mark_id).removeClass('highlight');
 			if (h > 20) {

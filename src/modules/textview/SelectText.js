@@ -12,9 +12,17 @@ const c = {
 				c.deactivateController();
 			}
 		})
-			.on('click mouseup', c.mark)
+			// .click(c.mark)
+			.mouseup(c.mark)
 	},
-	mark () {
+	mark (ev) {
+		if(ev.target.getAttribute('class')==='correction-msg' || ev.target.getAttribute('class')==='comment-msg'){
+			// $(ev.target).on('click', function () {
+			// 	console.log('click = ',this)
+			// });
+			return false;
+		};
+
 		let $sp = HighLightNode.create(),
 			sel = window.getSelection(),
 			ori_range = '',

@@ -5,6 +5,7 @@ const c = {
 	text: '',
 	$ta: null,
 	$applyBtn: null, $moveBtn: null,
+	curID: '',
 	init() {
 		this.$container = $('#correction');
 		this.$ta = $('#ta_correction');
@@ -12,9 +13,12 @@ const c = {
 		this.$moveBtn = $('#btn_change_message_position');
 
 		this.deactivate();
+		this.$applyBtn.on('click', this.apply.bind(this));
 	},
-	apply(id) {
+	apply() {
+		let id = this.curID;
 		console.log('correction mark id = ',id);
+
 		let cur_id = 'correction_'+id,
 			$mark = $('#'+id),
 			ty = this.$ta.scrollTop(),
@@ -27,13 +31,25 @@ const c = {
 		else {
 			$msg = $mark.children('.correction-msg');
 		}
-		$msg.html(this.$ta.val().convertLineBreakToBR());
-		$msg.insertBefore($f);
-		$msg.off('click');
 
+		if(this.$ta.val().length) {
+			$msg.html(this.$ta.val().convertLineBreakToBR());
+			$msg.insertBefore($f);
+
+			$msg.on('click', function () {
+				let $this = $(this);
+				c.curID = $this.attr('id').replace('correction_', '');
+				c.$ta.val($this.text());
+			})
+		}
+		else {
+			$msg.remove();
+		}
 	},
 	activate(id) {
-		this.$applyBtn.attr('disabled', false).click( this.apply.bind(this, id));
+		this.curID = id;
+		this.$ta.val('');
+		this.$applyBtn.attr('disabled', false);
 		this.$moveBtn.attr('disabled', false);
 		this.$ta.removeAttr('readonly');
 	},
