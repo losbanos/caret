@@ -1,7 +1,7 @@
 import './css/basic.css';
 import './css/layout.css';
 
-import './modules/common/sly';
+import './modules/common/Sly';
 
 import SortText from './modules/common/SortText';
 import SelectText from './modules/actions/SelectText';

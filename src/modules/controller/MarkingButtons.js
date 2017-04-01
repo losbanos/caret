@@ -1,4 +1,4 @@
-import '../common/jquery.plugins';
+import '../common/jquery.common';
 
 const MarkingButtons = {
 	$container: '',
