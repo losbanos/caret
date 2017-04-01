@@ -83,10 +83,12 @@
 		}, settings || {});
 
 		return this.each(function () {
-			let $owner = $(this),
-				text = $owner.html()
-			;
-			if(options.method === 'replace'){
+			let $owner = $(this);
+				$owner.children('.f, .e').removeClass('f e');
+
+			let text = $owner.html();
+
+			if(options.method === 'replaceWith'){
 				$owner[options.method](text);
 			}
 			else {

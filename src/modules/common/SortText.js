@@ -16,7 +16,7 @@ const SortText = {
 	},
 	convertLineBreakToBR(src) {
 		let result = src? src: this.text;
-		return result.replace(/(\r\n|\r|\n)/g, '<br />');
+		return result.replace(/(\r\n|\r|\n)/g, '<br>');
 	},
 	getText() {
 		return this.text;

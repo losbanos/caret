@@ -44,6 +44,8 @@ const c = {
 				$cur.append($('<i />', {class: 'icon'}));
 			}
 			/* end --> */
+
+			/*  paragraph 예외처리 시작 */
 			if (mark_id === 'paragraph') {
 				let $line = $('<span />', {class: 'paragraph-line'}),
 					$ta = $('#text_area'),
@@ -75,6 +77,7 @@ const c = {
 
 				highlightNode.add({id: cur.id, el: $line});
 			}
+			/*  paragraph 예외처리 끝 */
 
 			highlightNode.setCurrentItemToMarked();
 			highlightNode.setType(mark_id);
