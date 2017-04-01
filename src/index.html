@@ -34,49 +34,30 @@
                     <div class="contents-body">
                         <div class="text-area" id="text_area">
                             As time goes by, citizen can more money so they can spend their money in many ways through the consumption.
+                            However, the trash problem is a serious issue of the central city from people’s spending. I will suggest the cause of this condition and how to solve this difficult problem with my knowledge.
 
-                            However, the trash problem is a serious issue of the central city from people’s spending. I will suggest the cause of
-
-                            this condition and how to solve this difficult problem with my knowledge.
-
-                            Although peopleare always interested in vanishing the trash, they do not care about where the trash are gone and how
-
-                            to manage them. It is because ordinary people think that it is not their business and they live busy day from their hard
-
-                            work. For example some citizens never separate waste so they put plastics and papers altogether. Even they do not
-
-                            vanish the garbage in the trash can so it makes the street dirty and messy The worst thing is that when the place which
-
-                            burns the trash or recycles them start to establish, inhabitants object to the result strongly due to smell and atmosphere
-
-                            of the place. Therefore, the uncomfortable feeling of people is the first cause of this issue.
+                            Although peopleare always interested in vanishing the trash, they do not care about where the trash are gone and how to manage them. It is because ordinary people think that it is not their business and they live busy day from their hard work. For example some citizens never separate waste so they put plastics and papers altogether.
+                            Even they do not vanish the garbage in the trash can so it makes the street dirty and messy The worst thing is that when the place which burns the trash or recycles them start to establish,
+                            inhabitants object to the result strongly due to smell and atmosphere of the place. Therefore, the uncomfortable feeling of people is the first cause of this issue.
                         </div>
                         <div class="comment-area">
-                            <script type="text/x-template" id="tpl_comment"></script>
                             <h5>Comment</h5>
-                            <ul>
-                                <li id="comment_1">
-                                    <div class="comment-head">
-                                        <p>1.</p>
-                                        <button type="button" class="btn-remove-comment">삭제</button>
-                                    </div>
-                                    <div class="comment-text">
-                                        How is earning money related to waste issues around cities? you either need to rewrite this so that the reader can understand, or simply just paraphrase the topic question.
-                                    </div>
-                                </li>
-                                <li id="comment_2">
-                                    <div class="comment-head">
-                                        <p>2.</p>
-                                        <button type="button" class="btn-remove-comment">삭제</button>
-                                    </div>
-                                    <div class="comment-text">
-                                        This whole paragraph is not structured logically. Have a look at the last sentence of this paragraph I've wrote.
-
-                                        [Main point] not practicing waste sorting, reckless use of non-renewable resources → [Explanation] lack of environmental awareness due to living a busy life → [Relevant examples] plastics and papers jumbled together etc → [Result] the problem mentioned at a main point leads to health, environmental risks and infrastructure disruption.
-                                    </div>
-                                </li>
+                            <ul id="comments" class="comments">
+                                <script type="text/x-template" id="tpl_comment">
+                                    <li id="{{id}}" class="">
+                                        <div class="comment-head">
+                                            <p>{{index}}.</p>
+                                            <button type="button" class="btn-remove-comment">삭제</button>
+                                        </div>
+                                        <div class="comment-text">
+                                            <div class="view"></div>
+                                            <textarea></textarea>
+                                        </div>
+                                    </li>
+                                </script>
                             </ul>
-                            <textarea id="ta_comment" class="ta-comment"></textarea>
+                            <!--<label for="ta_comment" class="ass-lbl">Comment TextArea</label>-->
+                            <!--<textarea id="ta_comment" class="ta-comment"></textarea>-->
                         </div>
                     </div>
                 </section>
@@ -85,13 +66,14 @@
         <div class="controller">
             <div class="gutter">
                 <div class="gutter-in">
-                    <div class="correction col">
+                    <div class="correction col" id="correction">
                         <div class="correction-head">
                             <h6>Correction</h6>
-                            <button type="button" id="btn_apply_correction">적용</button>
+                            <button type="button" id="btn_apply_correction" disabled>적용</button>
                         </div>
                         <div class="correction-body">
-                            <textarea></textarea>
+                            <label for="ta_correction" class="ass-lbl">Correction TextArea</label>
+                            <textarea id="ta_correction" readonly></textarea>
                         </div>
                     </div>
                     <div class="func-tab col">
@@ -110,22 +92,24 @@
                             <div class="tab-content" id="mechanics"></div>
                         </div>
                     </div>
-                    <div class="caret-box col">
-                        <div class="paragraph-caret">
-                            <button type="button" id="caret_1">Paragraph Comment</button>
-                            <button type="button" id="caret_2">Liner</button>
-                        </div>
-                        <div class="marking-caret">
-                            <button type="button" id="caret_3"></button>
-                            <button type="button" id="caret_4"></button>
-                            <button type="button" id="caret_5"></button>
-                            <button type="button" id="caret_6"></button>
-                            <button type="button" id="caret_7"></button>
-                            <button type="button" id="caret_8"></button>
-                            <button type="button" id="caret_9"></button>
-                            <button type="button" id="caret_10"></button>
-                            <button type="button" id="caret_11"></button>
-                            <button type="button" id="caret_12"></button>
+                    <div class="btn-box col" id="btn_box">
+                        <div class="caret-box" id="caret_box">
+                            <div class="paragraph-caret">
+                                <button type="button" class="multi" id="paragraph">Paragraph Comment</button>
+                                <button type="button" class="multi" id="linear">Linear</button>
+                            </div>
+                            <div class="marking-caret">
+                                <button type="button" class="multi" id="removeletter"></button>
+                                <button type="button" class="multi" id="stitch"></button>
+                                <button type="button" class="multi" id="cancel"></button>
+                                <button type="button" class="" id="none1"></button>
+                                <button type="button" class="" id="none2"></button>
+                                <button type="button" class="single" id="spacing"></button>
+                                <button type="button" class="single" id="period"></button>
+                                <button type="button" class="single" id="comma"></button>
+                                <button type="button" class="single" id="indent"></button>
+                                <button type="button" class="single" id="linebreak"></button>
+                            </div>
                         </div>
                         <div class="net">
                             <button type="button">Load</button>

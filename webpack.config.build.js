@@ -69,7 +69,7 @@ module.exports = {
                 })
             },
             { test: /\.(jpe?g|gif|png)$/, use: [
-                {loader: 'file-loader', options: {name: 'images/[folder]/[name].[ext]'}},
+                {loader: 'file-loader', options: {name: '[folder]/[name].[ext]'}},
                 {loader: 'image-webpack-loader',
                     options: {
                         progressive: true,

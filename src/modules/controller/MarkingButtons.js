@@ -1,26 +1,98 @@
-import '../common/jquery.common';
+import '../addons/Utils';
+import highlightNode from '../textview/HighlightNode';
 
-const MarkingButtons = {
-	$container: '',
-	$triggers: '',
-	init ($container, $triggers) {
-		this.$container = $container;
-		this.$triggers = $triggers
-
+const c = {
+	$carets: '',
+	$buttons: '',
+	init () {
+		this.$carets = $('#caret_box');
+		this.$buttons = this.$carets.find('button').attr('disabled', true);
 	},
-	activate() {
-		this.$container.on('click', this.$triggers, function (ev) {
+	activate(has_length) {
+		this.$buttons.attr('disabled', true).removeClass('cursor');
+
+		let target = '';
+		if (has_length) {
+			target = 'multi';
+		}
+		else {
+			target = 'single';
+		}
+
+		this.$buttons.filter(function () {
+			return this.getAttribute('class') === target;
+		}).removeAttr('disabled').addClass('cursor');
+
+		this.$carets.on('click', 'button', function (ev) {
 			$.preventActions(ev);
 
 			let $this = $(this),
 				mark_id = $this.attr('id')
 			;
+			let cur = highlightNode.getCurrentItem(),
+				$cur = cur.el,
+				h = $cur.height()
+			;
+			console.log('cur = ',$cur, 'cur id = ', $cur.attr('id'));
 
+			$cur.addClass(mark_id).removeClass('highlight');
+			if (h > 20) {
+				$cur.addClass('multi-line');
+			}
+			/* <-- HighlightNode 에서 처리하도록 수정 필요 */
+			if (!$cur.children('.icon').length && mark_id === 'removeletter') {
+				$cur.append($('<i />', {class: 'icon'}));
+			}
+			/* end --> */
+			if (mark_id === 'paragraph') {
+				let $line = $('<span />', {class: 'paragraph-line'}),
+					$ta = $('#text_area')
+				;
+				$line.appendTo($ta)
+					.css({top: $cur.position().top + $ta.scrollTop(), height: $cur.height()})
+					.attr('id', cur.id);
+
+				let	$spans = $cur.find('span, br'),
+					text = ''
+				;
+				if($spans.length) {
+					$spans.each(function () {
+						let $this = $(this);
+						let t = '';
+						if($this.is('br')) {
+							t = '<br>';
+						}
+						else {
+							t = $this.html();
+						}
+						text += t
+					});
+				}
+				else {
+				    text = $cur.html();
+				}
+
+				$cur.replaceWith(text);
+
+				highlightNode.add({id: cur.id, el: $line});
+			}
+
+			highlightNode.setCurrentItemToMarked();
+			highlightNode.setType(mark_id);
+
+			c.$buttons.attr('disabled', true).removeClass('cursor');
+			c.$carets.off('click');
+
+			highlightNode.openEdit(mark_id)
 		})
 	},
-	deactivate() {
-		this.$container.off('click');
 
+	handleMark(ev) {
+
+	},
+	deactivate() {
+		this.$carets.off('click');
+		this.$buttons.attr('disabled', true).removeClass('cursor');
 	}
-}
-module.exports = MarkingButtons;
+};
+module.exports = c;

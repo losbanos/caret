@@ -3,7 +3,8 @@ const SortText = {
 	original: '',
 	init(source) {
 		this.text = this.original = source;
-		this.text = this.text.replace(/(\s{2,}|$\s{2,})/, '').replace(/(\r\n|\r|\n)/g, '<br />');
+		this.text = this.text.replace(/(\r\n|\r|\n)/g, '<br>');
+		this.text = this.text.replace(/\s{2,}/g, '');
 		return this.text;
 	},
 	removeSpace(src) {
@@ -11,7 +12,7 @@ const SortText = {
 		return result.replace(/(\s{2,}|$\s{2,})/, '');
 	},
 	convertLineBreakToBR(src) {
-		var result = src? src: this.text
+		let result = src? src: this.text;
 		return result.replace(/(\r\n|\r|\n)/g, '<br />');
 	},
 	getText() {

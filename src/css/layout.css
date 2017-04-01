@@ -13,6 +13,8 @@ textarea{
 }
 button{
     border:none;
+}
+.cursor{
     cursor: pointer;
 }
 ul, ol, li{list-style: none;}
@@ -21,8 +23,10 @@ a:hover{
     text-decoration: none;
     color: #000;
 }
-::selection{background: transparent;color:red;}
-::-moz-selection{background: transparent;color:red;}
+::selection{background: transparent;color:red;
+    font-weight: bold;}
+::-moz-selection{background: transparent;color:red;
+    font-weight: bold;}
 
 .root{
     text-align: center;
@@ -37,6 +41,8 @@ a:hover{
     background-color: #efefef;
     overflow: hidden;
 }
+.ass-lbl{
+    display: none;}
 h1{
     float: left;
     width: 98px; height: 50px;
@@ -112,15 +118,125 @@ h2 span{
     }
         .text-area{
             float: left;
-            width: 691px; height: 600px;
+            position: relative;
+            width: 691px; height: 500px;
             overflow-y: auto;
-            padding: 20px 24px 60px;
+            padding: 20px 24px 40px;
             line-height: 80px;
+            /*white-space: pre-wrap;*/
         }
+        .text-area br{
+            content: '';
+            display: block;
+            margin: 0; line-height: 12px;
+        }
+            .text-area span{
+                cursor: pointer;
+            }
+            .highlight{
+                position: relative;
+                border: 1px solid #000;
+            }
+            .text-area > span{
+                position: relative;
+            }
+            .text-area > span span{
+                position: relative;
+            }
+            .text-area span span:before,
+            .text-area span span:after{
+                content: '';
+                position: absolute;
+                overflow: hidden;
+            }
+            .text-area .paragraph-line{
+                display: block;
+                position: absolute;
+                right: 10px;
+                top: 0;
+                width: 10px; height:92px;
+                border: 2px solid #df0000;
+                border-left: none;
+            }
+            .linear{
+                background-color: #fffd71;
+            }
+            .removeletter span:before,
+            .removeletter span:after{
+                content: '';
+                top: 5px;left: 0;
+                width: 100%; height: 2px;
+                background-color: #df0000;
+            }
+            .removeletter > .e:after{
+                position: absolute;
+                top: -4px;left: 100%;
+                background: url("../images/ico_caret.png")no-repeat left -20px;
+                width: 13px; height: 12px;
+            }
+            .stitch span:before,
+            .stitch span:after{
+                top: -8px;left: 0;
+                height: 16px; width: 100%;
+                border-top: 2px solid #df0000;
+                overflow: hidden;
+            }
+            .stitch .f:before{
+                height: 10px;
+                width: 8px;
+                border-top-right-radius: 0;
+                border-top-left-radius: 7px;
+            }
+            .stitch .f:after{
+                display: none;}
+            .stitch .e:after{
+                /*left: 10px;*/
+                height: 10px; width: 6px;
+                border-top-left-radius: 0;
+                border-top-right-radius: 10px;
+            }
+            .stitch .e:before{
+                display: none;}
+            .stitch.multi-line:before,
+            .stitch.multi-line:after{
+                width: 100%;left: 0;
+            }
+            .cancel span:before{
+                top: 5px;left: 0;
+                height: 2px; width: 100%;
+                background-color: #df0000;
+            }
+            .spacing:before{
+                top: -6px;left: -3px;
+                background: url("../images/ico_caret.png")no-repeat left top;
+                width: 9px; height: 6px;
+            }
+            .period:after{
+                top: 12px;bottom: 0;left: -4px;
+                background: url("../images/ico_caret.png")no-repeat left -50px;
+                width: 9px; height: 14px;
+            }
+            .comma:after{
+                top: 12px;bottom: 0;left: -4px;
+                background: url("../images/ico_caret.png")no-repeat left -70px;
+                width: 9px; height: 15px;
+            }
+            .indent:before{
+                top: -4px;left: -5px;
+                background: url("../images/ico_caret.png")no-repeat left -90px;
+                width: 5px; height: 19px;
+            }
+            .linebreak:after{
+                left: 100%;top: -3px;
+                background: url("../images/ico_caret.png")no-repeat right -110px;
+                width: 20px; height: 17px;
+            }
+        /* Comment */
         .comment-area{
             float: right;
-            width: 239px;
+            width: 239px; height: 542px;
             padding: 8px 10px;
+            overflow-y: auto;
         }
             .comment-area h5{
                 font-weight: bold;
@@ -136,7 +252,6 @@ h2 span{
             .comment-head p{
                 float: left;
                 margin-left: 6px;
-                /*height: 25px;*/
                 color: red;
             }
             .comment-area li button{
@@ -150,133 +265,170 @@ h2 span{
                 cursor: pointer;
             }
             .comment-area .comment-text {
+                position: relative;
                 padding: 8px 8px 8px;
                 clear: both;
                 line-height: 1.4;
             }
+                .comment-text textarea,
+                .comment-text .view{
+                    width: 214px;
+                    width: calc(100% - 10px);
+                    width: -webkit-calc(100% - 10px);
+                    margin: 0; padding: 5px 5px;
+                }
+                .comment-text textarea{
+                    display: none;
+                    border: 0 none;
+                    background-color: #fff;
+                    min-height: 130px;
+                }
+                .comments .view{
+                    display: block;
+                }
+                .comments .edit textarea{
+                    display: block;
+                }
+                .comments .edit .view{
+                    display: none;
+                }
 
-.controller{
-    height: 184px;
-}
-    .controller .gutter{
-        overflow: hidden;
-        background-color: #eee;
-    }
-    .controller .gutter-in{
-        padding: 10px;
-    }
-    .controller .col{
-        float: left;
-        overflow: hidden;
-    }
-    .correction{
-        width: 315px;
-        /*height: 144px;*/
-    }
-        .correction-head{
-            overflow: hidden;
-            line-height: 25px;
+        /* Controller */
+        .controller{
+            height: 184px;
         }
-        .correction-head h6{
-            float: left;
-        }
-        .correction-head button{
-            float: right;
-            display: block;
-            width: 50px;height: 25px;
-            background: url("../images/btn_apply.png")no-repeat left top;
-            text-indent: -9999px;
-            border: 0;
-        }
-        .correction-body textarea{
-            width: 305px;
-            height: 129px;
-            overflow-y: auto;
-        }
-    .func-tab{
-        margin-left: 10px;
-    }
-        .tab-tit{
-            height: 42px;
-        }
-        .tab-tit a{
-            float: left;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 80px; height: 42px;
-            border-left: 1px solid #eee;
-            background-color: #bbb; color: #fff;
-            text-align: center;
-        }
-        .tab-tit .active,
-        .tab-tit a:hover{
-            background-color: #fff;
-            color: black;
-        }
-        .tab-contents{
-            clear: both;
-            width: 404px; height: 123px;
-            border-top:1px solid #ccc;
-            background-color: #fff;
-            overflow-y: auto;
-        }
-.caret-box{
-    float: left;
-    margin-left: 10px;
-    width: 240px; height: 164px;
-}
-    .paragraph-caret{
-        overflow: hidden;
-    }
-    .paragraph-caret button{
-        float: left;
-        display: block;
-        height: 30px; width: 93px;
-        background-color: #888;
-        line-height: 30px;
-        color: #fff;
-        margin-left: 5px;
-    }
-    .paragraph-caret button:first-child{
-        width: 142px;
-        margin-left: 0;
-    }
-    .marking-caret{
-        clear: both;
-        margin-top: 10px;
-        margin-left: -4px;
-        margin-bottom: -4px;
-    }
-    .marking-caret button{
-        display: block;
-        float: left;
-        width: 45px; height: 40px;
-        margin-left: 3px;
-        margin-bottom: 4px;
-        background: url("../images/btn_caret.png")no-repeat left top;
-        overflow: hidden;
+            .controller .gutter{
+                overflow: hidden;
+                background-color: #eee;
+            }
+            .controller .gutter-in{
+                padding: 10px;
+            }
+            .controller .col{
+                float: left;
+                overflow: hidden;
+            }
 
-    }
-    .marking-caret button:nth-child(2){ background-position-y: -40px; }
-    .marking-caret button:nth-child(3){ background-position-y: -80px; }
-    .marking-caret button:nth-child(4){ background-position-y: bottom; }
-    .marking-caret button:nth-child(5){ background-position-y: bottom; }
-    .marking-caret button:nth-child(6){ background-position-y: -120px; }
-    .marking-caret button:nth-child(7){ background-position-y: -160px; }
-    .marking-caret button:nth-child(8){ background-position-y: -200px; }
-    .marking-caret button:nth-child(9){ background-position-y: -240px; }
-    .marking-caret button:nth-child(10){ background-position-y: -280px;}
-.net{
-    clear: both;
-}
-    .net button{
-        width: 118px;
-        height: 30px;
-        margin-top: 10px;
-        color: #fff; background-color: #888;
-        text-align: center;
-    }
-.highlight{
-    border: 1px solid #000;
-}
+            /* Correction Area */
+            .correction{
+                width: 315px;
+                /*height: 144px;*/
+            }
+                .correction-head{
+                    overflow: hidden;
+                    line-height: 25px;
+                }
+                .correction-head h6{
+                    float: left;
+                }
+                .correction-head button{
+                    float: right;
+                    display: block;
+                    width: 50px;height: 25px;
+                    background: url("../images/btn_apply.png")no-repeat left top;
+                    text-indent: -9999px;
+                    border: 0;
+                }
+                .correction-body textarea{
+                    width: 305px;
+                    height: 129px;
+                    overflow-y: auto;
+                }
+
+            /* Tab */
+            .func-tab{
+                margin-left: 10px;
+            }
+                .tab-tit{
+                    height: 42px;
+                }
+                .tab-tit a{
+                    float: left;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    width: 80px; height: 42px;
+                    border-left: 1px solid #eee;
+                    background-color: #bbb; color: #fff;
+                    text-align: center;
+                }
+                .tab-tit .active,
+                .tab-tit a:hover{
+                    background-color: #fff;
+                    color: black;
+                }
+                .tab-contents{
+                    clear: both;
+                    width: 404px; height: 123px;
+                    border-top:1px solid #ccc;
+                    background-color: #fff;
+                    overflow-y: auto;
+                }
+
+            /* Mark Button Box */
+            .btn-box{
+                float: left;
+                margin-left: 10px;
+                width: 240px; height: 164px;
+            }
+                .paragraph-caret{
+                    overflow: hidden;
+                }
+                .paragraph-caret button{
+                    float: left;
+                    display: block;
+                    height: 30px; width: 93px;
+                    background-color: #888;
+                    line-height: 30px;
+                    color: #fff;
+                    margin-left: 5px;
+                    opacity: 0.5;
+                }
+                .paragraph-caret button:first-child{
+                    width: 142px;
+                    margin-left: 0;
+                }
+                .marking-caret{
+                    clear: both;
+                    margin-top: 10px;
+                    margin-left: -4px;
+                    margin-bottom: -4px;
+                    overflow: hidden;
+                }
+                .marking-caret button{
+                    display: block;
+                    float: left;
+                    width: 45px; height: 40px;
+                    margin-left: 3px;
+                    margin-bottom: 4px;
+                    background: url("../images/btn_caret.png")no-repeat left top;
+                    overflow: hidden;
+                    opacity: 0.5;
+                }
+                .marking-caret button:nth-child(2){ background-position-y: -40px; }
+                .marking-caret button:nth-child(3){ background-position-y: -80px; }
+                .marking-caret button:nth-child(4){ background-position-y: bottom; }
+                .marking-caret button:nth-child(5){ background-position-y: bottom; }
+                .marking-caret button:nth-child(6){ background-position-y: -120px; }
+                .marking-caret button:nth-child(7){ background-position-y: -160px; }
+                .marking-caret button:nth-child(8){ background-position-y: -200px; }
+                .marking-caret button:nth-child(9){ background-position-y: -240px; }
+                .marking-caret button:nth-child(10){ background-position-y: -280px;}
+
+                .marking-caret .cursor,
+                .paragraph-caret .cursor{
+                    opacity: 1;
+                }
+
+            /* Save, Load Area */
+            .net{
+                clear: both;
+            }
+                .net button{
+                    width: 118px;
+                    height: 30px;
+                    margin-top: 10px;
+                    color: #fff; background-color: #888;
+                    text-align: center;
+                }
+
