@@ -30,9 +30,9 @@ import '../addons/Utils';
 						}
 					});
 					$ta.on('focusout', function () {
-						// status = 'view';
-						// $owner.removeClass(options.activeClass);
-						// $view.html($ta.val().convertLineBreakToBR());
+						status = 'view';
+						$owner.removeClass(options.activeClass);
+						$view.html($ta.val().convertLineBreakToBR());
 						// if(!$view.text().length){ c.remove(); }
 					});
 					$ta.on('keydown', function (ev) {

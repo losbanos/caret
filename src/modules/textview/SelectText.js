@@ -12,7 +12,7 @@ const c = {
 				c.deactivateController();
 			}
 		})
-			.on('click', c.mark)
+			.on('click mouseup', c.mark)
 	},
 	mark () {
 		let $sp = HighLightNode.create(),

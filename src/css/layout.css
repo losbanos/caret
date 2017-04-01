@@ -299,6 +299,24 @@ h2 span{
                     display: none;
                 }
 
+        /* Corrections */
+        .text-area .correction-msg{
+            position: absolute;
+            left: 0; top: 18px;
+            height: auto; width: auto;
+            /*padding-left: 12px;*/
+            line-height:1.2;
+        }
+        .text-area .correction-msg:before{
+            content: '└';
+            position: static;
+            margin-left: -12px;
+            color: #df0000;
+            background: 0 none;
+        }
+        .text-area .correction-msg:after {
+            display: none;
+        }
         /* Controller */
         .controller{
             height: 184px;

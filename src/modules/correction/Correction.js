@@ -14,13 +14,22 @@ const c = {
 		this.deactivate();
 	},
 	apply(id) {
-		console.log('mark id = ',id);
+		console.log('correction mark id = ',id);
 		let cur_id = 'correction_'+id,
 			$mark = $('#'+id),
-			$msg = $('<span />', {class: 'correction-msg', id:cur_id}).appendTo($mark)
+			ty = this.$ta.scrollTop(),
+        	$f = $mark.children('.f'),
+			$msg
 		;
-		let offsetY = $mark.position().top + this.$ta.scrollTop() + 20;
-		$msg.html(this.$ta.val().convertLineBreakToBR())
+		if(!$mark.children('.correction-msg').length) {
+            $msg = $('<span />', {class: 'correction-msg', id:cur_id}).appendTo($mark);
+		}
+		else {
+			$msg = $mark.children('.correction-msg');
+		}
+		$msg.html(this.$ta.val().convertLineBreakToBR());
+		$msg.insertBefore($f);
+		$msg.off('click');
 
 	},
 	activate(id) {
@@ -32,6 +41,9 @@ const c = {
 		this.$applyBtn.attr('disabled', true);
 		this.$moveBtn.attr('disabled', true);
 		this.$ta.attr('readonly', 'readonly');
+	},
+	showText () {
+
 	}
 };
 c.init();
