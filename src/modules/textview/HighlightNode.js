@@ -30,14 +30,23 @@ const h = {
 		}
 		return this.items;
 	},
-	parse ($el) {
-		if($el.text().length) {
-			let r = $el.html().parseToTag();
-			$el.html(r);
+	parse (sc, ec, $el) {
+		if(!$el) $el = this.$el;
 
+        sc.setAttribute('class', 'f');
+        ec.setAttribute('class', 'e');
+        let $sc = $(sc);
+        let result = $sc.nextUntil(ec).add($sc).add(ec);
+        result = result.wrapAll($el);
+        return $el;
+        $($(sc).nextUntil(ec)).wrapAll($sp);
+		if($el.text().length) {
 			$el.find('span').first().addClass('f').end().last().addClass('e');
 		}
 		return $el;
+	},
+	recover (sc, ec, $el) {
+
 	},
 	clicked() {
 		let $this = $(this);

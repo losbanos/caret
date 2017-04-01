@@ -12,9 +12,7 @@ const c = {
 				c.deactivateController();
 			}
 		})
-			.on('click', function () {
-				c.mark();
-			})
+			.on('click', c.mark)
 	},
 	mark () {
 		let $sp = HighLightNode.create(),
@@ -28,17 +26,22 @@ const c = {
 				sel_text = sel.toString();
 				let range = ori_range.cloneRange();
 				try {
-					range.surroundContents($sp.get(0));
-
-					$sp = HighLightNode.parse($sp);
-
+					let sc = range.startContainer.parentNode,
+						ec= range.endContainer.parentNode
+					;
+					if(sel_text) {
+						$sp = HighLightNode.parse(sc, ec, $sp);
+					}
+					else {
+						range.surroundContents($sp.get(0));
+					}
 					sel.removeAllRanges();
 					sel.addRange(range);
 
 					HighLightNode.add({id: $sp.attr('id'), text: sel_text, el: $sp, marked: false});
-					// sel.removeAllRanges();
+					sel.removeAllRanges();
 
-					c.activateController(sel_text);
+					// c.activateController(sel_text);
 				}
 				catch (e) {
 					console.warn(e);
@@ -65,7 +68,7 @@ const c = {
 						t = '<br>';
 					}
 					else {
-						t = $this.html();
+						t = $this.removeClass('f e').prop('outerHTML');
 					}
 					text += t
 				});

@@ -7,7 +7,7 @@
 	};
 	String.prototype.parseToTag = function () {
 		if(!this.length) return false;
-		return this.replace(/<br\s?\/?>/ig,'_').replace(/(.)/g, '<span>$1</span>').replace(/\<span\>\_\<\/span\>/g, '<br>');
+		return this.replace(/<br\s?\/?>/ig,'\|').replace(/(.)/g, '<span>$1</span>').replace(/\<span\>\|\<\/span\>/g, '<br>');
 	};
 
 	let $win = $(win), $doc = $(doc);

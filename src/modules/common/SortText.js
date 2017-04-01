@@ -3,8 +3,11 @@ const SortText = {
 	original: '',
 	init(source) {
 		this.text = this.original = source;
-		this.text = this.text.replace(/(\r\n|\r|\n)/g, '<br>');
-		this.text = this.text.replace(/\s{2,}/g, '');
+		this.text = this.text
+			.replace(/(\r\n|\r|\n)/g, '\|')
+			.replace(/\s{2,}/g, '')
+			.replace(/(.)/g, '<span>$1</span>')
+			.replace(/\<span\>\|\<\/span\>/g, '<br>');
 		return this.text;
 	},
 	removeSpace(src) {
