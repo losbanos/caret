@@ -17,6 +17,9 @@ button{
 .cursor{
     cursor: pointer;
 }
+.yellow-block{
+    background: rgba(233, 255, 0, 0.21);
+}
 ul, ol, li{list-style: none;}
 a:link,
 a:hover{

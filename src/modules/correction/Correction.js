@@ -45,12 +45,12 @@ const c = {
 		}
 		else {
 			$msg.remove();
-			c.curID = '';
 		}
 	},
-	activate(id) {
+	activate(id, reactivate) {
 		this.curID = id;
-		this.$ta.val('');
+		if(!reactivate) this.$ta.val('');
+
 		this.$applyBtn.attr('disabled', false);
 		this.$moveBtn.attr('disabled', false);
 		this.$ta.removeAttr('readonly');

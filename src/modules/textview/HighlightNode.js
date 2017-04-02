@@ -85,6 +85,11 @@ const h = {
     setCurrentItemToMarked() {
         this.getCurrentItem().marked = true;
         this.getCurrentItem().init();
+    },
+    removeLinearColor() {
+        this.items.forEach(function (n){
+            n.el.removeClass('yellow-block');
+        })
     }
 };
 

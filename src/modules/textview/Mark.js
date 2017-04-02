@@ -1,9 +1,10 @@
+import HighlightNode from './HighlightNode';
 import Comment from '../comment/Comment';
 import Correction from '../correction/Correction';
 
 export default function (dataObj) {
     let c = {
-        id:'',
+        id: '',
         el: '',
         type: '',
         marked: false,
@@ -14,13 +15,18 @@ export default function (dataObj) {
             return c;
         },
         clicked() {
+            HighlightNode.removeLinearColor();
+            Correction.activate(this.id, true);
+            this.el.addClass('yellow-block');
             return c;
         },
         openEdit() {
-            switch(this.type) {
+            switch (this.type) {
                 case 'cancel':
-                    Comment.add({id: 'comment_'+this.id, index: this.index});
+                    console.log(this);
+                    Comment.add({id: 'comment_' + this.id, index: this.index});
                     Correction.activate(this.id);
+                    this.el.on('click', this.clicked.bind(this)).addClass('cursor');
                     break;
                 case 'paragraph':
                     break;
@@ -29,8 +35,12 @@ export default function (dataObj) {
             }
             return c;
         },
-        getIndex() { return this.index; },
-        setIndex(number) { this.index = number; },
+        getIndex() {
+            return this.index;
+        },
+        setIndex(number) {
+            this.index = number;
+        },
         getComment() {
 
         },
@@ -49,7 +59,9 @@ export default function (dataObj) {
         removeCorrection() {
 
         },
-        getText() {return this.text;},
+        getText() {
+            return this.text;
+        },
         remove() {
 
         }
