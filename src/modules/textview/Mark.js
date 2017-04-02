@@ -15,11 +15,18 @@ export default function (dataObj) {
             return c;
         },
         clicked() {
-            HighlightNode.removeLinearColor();
-
-            Correction.activate(this.id);
-
-            this.el.addClass('yellow-block');
+            switch (this.type) {
+                case 'cancel':
+                    Comment.activate({id: 'comment_' + this.id, index: this.index});
+                    Correction.activate(this.id);
+                    HighlightNode.removeLinearColor();
+                    this.el.addClass('yellow-block');
+                    break;
+                case 'paragraph':
+                    break;
+                case 'linear':
+                    break;
+            }
             return c;
         },
         openEdit() {

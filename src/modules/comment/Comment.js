@@ -1,4 +1,5 @@
 import Mustache from 'mustache';
+import _ from 'lodash';
 
 import '../addons/Utils';
 import './CommentBox';
@@ -7,30 +8,41 @@ import highlightNode from '../textview/HighlightNode';
 const c = {
 	items: [],
 	$container: '',
+	$list: '',
 	template: '',
 	init () {
-		this.$container = $('#comments');
+		this.$container = $('#comment_area');
+		this.$list = $('#comments');
 		this.template = $('#tpl_comment').html();
 	},
 	add (data) {
-		let comm = Mustache.render(this.template, data);
-		this.$container.append(comm);
-		this.activateComment(data.id);
-	},
-	activateComment (id) {
-		let $li = $('#' + id);
-		$li.comment({
-			$removeBtn: $li.find('button'),
-			$view: $li.find('.view'),
-			$ta: $li.find('textarea'),
-			onRemove: function (id) {
-				// $('#' + id).recoverText();
-				// highlightNode.removeItem(id);
-			}
-		})
-	},
-	remove () {
+		data.index = this.items.length ? this.items.length + 1: 1;
 
+		let comm = Mustache.render(this.template, data);
+		this.$list.append(comm);
+
+		let $li = $('#' + data.id);
+        $li.comment({
+            $removeBtn: $li.find('button'),
+            $view: $li.find('.view'),
+            $ta: $li.find('textarea'),
+            onRemove: function () {c.removeItem(data.id)}
+        });
+        this.items.push($li);
+	},
+	activate (data) {
+		let $el = _.find(this.items, function(n){ return n.attr('id') === data.id });
+		if($el !== void 0) {
+			this.$container.animate({scrollTop: $el.position().top}, 400);
+		}
+		else {
+			this.add(data);
+		}
+	},
+	removeItem(id) {
+		return _.remove(this.items, function (n) {
+			return n.attr('id') === id;
+		})
 	}
 }
 module.exports = c;
