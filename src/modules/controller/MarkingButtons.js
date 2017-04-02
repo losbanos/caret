@@ -2,68 +2,68 @@ import '../addons/Utils';
 import highlightNode from '../textview/HighlightNode';
 
 const c = {
-	$carets: '',
-	$buttons: '',
-	init () {
-		this.$carets = $('#caret_box');
-		this.$buttons = this.$carets.find('button').attr('disabled', true);
-	},
-	activate(has_length) {
-		this.$buttons.attr('disabled', true).removeClass('cursor');
+    $carets: '',
+    $buttons: '',
+    init () {
+        this.$carets = $('#caret_box');
+        this.$buttons = this.$carets.find('button').attr('disabled', true);
+    },
+    activate(has_length) {
+        this.$buttons.attr('disabled', true).removeClass('cursor');
 
-		let target = '';
-		if (has_length) {
-			target = 'multi';
-		}
-		else {
-			target = 'single';
-		}
+        let target = '';
+        if (has_length) {
+            target = 'multi';
+        }
+        else {
+            target = 'single';
+        }
 
-		this.$buttons.filter(function () {
-			return this.getAttribute('class') === target;
-		}).removeAttr('disabled').addClass('cursor');
+        this.$buttons.filter(function () {
+            return this.getAttribute('class') === target;
+        }).removeAttr('disabled').addClass('cursor');
 
-		this.$carets.on('click', 'button', function (ev) {
-			$.preventActions(ev);
+        this.$carets.on('click', 'button', function (ev) {
+            $.preventActions(ev);
 
-			let $this = $(this),
-				mark_id = $this.attr('id')
-			;
-			let cur = highlightNode.getCurrentItem(),
-				$cur = cur.el,
-				h = $cur.height()
-			;
-			// console.log('cur = ',$cur, 'cur id = ', $cur.attr('id'));
+            let $this = $(this),
+                mark_id = $this.attr('id')
+            ;
+            let cur = highlightNode.getCurrentItem(),
+                $cur = cur.el,
+                h = $cur.height()
+            ;
+            // console.log('cur = ',$cur, 'cur id = ', $cur.attr('id'));
 
-			$cur.addClass(mark_id).removeClass('highlight');
-			if (h > 20) {
-				$cur.addClass('multi-line');
-			}
-			/* <-- HighlightNode 에서 처리하도록 수정 필요 */
-			if (!$cur.children('.icon').length && mark_id === 'removeletter') {
-				$cur.append($('<i />', {class: 'icon'}));
-			}
-			/* end --> */
+            $cur.addClass(mark_id).removeClass('highlight');
+            if (h > 20) {
+                $cur.addClass('multi-line');
+            }
+            /* <-- HighlightNode 에서 처리하도록 수정 필요 */
+            if (!$cur.children('.icon').length && mark_id === 'removeletter') {
+                $cur.append($('<i />', {class: 'icon'}));
+            }
+            /* end --> */
 
-			/*  paragraph 예외처리 시작 */
-			if (mark_id === 'paragraph') {
-				let $line = $('<span />', {class: 'paragraph-line'}),
-					$ta = $('#text_area'),
-					ty = $ta.scrollTop()
-				;
-				let h = $cur.children('.e').position().top;
-				$line.appendTo($ta)
-					.css({top: $cur.position().top + ty, height: h})
-					.attr('id', cur.id);
+            /*  paragraph 예외처리 시작 */
+            if (mark_id === 'paragraph') {
+                let $line = $('<span />', {class: 'paragraph-line'}),
+                    $ta = $('#text_area'),
+                    ty = $ta.scrollTop()
+                ;
+                let h = $cur.children('.e').position().top;
+                $line.appendTo($ta)
+                    .css({top: $cur.position().top + ty, height: h})
+                    .attr('id', cur.id);
 
-				let	$spans = $cur.find('span, br'),
-					text = ''
-				;
-                if($spans.length) {
+                let $spans = $cur.find('span, br'),
+                    text = ''
+                ;
+                if ($spans.length) {
                     $spans.each(function () {
                         let $this = $(this);
                         let t = '';
-                        if($this.is('br')) {
+                        if ($this.is('br')) {
                             t = '<br>';
                         }
                         else {
@@ -72,29 +72,24 @@ const c = {
                         text += t
                     });
                 }
+                $cur.replaceWith(text);
 
-				$cur.replaceWith(text);
+                highlightNode.add({id: cur.id, el: $line});
+            }
+            /*  paragraph 예외처리 끝 */
 
-				highlightNode.add({id: cur.id, el: $line});
-			}
-			/*  paragraph 예외처리 끝 */
+            highlightNode.setType(mark_id);
+            highlightNode.setCurrentItemToMarked();
 
-			highlightNode.setCurrentItemToMarked();
-			highlightNode.setType(mark_id);
+            c.$buttons.attr('disabled', true).removeClass('cursor');
+            c.$carets.off('click');
 
-			c.$buttons.attr('disabled', true).removeClass('cursor');
-			c.$carets.off('click');
-
-			highlightNode.openEdit(mark_id)
-		})
-	},
-
-	handleMark(ev) {
-
-	},
-	deactivate() {
-		this.$carets.off('click');
-		this.$buttons.attr('disabled', true).removeClass('cursor');
-	}
+            highlightNode.getCurrentItem().openEdit();
+        })
+    },
+    deactivate() {
+        this.$carets.off('click');
+        this.$buttons.attr('disabled', true).removeClass('cursor');
+    }
 };
 module.exports = c;

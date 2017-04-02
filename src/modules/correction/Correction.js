@@ -31,6 +31,7 @@ const c = {
 		else {
 			$msg = $mark.children('.correction-msg');
 		}
+		$msg.width($mark.width());
 
 		if(this.$ta.val().length) {
 			$msg.html(this.$ta.val().convertLineBreakToBR());
@@ -44,6 +45,7 @@ const c = {
 		}
 		else {
 			$msg.remove();
+			c.curID = '';
 		}
 	},
 	activate(id) {

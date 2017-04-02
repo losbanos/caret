@@ -304,7 +304,7 @@ h2 span{
             position: absolute;
             left: 0; top: 18px;
             height: auto; width: auto;
-            /*padding-left: 12px;*/
+            margin-left: 6px;
             line-height:1.2;
         }
         .text-area .correction-msg:before{

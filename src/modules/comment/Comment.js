@@ -24,8 +24,8 @@ const c = {
 			$view: $li.find('.view'),
 			$ta: $li.find('textarea'),
 			onRemove: function (id) {
-				$('#' + id).recoverText();
-				highlightNode.removeItem(id);
+				// $('#' + id).recoverText();
+				// highlightNode.removeItem(id);
 			}
 		})
 	},
