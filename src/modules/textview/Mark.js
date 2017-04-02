@@ -16,14 +16,15 @@ export default function (dataObj) {
         },
         clicked() {
             HighlightNode.removeLinearColor();
-            Correction.activate(this.id, true);
+
+            Correction.activate(this.id);
+
             this.el.addClass('yellow-block');
             return c;
         },
         openEdit() {
             switch (this.type) {
                 case 'cancel':
-                    console.log(this);
                     Comment.add({id: 'comment_' + this.id, index: this.index});
                     Correction.activate(this.id);
                     this.el.on('click', this.clicked.bind(this)).addClass('cursor');

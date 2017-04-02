@@ -70,21 +70,31 @@ const h = {
         })
     },
     removeItem (id) {
-        return _.remove(this.items, function (n) {
+        _.remove(this.items, function (n) {
             return n.id === id;
-        })
+        });
+        return this.sortItemsByIndex()
     },
     removeNonMarked() {
-        return _.remove(this.items, function (n) {
+        let removed = _.remove(this.items, function (n) {
             return n.marked === false;
         });
+        this.sortItemsByIndex();
+        return removed;
+    },
+    sortItemsByIndex() {
+      this.items = _.orderBy(this.items, 'index', 'asc');
+      this.items = _.forEach(this.items, function (n, i) {
+          n.index = i + 1;
+      });
+      return this.items;
     },
     setType (type) {
         this.getCurrentItem().type = type;
     },
     setCurrentItemToMarked() {
         this.getCurrentItem().marked = true;
-        this.getCurrentItem().init();
+        this.getCurrentItem().init().setIndex(this.items.length);
     },
     removeLinearColor() {
         this.items.forEach(function (n){

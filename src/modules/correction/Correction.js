@@ -49,7 +49,7 @@ const c = {
 	},
 	activate(id, reactivate) {
 		this.curID = id;
-		if(!reactivate) this.$ta.val('');
+		this.$ta.val('');
 
 		this.$applyBtn.attr('disabled', false);
 		this.$moveBtn.attr('disabled', false);
