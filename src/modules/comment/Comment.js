@@ -26,9 +26,11 @@ const c = {
             $removeBtn: $li.find('button'),
             $view: $li.find('.view'),
             $ta: $li.find('textarea'),
-            onRemove: function () {c.removeItem(data.id)}
+            onRemove: function () {c.removeItem(data.id); c.sortItems()}
         });
         this.items.push($li);
+
+        this.sortItems()
 	},
 	activate (data) {
 		let $el = _.find(this.items, function(n){ return n.attr('id') === data.id });
@@ -43,6 +45,13 @@ const c = {
 		return _.remove(this.items, function (n) {
 			return n.attr('id') === id;
 		})
-	}
+	},
+    sortItems() {
+        this.items.forEach(function (n, i) {
+            let num = i +1;
+            n.find('.comment-index').text(num+'.');
+        });
+        return this.items;
+    }
 }
 module.exports = c;
