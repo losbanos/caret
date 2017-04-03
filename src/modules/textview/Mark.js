@@ -12,7 +12,6 @@ export default function (dataObj) {
 		text: '',
 		index: 0,
 		init () {
-			// this.el.on('click', this.clicked);
 			let $num = $('<span />', {class: 'mark-number info', text: '(' + this.index + ')'});
 			$num.insertBefore($(this.el).find('.f'));
 			return c;
