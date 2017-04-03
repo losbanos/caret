@@ -94,11 +94,11 @@ const h = {
     },
     setCurrentItemToMarked() {
         this.getCurrentItem().marked = true;
-        this.getCurrentItem().init().setIndex(this.items.length);
+        this.getCurrentItem().setIndex(this.items.length).init()
     },
     removeLinearColor() {
         this.items.forEach(function (n){
-            n.el.removeClass('yellow-block');
+            n.el.removeClass('active-block');
         })
     }
 };

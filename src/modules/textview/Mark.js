@@ -12,6 +12,8 @@ export default function (dataObj) {
         index: 0,
         init () {
             // this.el.on('click', this.clicked);
+            let $num = $('<span />', {class:'mark-number info', text: '('+this.index+')'});
+            $num.insertBefore($(this.el).find('.f'));
             return c;
         },
         clicked() {
@@ -20,7 +22,7 @@ export default function (dataObj) {
                     Comment.activate({id: 'comment_' + this.id, index: this.index});
                     Correction.activate(this.id, true);
                     HighlightNode.removeLinearColor();
-                    this.el.addClass('yellow-block');
+                    this.el.addClass('active-block');
                     break;
                 case 'paragraph':
                     break;
@@ -35,7 +37,7 @@ export default function (dataObj) {
                     Comment.add({id: 'comment_' + this.id, index: this.index});
                     Correction.activate(this.id, false);
                     HighlightNode.removeLinearColor();
-                    this.el.on('click', this.clicked.bind(this)).addClass('cursor yellow-block');
+                    this.el.on('click', this.clicked.bind(this)).addClass('cursor active-block');
                     break;
                 case 'paragraph':
                     break;
@@ -49,6 +51,7 @@ export default function (dataObj) {
         },
         setIndex(number) {
             this.index = number;
+            return c;
         },
         getComment() {
 

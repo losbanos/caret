@@ -26,7 +26,7 @@ const c = {
 			$msg
 		;
 		if(!$mark.children('.correction-msg').length) {
-            $msg = $('<span />', {class: 'correction-msg', id:cur_id}).appendTo($mark);
+            $msg = $('<span />', {class: 'correction-msg info', id:cur_id}).appendTo($mark);
 		}
 		else {
 			$msg = $mark.children('.correction-msg');
