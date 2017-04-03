@@ -26,8 +26,12 @@ const c = {
             $removeBtn: $li.find('button'),
             $view: $li.find('.view'),
             $ta: $li.find('textarea'),
-            onRemove: function () {c.removeItem(data.id); c.sortItems()}
-        });
+            onRemove: function () {c.removeItem(data.id); c.sortItems()},
+        }).on('edit', function (ev, $el) {
+			c.$list.find('li').removeClass('active');
+        	$el.addClass('active');
+		});
+
         this.items.push($li);
         this.$list.find('li').removeClass('active');
 		$li.addClass('active');

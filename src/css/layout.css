@@ -21,7 +21,7 @@ button{
     /*background: rgba(233, 255, 0, 0.21);*/
     background: rgba(16, 154, 163, 0.2);
 }
-ul, ol, li{list-stle: none;}
+ul, ol, li{list-style: none;}
 a:link,
 a:hover{
     text-decoration: none;
@@ -272,15 +272,18 @@ h2 span{
             .comment-area .active .comment-index{
                 font-weight: bold;}
             .comment-head{
-                line-height: 25px;
+                height: 25px;
+                overflow: hidden;
             }
             .comment-head p{
                 float: left;
                 margin-left: 6px;
                 color: red;
+                line-height:25px;
             }
             .comment-area li button{
                 float: right;
+                align-self: flex-end;
                 display: block;
                 width: 50px; height: 25px;
                 right: 0; top: 0;
@@ -301,6 +304,7 @@ h2 span{
                     width: calc(100% - 10px);
                     width: -webkit-calc(100% - 10px);
                     margin: 0; padding: 5px 5px;
+                    min-height: 20px;
                 }
                 .comment-text textarea{
                     display: none;
@@ -311,10 +315,10 @@ h2 span{
                 .comments .view{
                     display: block;
                 }
-                .comments .edit textarea{
+                .comments .active textarea{
                     display: block;
                 }
-                .comments .edit .view{
+                .comments .active .view{
                     display: none;
                 }
 

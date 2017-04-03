@@ -7,7 +7,7 @@ import '../addons/Utils';
 			$removeBtn: '',
 			$view: '.view',
 			$ta: 'textarea',
-			activeClass: 'edit',
+			activeClass: 'active',
 			onRemove: null
 		}, settings || {});
 
@@ -21,23 +21,19 @@ import '../addons/Utils';
 				viewText: '',
 				taText: '',
 				init() {
-					$owner.on('click', '.comment-text', function () {
-						if(status==='view') {
-							$owner.addClass(options.activeClass);
-							$ta.html($view.html());
-							// $ta.focus();
-							status = 'edit';
-						}
+					$owner.on('click', '.comment-head, .comment-text', function (ev) {
+						$owner.addClass(options.activeClass);
+						$ta.html($view.html());
+						status = 'edit';
+						$owner.trigger('edit', [$owner]);
 					});
 					$ta.on('focusout', function () {
-						status = 'view';
 						$owner.removeClass(options.activeClass);
 						$view.html($ta.val().convertLineBreakToBR());
 						// if(!$view.text().length){ c.remove(); }
 					});
 					$ta.on('keydown', function (ev) {
 						if(ev.which === 13 && ev.ctrlKey) {
-							status = 'view';
 							$owner.removeClass(options.activeClass);
 							$view.html($ta.val().convertLineBreakToBR());
 							if(!$view.text().length){ c.remove(); }
