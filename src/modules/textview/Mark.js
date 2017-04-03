@@ -34,7 +34,7 @@ export default function (dataObj) {
                 case 'cancel':
                     Comment.add({id: 'comment_' + this.id, index: this.index});
                     Correction.activate(this.id, false);
-                    HighlightNode.removeLinearColor()
+                    HighlightNode.removeLinearColor();
                     this.el.on('click', this.clicked.bind(this)).addClass('cursor yellow-block');
                     break;
                 case 'paragraph':

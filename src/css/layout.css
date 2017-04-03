@@ -18,7 +18,8 @@ button{
     cursor: pointer;
 }
 .yellow-block{
-    background: rgba(233, 255, 0, 0.21);
+    /*background: rgba(233, 255, 0, 0.21);*/
+    background: rgba(16, 154, 163, 0.2);
 }
 ul, ol, li{list-style: none;}
 a:link,
@@ -256,8 +257,11 @@ h2 span{
                 background-color: #eee;
             }
             .comment-area .active{
-                background: #FCFCC7;
+                /*background: #FCFCC7;*/
+                background: rgba(16, 154, 163, 0.4);
             }
+            .comment-area .active .comment-index{
+                font-weight: bold;}
             .comment-head{
                 line-height: 25px;
             }

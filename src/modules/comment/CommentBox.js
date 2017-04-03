@@ -42,6 +42,7 @@ import '../addons/Utils';
 							$view.html($ta.val().convertLineBreakToBR());
 							if(!$view.text().length){ c.remove(); }
 						}
+						$owner.trigger('comment-added', )
 					})
 					options.$removeBtn.one('click', this.remove);
 
