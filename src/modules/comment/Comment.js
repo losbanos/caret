@@ -4,7 +4,7 @@ import _ from 'lodash';
 import '../addons/Utils';
 import './CommentBox';
 import EVENT from '../common/Events';
-import HighlightNode from '../textview/HighlightNode';
+
 const c = {
 	items: [],
 	$container: '',
@@ -36,7 +36,7 @@ const c = {
 			let event = new CustomEvent(EVENT.COMMENT_ACTIVE, {
 				detail: {id: $el.attr('id').replace('comment_', ''), $el: $el, $list: c.$list, from: 'comment'}
 			});
-			window.dispatchEvent(event);
+			document.dispatchEvent(event);
 		});
 
 		this.items.push($li);
@@ -70,5 +70,8 @@ const c = {
 		});
 		return this.items;
 	},
+	getCommentLength() {
+		return this.items.length;
+	}
 }
 export default c;

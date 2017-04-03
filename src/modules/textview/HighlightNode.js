@@ -49,7 +49,7 @@ const h = {
 		}
 		catch (e) {
 			alert('Not Selectable');
-			console.log(e);
+			console.warn(e);
 		}
 		return false;
 	},
@@ -112,6 +112,6 @@ const h = {
 		$('#'+ev.detail.id).addClass('active-block').trigger(EVENT.MARK_ACTIVE);
 	}
 };
-window.addEventListener(EVENT.COMMENT_ACTIVE, h.activeByComment);
+document.addEventListener(EVENT.COMMENT_ACTIVE, h.activeByComment);
 export default h;
 
