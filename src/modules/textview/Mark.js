@@ -18,7 +18,7 @@ export default function (dataObj) {
             switch (this.type) {
                 case 'cancel':
                     Comment.activate({id: 'comment_' + this.id, index: this.index});
-                    Correction.activate(this.id);
+                    Correction.activate(this.id, true);
                     HighlightNode.removeLinearColor();
                     this.el.addClass('yellow-block');
                     break;
@@ -33,8 +33,9 @@ export default function (dataObj) {
             switch (this.type) {
                 case 'cancel':
                     Comment.add({id: 'comment_' + this.id, index: this.index});
-                    Correction.activate(this.id);
-                    this.el.on('click', this.clicked.bind(this)).addClass('cursor');
+                    Correction.activate(this.id, false);
+                    HighlightNode.removeLinearColor()
+                    this.el.on('click', this.clicked.bind(this)).addClass('cursor yellow-block');
                     break;
                 case 'paragraph':
                     break;

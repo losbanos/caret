@@ -255,6 +255,9 @@ h2 span{
                 /*position: relative;*/
                 background-color: #eee;
             }
+            .comment-area .active{
+                background: #FCFCC7;
+            }
             .comment-head{
                 line-height: 25px;
             }

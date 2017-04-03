@@ -29,13 +29,17 @@ const c = {
             onRemove: function () {c.removeItem(data.id); c.sortItems()}
         });
         this.items.push($li);
+        this.$list.find('li').removeClass('active');
+		$li.addClass('active');
 
         this.sortItems()
 	},
 	activate (data) {
 		let $el = _.find(this.items, function(n){ return n.attr('id') === data.id });
 		if($el !== void 0) {
-			this.$container.animate({scrollTop: $el.position().top}, 400);
+			this.$container.animate,({scrollTop: $el.position().top}, 400);
+			this.$list.find('li').removeClass('active');
+			$el.addClass('active');
 		}
 		else {
 			this.add(data);
@@ -52,6 +56,6 @@ const c = {
             n.find('.comment-index').text(num+'.');
         });
         return this.items;
-    }
+    },
 }
 module.exports = c;
