@@ -27,7 +27,6 @@ const h = {
 		}
 		else {
 			o.update(obj);
-
 		}
 
 		return this.items;
@@ -105,7 +104,6 @@ const h = {
 	setCurrentItemToMarked() {
 		this.getCurrentItem().marked = true;
 		this.getCurrentItem().setIndex(this.items.length).init()
-		console.log('items = ',this.items);
 	},
 	removeLinearColor() {
 		this.items.forEach(function (n) {

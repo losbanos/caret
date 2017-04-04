@@ -28,7 +28,14 @@ export default function (dataObj) {
 		displayCommentIndex() {
 			this.commentIndex = Comment.getCommentLength() + 1;
             let $num = $('<span />', {class: 'mark-number info', text: '(' + this.commentIndex + ')'});
-            $num.insertBefore($(this.$el).children('.f'));
+            switch(this.type) {
+				case 'cancel':
+						$num.insertBefore($(this.$el).children('.f'));
+					break;
+				case 'paragraph':
+						this.$el.append($num);
+					break;
+			}
 		},
 		clicked() {
 			switch (this.type) {
@@ -46,6 +53,7 @@ export default function (dataObj) {
 				case 'paragraph':
 					Comment.activate({id: 'comment_' + this.id, index: this.index});
 					HighlightNode.removeLinearColor();
+					Correction.deactivate();
 					break;
 				case 'linear':
 					break;
@@ -61,6 +69,9 @@ export default function (dataObj) {
 					this.$el.on('click', this.clicked.bind(this)).addClass('cursor active-block');
 					break;
 				case 'paragraph':
+					Comment.add({id: 'comment_' + this.id, index: this.index});
+					HighlightNode.removeLinearColor();
+					Correction.deactivate();
 					break;
 				case 'linear':
 					break;
