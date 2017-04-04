@@ -1,3 +1,4 @@
+import _ from 'lodash';
 import HighlightNode from './HighlightNode';
 import Comment from '../comment/Comment';
 import Correction from '../correction/Correction';
@@ -43,6 +44,8 @@ export default function (dataObj) {
 					this.$ta_correction.get(0).dispatchEvent(event);
 					break;
 				case 'paragraph':
+					Comment.activate({id: 'comment_' + this.id, index: this.index});
+					HighlightNode.removeLinearColor();
 					break;
 				case 'linear':
 					break;
@@ -106,6 +109,11 @@ export default function (dataObj) {
 				detail:{id: this.id, text: c.getCorrectionText()} }
 			);
 			$('#ta_correction').get(0).dispatchEvent(event);
+		},
+		update(obj) {
+			_.forEach(obj, function (v, k) {
+				c[k] = v
+			})
 		}
 
 	};

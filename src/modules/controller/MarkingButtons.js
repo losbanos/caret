@@ -55,25 +55,9 @@ const c = {
                     .css({top: $cur.position().top + ty, height: h})
                     .attr('id', cur.id);
 
-                let $spans = $cur.find('span, br'),
-                    text = ''
-                ;
-                if ($spans.length) {
-                    $spans.each(function () {
-                        let $this = $(this);
-                        let t = '';
-                        if ($this.is('br')) {
-                            t = '<br>';
-                        }
-                        else {
-                            t = $this.removeClass('f e').prop('outerHTML');
-                        }
-                        text += t
-                    });
-                }
-                $cur.replaceWith(text);
-
-                highlightNode.add({id: cur.id, el: $line});
+                $cur.children('.f, .e').removeClass('f e');
+                $cur.replaceWith($cur.html());
+                highlightNode.add({id: cur.id, $el: $line});
             }
             /*  paragraph 예외처리 끝 */
 

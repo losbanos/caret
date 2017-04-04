@@ -20,8 +20,16 @@ const h = {
 	},
 
 	add (obj) {
-		let newOne = new Mark(obj);
-		this.items.push(newOne);
+		let o =_.find(this.items, function (n) {return n.id === obj.id});
+		if(!o) {
+			let newOne = new Mark(obj);
+			this.items.push(newOne);
+		}
+		else {
+			o.update(obj);
+
+		}
+
 		return this.items;
 	},
 	parse (sc, ec, $el) {
@@ -79,7 +87,7 @@ const h = {
 	},
 	removeNonMarked() {
 		let removed = _.remove(this.items, function (n) {
-			return n.marked === false;
+			return !n.marked
 		});
 		this.sortItemsByIndex();
 		return removed;
@@ -97,6 +105,7 @@ const h = {
 	setCurrentItemToMarked() {
 		this.getCurrentItem().marked = true;
 		this.getCurrentItem().setIndex(this.items.length).init()
+		console.log('items = ',this.items);
 	},
 	removeLinearColor() {
 		this.items.forEach(function (n) {
