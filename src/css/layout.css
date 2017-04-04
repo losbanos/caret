@@ -170,6 +170,7 @@ h2 span{
                 width: 10px; height:92px;
                 border: 2px solid #df0000;
                 border-left: none;
+                cursor: pointer;
             }
             .text-area .paragraph-line .mark-number{
                 left: auto;right: -20px;

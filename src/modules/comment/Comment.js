@@ -33,7 +33,7 @@ const c = {
 		}).on('edit', function (ev, $el) {
 			c.$list.find('li').removeClass('active');
 			$el.addClass('active');
-			let event = new CustomEvent(EVENT.COMMENT_ACTIVE, {
+			let event = new CustomEvent(EVENT.MARK_ACTIVE, {
 				detail: {id: $el.attr('id').replace('comment_', ''), $el: $el, $list: c.$list, from: 'comment'}
 			});
 			$('#'+event.detail.id).get(0).dispatchEvent(event);

@@ -16,13 +16,13 @@ export default function (dataObj) {
 		correctionText: '',
 		$ta_correction: '',
 		init () {
-			switch(this.type) {
+			switch(c.type) {
 				case 'cancel': this.displayCommentIndex(); break;
 				case 'paragraph': this.displayCommentIndex(); break;
 			}
 
-			this.$ta_correction = $('#ta_correction');
-			c.$el.get(0).addEventListener(EVENT.COMMENT_ACTIVE, c.activeByComment, true);
+			c.$ta_correction = $('#ta_correction');
+			c.$el.get(0).addEventListener(EVENT.MARK_ACTIVE, c.activeByComment, true);
 			return c;
 		},
 		displayCommentIndex() {
@@ -38,15 +38,14 @@ export default function (dataObj) {
 			}
 		},
 		clicked() {
-			switch (this.type) {
+			switch (c.type) {
 				case 'cancel':
 					Comment.activate({id: 'comment_' + this.id, index: this.index});
-					Correction.activate(this.id, true);
 					HighlightNode.removeLinearColor();
 					this.$el.addClass('active-block');
 
-					let	event = new CustomEvent(EVENT.MARK_CLICK, {
-							detail:{id: this.id, text: this.getCorrectionText()} }
+					let	event = new CustomEvent(EVENT.CORRECTION_ACTIVATE, {
+							detail:{id: this.id, text: this.getCorrectionText(), reactivate: true} }
 					);
 					this.$ta_correction.get(0).dispatchEvent(event);
 					break;
@@ -64,14 +63,19 @@ export default function (dataObj) {
 			switch (this.type) {
 				case 'cancel':
 					Comment.add({id: 'comment_' + this.id, index: this.index});
-					Correction.activate(this.id, false);
 					HighlightNode.removeLinearColor();
+
+					let	event = new CustomEvent(EVENT.CORRECTION_ACTIVATE, {
+						detail:{id: this.id, text: this.getCorrectionText(), reactivate: false, from:'mark'} }
+					);
+					this.$ta_correction.get(0).dispatchEvent(event);
 					this.$el.on('click', this.clicked.bind(this)).addClass('cursor active-block');
 					break;
 				case 'paragraph':
 					Comment.add({id: 'comment_' + this.id, index: this.index});
 					HighlightNode.removeLinearColor();
 					Correction.deactivate();
+					this.$el.on('click', this.clicked).addClass('cursor active-block');
 					break;
 				case 'linear':
 					break;
@@ -116,10 +120,24 @@ export default function (dataObj) {
 			console.log('active By Mark');
 		},
 		activeByComment() {
-			let	event = new CustomEvent(EVENT.MARK_CLICK, {
-				detail:{id: this.id, text: c.getCorrectionText()} }
-			);
-			$('#ta_correction').get(0).dispatchEvent(event);
+			let event,
+				ta = $('#ta_correction').get(0)
+			;
+			HighlightNode.removeLinearColor();
+			c.$el.addClass('active-block');
+
+			switch(c.type) {
+				case 'cancel':
+					event = new CustomEvent(EVENT.CORRECTION_ACTIVATE, {
+						detail:{
+							id: c.id, text: c.getCorrectionText(),
+							from:'mark', reactivate: true} });
+					break;
+				case 'paragraph':
+					event = new CustomEvent(EVENT.CORRECTION_DEACTIVATE, { detail: {id: c.id}});
+					break;
+			}
+			ta.dispatchEvent(event);
 		},
 		update(obj) {
 			_.forEach(obj, function (v, k) {
