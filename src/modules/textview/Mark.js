@@ -17,8 +17,8 @@ export default function (dataObj) {
 		$ta_correction: '',
 		init () {
 			switch(c.type) {
-				case 'cancel': this.displayCommentIndex(); break;
-				case 'paragraph': this.displayCommentIndex(); break;
+				case 'cancel': c.displayCommentIndex(); break;
+				case 'paragraph': c.displayCommentIndex(); break;
 			}
 
 			c.$ta_correction = $('#ta_correction');
@@ -28,7 +28,7 @@ export default function (dataObj) {
 		displayCommentIndex() {
 			this.commentIndex = Comment.getCommentLength() + 1;
             let $num = $('<span />', {class: 'mark-number info', text: '(' + this.commentIndex + ')'});
-            switch(this.type) {
+            switch(c.type) {
 				case 'cancel':
 						$num.insertBefore($(this.$el).children('.f'));
 					break;
@@ -60,7 +60,7 @@ export default function (dataObj) {
 			return c;
 		},
 		openEdit() {
-			switch (this.type) {
+			switch (c.type) {
 				case 'cancel':
 					Comment.add({id: 'comment_' + this.id, index: this.index});
 					HighlightNode.removeLinearColor();
@@ -75,7 +75,7 @@ export default function (dataObj) {
 					Comment.add({id: 'comment_' + this.id, index: this.index});
 					HighlightNode.removeLinearColor();
 					Correction.deactivate();
-					this.$el.on('click', this.clicked).addClass('cursor active-block');
+					c.$el.on('click', this.clicked).addClass('cursor active-block');
 					break;
 				case 'linear':
 					break;
