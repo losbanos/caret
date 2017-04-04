@@ -30,10 +30,9 @@ const c = {
                 mark_id = $this.attr('id')
             ;
             let cur = highlightNode.getCurrentItem(),
-                $cur = cur.el,
+                $cur = cur.$el,
                 h = $cur.height()
             ;
-            // console.log('cur = ',$cur, 'cur id = ', $cur.attr('id'));
 
             $cur.addClass(mark_id).removeClass('highlight');
             if (h > 20) {

@@ -6,6 +6,7 @@ import EVENT from '../common/Events';
 
 const h = {
 	$el: '',
+	$ta: $('#text_area'),
 	items: [],
 	create () {
 		let sp = document.createElement('span');
@@ -99,7 +100,7 @@ const h = {
 	},
 	removeLinearColor() {
 		this.items.forEach(function (n) {
-			n.el.removeClass('active-block');
+			n.$el.removeClass('active-block');
 		})
 	},
 	activeByComment(ev) {
@@ -109,9 +110,9 @@ const h = {
 			$('#'+mid).removeClass('active-block');
 		});
 
-		$('#'+ev.detail.id).addClass('active-block').trigger(EVENT.MARK_ACTIVE);
+		$('#'+ev.detail.id).addClass('active-block').trigger(EVENT.COMMENT_ACTIVE);
 	}
 };
-document.addEventListener(EVENT.COMMENT_ACTIVE, h.activeByComment);
+$('#text_area').get(0).addEventListener(EVENT.COMMENT_ACTIVE, h.activeByComment, true);
 export default h;
 

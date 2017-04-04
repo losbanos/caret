@@ -6,38 +6,41 @@ import EVENT from '../common/Events';
 export default function (dataObj) {
 	let c = {
 		id: '',
-		el: '',
+		$el: '',
 		type: '',
 		marked: false,
 		text: '',
 		index: 0,
 		commentIndex: 0,
+		correctionText: '',
+		$ta_correction: '',
 		init () {
-			// this.el.on('click', this.clicked);
 			switch(this.type) {
 				case 'cancel': this.displayCommentIndex(); break;
 				case 'paragraph': this.displayCommentIndex(); break;
 			}
 
+			this.$ta_correction = $('#ta_correction');
+			c.$el.get(0).addEventListener(EVENT.COMMENT_ACTIVE, c.activeByComment, true);
 			return c;
 		},
 		displayCommentIndex() {
 			this.commentIndex = Comment.getCommentLength() + 1;
             let $num = $('<span />', {class: 'mark-number info', text: '(' + this.commentIndex + ')'});
-            $num.insertBefore($(this.el).children('.f'));
+            $num.insertBefore($(this.$el).children('.f'));
 		},
 		clicked() {
 			switch (this.type) {
 				case 'cancel':
 					Comment.activate({id: 'comment_' + this.id, index: this.index});
 					Correction.activate(this.id, true);
-					let event = new CustomEvent(EVENT.MARK_CLICK, {
-							detail:{}
-							}
-						);
-					document.dispatchEvent(event);
 					HighlightNode.removeLinearColor();
-					this.el.addClass('active-block');
+					this.$el.addClass('active-block');
+
+					let	event = new CustomEvent(EVENT.MARK_CLICK, {
+							detail:{id: this.id, text: this.getCorrectionText()} }
+					);
+					this.$ta_correction.get(0).dispatchEvent(event);
 					break;
 				case 'paragraph':
 					break;
@@ -52,7 +55,7 @@ export default function (dataObj) {
 					Comment.add({id: 'comment_' + this.id, index: this.index});
 					Correction.activate(this.id, false);
 					HighlightNode.removeLinearColor();
-					this.el.on('click', this.clicked.bind(this)).addClass('cursor active-block');
+					this.$el.on('click', this.clicked.bind(this)).addClass('cursor active-block');
 					break;
 				case 'paragraph':
 					break;
@@ -77,27 +80,35 @@ export default function (dataObj) {
 		removeComment() {
 
 		},
-		getCorrection() {
-
-		},
-		setCorrection() {
-
-		},
 		removeCorrection() {
 
 		},
 		getText() {
 			return this.text;
 		},
+		getCorrectionText() {
+			let $msg = this.$el.children('.correction-msg');
+			if($msg.length) {
+				return this.correctionText = $msg.text();
+			}
+			else {
+				return '';
+			}
+		},
 		remove() {
 
 		},
 		activeByMark() {
 			console.log('active By Mark');
+		},
+		activeByComment() {
+			let	event = new CustomEvent(EVENT.MARK_CLICK, {
+				detail:{id: this.id, text: c.getCorrectionText()} }
+			);
+			$('#ta_correction').get(0).dispatchEvent(event);
 		}
 
 	};
 	c = $.extend(true, c, dataObj);
-	$(c.el).on(EVENT.MARK_ACTIVE, c.activeByMark());
 	return c;
 }

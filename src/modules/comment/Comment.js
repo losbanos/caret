@@ -36,7 +36,7 @@ const c = {
 			let event = new CustomEvent(EVENT.COMMENT_ACTIVE, {
 				detail: {id: $el.attr('id').replace('comment_', ''), $el: $el, $list: c.$list, from: 'comment'}
 			});
-			document.dispatchEvent(event);
+			$('#'+event.detail.id).get(0).dispatchEvent(event);
 		});
 
 		this.items.push($li);
@@ -50,7 +50,7 @@ const c = {
 			return n.attr('id') === data.id
 		});
 		if ($el !== void 0) {
-			this.$container.animate({scrollTop: $el.position().top}, 400);
+			this.$container.animate({scrollTop: $el.position().top + 100}, 400);
 			this.$list.find('li').removeClass('active');
 			$el.addClass('active');
 		}

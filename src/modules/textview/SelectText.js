@@ -12,14 +12,10 @@ const c = {
 				c.deactivateController();
 			}
 		})
-			// .click(c.mark)
 			.mouseup(c.mark)
 	},
 	mark (ev) {
 		if(ev.target.getAttribute('class')==='correction-msg' || ev.target.getAttribute('class')==='comment-msg'){
-			// $(ev.target).on('click', function () {
-			// 	console.log('click = ',this)
-			// });
 			return false;
 		};
 
@@ -46,7 +42,7 @@ const c = {
 					sel.removeAllRanges();
 					sel.addRange(range);
 
-					HighLightNode.add({id: $sp.attr('id'), text: sel_text, el: $('#'+$sp.attr('id')), marked: false});
+					HighLightNode.add({id: $sp.attr('id'), text: sel_text, $el: $('#'+$sp.attr('id')), marked: false});
 					sel.removeAllRanges();
 
 					c.activateController(sel_text);
