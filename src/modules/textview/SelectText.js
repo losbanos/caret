@@ -15,7 +15,8 @@ const c = {
 			.mouseup(c.mark)
 	},
 	mark (ev) {
-		if(ev.target.getAttribute('class')==='correction-msg' || ev.target.getAttribute('class')==='comment-msg'){
+		let targetName = ev.target.getAttribute('class');
+		if(targetName==='correction-msg' || targetName==='comment-msg' ||targetName==='paragraph-line'){
 			return false;
 		};
 

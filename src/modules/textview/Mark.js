@@ -65,6 +65,7 @@ export default function (dataObj) {
 					Comment.activate({id: 'comment_' + this.id, index: this.index});
 					HighlightNode.removeLinearColor();
 					Correction.deactivate();
+					c.$el.addClass('active-block')
 					break;
 				case 'linear':
 					break;
