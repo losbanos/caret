@@ -20,6 +20,17 @@ const c = {
 		ta.addEventListener(EVENT.CORRECTION_ACTIVATE, c.activate.bind(this), true);
 		ta.addEventListener(EVENT.CORRECTION_DEACTIVATE, c.deactivate.bind(this), true);
 	},
+	reset() {
+        this.$container = $('#correction');
+        this.$ta = $('#ta_correction');
+        this.$applyBtn = $('#btn_apply_correction');
+        this.$moveBtn = $('#btn_change_message_position');
+        this.$applyBtn.on('click', this.apply.bind(this));
+
+        let ta = this.$ta.get(0);
+        ta.addEventListener(EVENT.CORRECTION_ACTIVATE, c.activate.bind(this), true);
+        ta.addEventListener(EVENT.CORRECTION_DEACTIVATE, c.deactivate.bind(this), true);
+	},
 	apply() {
 		let id = this.markID;
 		console.log('correction mark id = ', id);

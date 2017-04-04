@@ -28,8 +28,16 @@ const h = {
 		else {
 			o.update(obj);
 		}
-
+		this.reset();
 		return this.items;
+	},
+	reset() {
+        this.items.forEach(function (v) {
+            let $el = $('#'+v.id);
+            v.$el = $el;
+            v.reset()
+        });
+        return this.items;
 	},
 	parse (sc, ec, $el) {
 		if (!$el) $el = this.$el;

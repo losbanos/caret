@@ -15,6 +15,9 @@ const c = {
 		this.$list = $('#comments');
 		this.template = $('#tpl_comment').html();
 	},
+	reset() {
+
+	},
 	add (data) {
 		data.index = this.items.length ? this.items.length + 1 : 1;
 

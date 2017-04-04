@@ -20,10 +20,22 @@ export default function (dataObj) {
 				case 'cancel': this.displayCommentIndex(); break;
 				case 'paragraph': this.displayCommentIndex(); break;
 			}
-
 			c.$ta_correction = $('#ta_correction');
-			c.$el.get(0).addEventListener(EVENT.MARK_ACTIVE, c.activeByComment, true);
+			c.$el.get(0).addEventListener(EVENT.MARK_ACTIVE, c.activeByComment);
 			return c;
+		},
+		reset(){
+            c.$ta_correction = $('#ta_correction');
+            c.$el.get(0).addEventListener(EVENT.MARK_ACTIVE, c.activeByComment);
+            switch(c.type) {
+				case 'cancel':
+                    this.$el.on('click', this.clicked.bind(this));
+					break;
+				case 'paragraph':
+                    this.$el.on('click', this.clicked)
+					break;
+			}
+            return c;
 		},
 		displayCommentIndex() {
 			this.commentIndex = Comment.getCommentLength() + 1;
@@ -123,6 +135,7 @@ export default function (dataObj) {
 			let event,
 				ta = $('#ta_correction').get(0)
 			;
+			console.log('activebyComment')
 			HighlightNode.removeLinearColor();
 			c.$el.addClass('active-block');
 

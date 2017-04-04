@@ -30,7 +30,6 @@ import '../addons/Utils';
 					$ta.on('focusout', function () {
 						$owner.removeClass(options.activeClass);
 						$view.html($ta.val().convertLineBreakToBR());
-						// if(!$view.text().length){ c.remove(); }
 					});
 					$ta.on('keydown', function (ev) {
 						if(ev.which === 13 && ev.ctrlKey) {
@@ -39,7 +38,7 @@ import '../addons/Utils';
 							if(!$view.text().length){ c.remove(); }
 						}
 						$owner.trigger('comment-added', )
-					})
+					});
 					options.$removeBtn.one('click', this.remove);
 
 					return c;
