@@ -11,16 +11,31 @@ export default function (dataObj) {
 		marked: false,
 		text: '',
 		index: 0,
+		commentIndex: 0,
 		init () {
-			let $num = $('<span />', {class: 'mark-number info', text: '(' + this.index + ')'});
-			$num.insertBefore($(this.el).find('.f'));
+			// this.el.on('click', this.clicked);
+			switch(this.type) {
+				case 'cancel': this.displayCommentIndex(); break;
+				case 'paragraph': this.displayCommentIndex(); break;
+			}
+
 			return c;
+		},
+		displayCommentIndex() {
+			this.commentIndex = Comment.getCommentLength() + 1;
+            let $num = $('<span />', {class: 'mark-number info', text: '(' + this.commentIndex + ')'});
+            $num.insertBefore($(this.el).children('.f'));
 		},
 		clicked() {
 			switch (this.type) {
 				case 'cancel':
 					Comment.activate({id: 'comment_' + this.id, index: this.index});
 					Correction.activate(this.id, true);
+					let event = new CustomEvent(EVENT.MARK_CLICK, {
+							detail:{}
+							}
+						);
+					document.dispatchEvent(event);
 					HighlightNode.removeLinearColor();
 					this.el.addClass('active-block');
 					break;
