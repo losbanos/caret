@@ -126,13 +126,16 @@ const h = {
 
 		$('#'+ev.detail.id).addClass('active-block').trigger(EVENT.COMMENT_ACTIVE);
 	},
-	remove(ev) {
-		console.log('remove in highlightnode ')
+	remove(ev, param) {
+		_.remove(h.items, function (n) {
+			return n.id === param.detail.id;
+		});
+		h.reset();
 	}
 };
 let $ta = $('#text_area');
 $ta.get(0).addEventListener(EVENT.COMMENT_ACTIVE, h.activeByComment, true);
-$ta.get(0).addEventListener(EVENT.MARK_REMOVE, h.remove);
+$ta.on(EVENT.MARK_REMOVE, h.remove);
 
 export default h;
 

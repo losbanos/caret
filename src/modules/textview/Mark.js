@@ -23,7 +23,7 @@ export default function (dataObj) {
 			}
 			c.$ta_correction = $('#ta_correction');
 
-			if(c.$el.length) {
+			if(c.$el && c.$el.length) {
 				c.$el.get(0).addEventListener(EVENT.MARK_ACTIVE, c.activeByComment);
 
 				c.$el.on('contextmenu', function(ev) {
@@ -31,13 +31,7 @@ export default function (dataObj) {
 					let m = confirm('Are you sure you want to delete?');
 					if(m) {
 						console.log('삭제한다!')
-						let event = new CustomEvent(EVENT.MARK_REMOVE, {
-							detail: {
-								id: c.id, type: c.type
-							}
-						});
 						try{
-							c.removeCommentIndex();
 							c.remove();
 						}
 						catch(e){
@@ -164,18 +158,38 @@ export default function (dataObj) {
 		},
 		removeCommentIndex() {
 			try{
-				let $msg = c.$el.children('.mark-number');
-				if($msg.length) {
-					$msg.remove();
+				c.$el = c.$el? c.$el : $('#'+c.id);
+				let $number = c.$el.children('.mark-number');
+				if($number.length && $number) {
+					$number.remove();
 				}
 			}
 			catch(e) {
 				console.warn(e)
 			}
 		},
+		removeCorrection() {
+			try{
+				c.$el = c.$el? c.$el : $('#'+c.id);
+				let $msg = c.$el.children('.correction-msg');
+				if($msg.length && $msg) {
+					$msg.remove();
+				}
+			}
+			catch(e) {
+				console.log(e);
+			}
+		},
 		remove() {
+			c.removeCommentIndex();
+			c.removeCorrection();
 			c.$el.removeMark();
 
+			let event = new CustomEvent(EVENT.MARK_REMOVE, {
+				detail: {
+					id: c.id, type: c.type
+				}
+			});
 			$('#text_area').trigger(EVENT.MARK_REMOVE, [event]);
 			$('#ta_correction').trigger(EVENT.MARK_REMOVE, [event]);
 			$('#comments').trigger(EVENT.MARK_REMOVE, [event]);

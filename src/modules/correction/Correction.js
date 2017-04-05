@@ -18,6 +18,7 @@ const c = {
 
 		this.$ta.get(0).addEventListener(EVENT.CORRECTION_ACTIVATE, c.activate.bind(this), true);
 		this.$ta.get(0).addEventListener(EVENT.CORRECTION_DEACTIVATE, c.deactivate.bind(this), true);
+		this.$ta.on(EVENT.MARK_REMOVE, this.deactivate);
 	},
 	reset() {
         this.$container = $('#correction');
@@ -70,8 +71,13 @@ const c = {
 		this.$ta.removeAttr('readonly');
 	},
 	deactivate() {
+		this.$applyBtn = $('#btn_apply_correction');
 		this.$applyBtn.attr('disabled', true);
+
+		this.$moveBtn= $('#btn_change_message_position');
 		this.$moveBtn.attr('disabled', true);
+
+		this.$ta = $('#ta_correction');
 		this.$ta.attr('readonly', 'readonly');
 		this.$ta.val('');
 	}
