@@ -34,7 +34,7 @@ module.exports = {
                 return 0;
             },
             minify: {
-                collapseWhitespace: true,
+                collapseWhitespace: false,
                 removeComments: true,
                 keepClosingSlash: true,
                 xhtml: true
