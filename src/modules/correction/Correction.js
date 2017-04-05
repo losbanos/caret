@@ -28,6 +28,9 @@ const c = {
         this.$applyBtn.on('click', this.apply.bind(this));
 
         let ta = this.$ta.get(0);
+		ta.removeEventListener(EVENT.CORRECTION_ACTIVATE, c.activate);
+		ta.removeEventListener(EVENT.CORRECTION_DEACTIVATE, c.deactivate);
+
         ta.addEventListener(EVENT.CORRECTION_ACTIVATE, c.activate.bind(this), true);
         ta.addEventListener(EVENT.CORRECTION_DEACTIVATE, c.deactivate.bind(this), true);
 	},
@@ -59,7 +62,7 @@ const c = {
 		}
 	},
 	activate(ev) {
-		console.log('Correction activate from [', ev.detail.from, ']');
+		console.log('Correction activate from [', ev.detail.type,']');
 		this.markID = ev.detail.id;
 		if (!ev.detail.reactivate) this.$ta.val('');
 		else c.$ta.val(ev.detail.text);

@@ -3,7 +3,7 @@ import HighlightNode from './HighlightNode';
 import Comment from '../comment/Comment';
 import Correction from '../correction/Correction';
 import EVENT from '../common/Events';
-
+const cnt = 0;
 export default function (dataObj) {
 	let c = {
 		id: '',
@@ -26,7 +26,11 @@ export default function (dataObj) {
 		},
 		reset(){
             c.$ta_correction = $('#ta_correction');
-            c.$el.get(0).addEventListener(EVENT.MARK_ACTIVE, c.activeByComment);
+            c.$el= $('#'+c.$el.attr('id'));
+
+			c.$el.get(0).removeEventListener(EVENT.MARK_ACTIVE, c.activeByComment);
+            c.$el.get(0).addEventListener(EVENT.MARK_ACTIVE, c.activeByComment, true);
+
             switch(c.type) {
 				case 'cancel':
                     this.$el.on('click', this.clicked.bind(this));
@@ -52,15 +56,18 @@ export default function (dataObj) {
 					break;
 			}
 		},
-		clicked() {
+
+		clicked(ev) {
+			ev.stopImmediatePropagation();
+			let event;
 			switch (c.type) {
 				case 'cancel':
 					Comment.activate({id: 'comment_' + this.id, index: this.index});
 					HighlightNode.removeLinearColor();
 					this.$el.addClass('active-block');
 
-					let	event = new CustomEvent(EVENT.CORRECTION_ACTIVATE, {
-							detail:{id: this.id, text: this.getCorrectionText(), reactivate: true} }
+					event = new CustomEvent(EVENT.CORRECTION_ACTIVATE, {
+							detail:{id: this.id, text: this.getCorrectionText(), reactivate: true, type:'cancel'} }
 					);
 					this.$ta_correction.get(0).dispatchEvent(event);
 					break;
@@ -75,13 +82,17 @@ export default function (dataObj) {
 				case 'spacing':
 					HighlightNode.removeLinearColor();
 					c.$el.addClass('active-block');
-					Correction.activate();
+
+					event = new CustomEvent(EVENT.CORRECTION_ACTIVATE, {
+						detail:{id: this.id, text: c.getCorrectionText(), reactivate: true, type: 'spacing'} }
+					);
+					c.$ta_correction.get(0).dispatchEvent(event);
 					break;
 			}
 			return c;
 		},
 		openEdit() {
-				let event;
+			let event;
 			switch (c.type) {
 				case 'cancel':
 					Comment.add({id: 'comment_' + this.id, index: this.index});
@@ -109,6 +120,7 @@ export default function (dataObj) {
 					c.$el.on('click', this.clicked).addClass('cursor active-block');
 					break;
 			}
+
 			return c;
 		},
 		getIndex() {
