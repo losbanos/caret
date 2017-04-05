@@ -73,10 +73,9 @@ export default function (dataObj) {
 				case 'linear':
 					break;
 				case 'spacing':
-					console.log('on')
 					HighlightNode.removeLinearColor();
 					c.$el.addClass('active-block');
-					Correction.deactivate();
+					Correction.activate();
 					break;
 			}
 			return c;

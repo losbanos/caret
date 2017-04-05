@@ -242,8 +242,8 @@ h2 span{
                 content: '┌';
                 /*top: -18px;*/
             }
-            .active-block .correction-msg{
-                background: rgba(16, 154, 163, 0.4);
+            .active-block.spacing .correction-msg{
+                background: rgba(16, 154, 163, 0.2);
             }
             .period:after{
                 top: 12px ;bottom: 0;left: -4px;

@@ -70,25 +70,9 @@ const c = {
 	},
 	removeNonMarked () {
 		HighLightNode.removeNonMarked().forEach(function (n) {
-			let $n = $('#' + n.id),
-				text = '',
-				$spans = $n.find('span, br')
-			;
-			if($spans.length) {
-				$spans.each(function () {
-					let $this = $(this);
-					let t = '';
-					if($this.is('br')) {
-						t = '<br>';
-					}
-					else {
-						t = $this.removeClass('f e').prop('outerHTML');
-					}
-					text += t
-				});
-			}
-			// $n.after(text).remove();
-			$n.replaceWith(text);
+			let $n = $('#' + n.id);
+			$n.children('.f, .e').removeClass('f e');
+			$n.replaceWith($n.html());
 		})
 	},
 	activateController(selected_text) {
