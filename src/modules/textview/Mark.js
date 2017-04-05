@@ -65,6 +65,24 @@ export default function (dataObj) {
 						this.$el.on('click', this.clicked);
 						break;
 				}
+				c.$el.on('contextmenu', function(ev) {
+					ev.stopImmediatePropagation();
+					let m = confirm('Are you sure you want to delete?');
+					if(m) {
+						console.log('삭제한다!')
+						try{
+							c.remove();
+						}
+						catch(e){
+							console.log(e);
+						}
+						finally {
+							return false;
+						}
+					}
+					else return false;
+
+				});
 			}
             return c;
 		},
