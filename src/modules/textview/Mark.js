@@ -73,12 +73,13 @@ export default function (dataObj) {
 			return c;
 		},
 		openEdit() {
+				let event;
 			switch (c.type) {
 				case 'cancel':
 					Comment.add({id: 'comment_' + this.id, index: this.index});
 					HighlightNode.removeLinearColor();
 
-					let	event = new CustomEvent(EVENT.CORRECTION_ACTIVATE, {
+					event = new CustomEvent(EVENT.CORRECTION_ACTIVATE, {
 						detail:{id: this.id, text: this.getCorrectionText(), reactivate: false, from:'mark'} }
 					);
 					this.$ta_correction.get(0).dispatchEvent(event);
@@ -91,6 +92,13 @@ export default function (dataObj) {
 					c.$el.on('click', this.clicked).addClass('cursor active-block');
 					break;
 				case 'linear':
+					break;
+				case 'spacing':
+					event = new CustomEvent(EVENT.CORRECTION_ACTIVATE, {
+						detail:{id: this.id, text: this.getCorrectionText(), reactivate: false, from:'mark'} }
+					);
+					this.$ta_correction.get(0).dispatchEvent(event);
+					c.$el.on('click', this.clicked).addClass('cursor active-block');
 					break;
 			}
 			return c;

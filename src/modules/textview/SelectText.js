@@ -15,10 +15,19 @@ const c = {
 			.mouseup(c.mark)
 	},
 	mark (ev) {
-		let targetName = ev.target.getAttribute('class');
-		if(targetName==='correction-msg' || targetName==='comment-msg' ||targetName==='paragraph-line'){
-			return false;
-		};
+		let nonOccurs = ['correction-msg', 'comment-msg', 'paragraph-line', 'info', 'mark-number'],
+			$target = $(ev.target),
+			stopOccur = false
+		;
+		if($target.is('span')){
+			$.each(nonOccurs, function (i, n) {
+				if($target.hasClass(n)){
+					stopOccur = true;
+					return false
+				}
+			})
+		}
+		if(stopOccur) return false;
 
 		let $sp = HighLightNode.create(),
 			sel = window.getSelection(),

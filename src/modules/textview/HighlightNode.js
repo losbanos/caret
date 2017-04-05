@@ -15,7 +15,6 @@ const h = {
 		let $sp = $(sp);
 
 		this.$el = $sp;
-		$(sp).on('click', this.doubleClicked.bind(sp));
 		return $sp;
 	},
 
@@ -114,9 +113,7 @@ const h = {
 		this.getCurrentItem().setIndex(this.items.length).init()
 	},
 	removeLinearColor() {
-		console.log(this.items);
 		this.items.forEach(function (n) {
-			console.log(n.$el)
 			n.$el.removeClass('active-block');
 		})
 	},
