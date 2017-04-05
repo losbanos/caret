@@ -16,14 +16,13 @@ const c = {
 		this.template = $('#tpl_comment').html();
 
 		this.$list.on(EVENT.MARK_REMOVE, this.remove);
-
 	},
 	reset() {
-		init();
-		this.$list.on(EVENT.MARK_REMOVE, this.remove);
+		this.init();
+		this.sortItems();
 	},
 	add (data) {
-		data.index = this.items.length ? this.items.length + 1 : 1;
+		// data.index = this.items.length ? this.items.length + 1 : 1;
 
 		let comm = Mustache.render(this.template, data);
 		this.$list.append(comm);
@@ -35,7 +34,7 @@ const c = {
 			$ta: $li.find('textarea'),
 			onRemove: function () {
 				c.removeItem(data.id);
-				c.sortItems()
+				// c.sortItems()
 			},
 		}).on('edit', function (ev, $el) {
 			c.$list.find('li').removeClass('active');
@@ -47,10 +46,11 @@ const c = {
 		});
 
 		this.items.push($li);
-		this.$list.find('li').removeClass('active');
+		this.$list.find('li').removeClass('active').each(function (i){
+			let $this = $(this);
+		});
 		$li.addClass('active');
 
-		this.sortItems()
 	},
 	activate (data) {
 		let $el = _.find(this.items, function (n) {
@@ -85,6 +85,13 @@ const c = {
 
 		$('#'+id).remove();
 		c.removeItem(id);
-	}
+		c.reset();
+	},
+	// sortItems() {
+     //    this.$list = this.$list? this.$list: $('#comments');
+     //    this.$list.find('li').each(function (i, n) {
+     //        $(n).find('.comment-index').text(i+1+'.');
+     //    })
+	// }
 }
 export default c;

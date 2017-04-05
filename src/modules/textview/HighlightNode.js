@@ -20,6 +20,7 @@ const h = {
 
 	add (obj) {
 		let o =_.find(this.items, function (n) {return n.id === obj.id});
+
 		if(!o) {
 			let newOne = new Mark(obj);
 			this.items.push(newOne);
@@ -31,10 +32,11 @@ const h = {
 		return this.items;
 	},
 	reset() {
-        this.items.forEach(function (v) {
+        this.items.forEach(function (v, i) {
             let $el = $('#'+v.id);
             v.$el = $el;
-            v.reset()
+            v.reset();
+			v.setCommentIndex(i + 1);
         });
         return this.items;
 	},

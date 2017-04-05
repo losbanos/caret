@@ -61,7 +61,7 @@ const c = {
 		}
 	},
 	activate(ev) {
-		console.log('Correction activate from [', ev.detail.type,']');
+		// console.log('Correction activate from [', ev.detail.type,']');
 		this.markID = ev.detail.id;
 		if (!ev.detail.reactivate) this.$ta.val('');
 		else c.$ta.val(ev.detail.text);

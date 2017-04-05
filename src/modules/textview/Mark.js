@@ -15,6 +15,7 @@ export default function (dataObj) {
 		commentIndex: 0,
 		correctionText: '',
 		$ta_correction: '',
+
 		init () {
 			switch(c.type) {
 				case 'cancel': c.displayCommentIndex(); break;
@@ -64,6 +65,11 @@ export default function (dataObj) {
 					case 'spacing':
 						this.$el.on('click', this.clicked);
 						break;
+					case 'linear':
+						this.$el.on('click', this.clicked);
+						break;
+					default:
+						this.$el.on('click', this.clicked);
 				}
 				c.$el.on('contextmenu', function(ev) {
 					ev.stopImmediatePropagation();
@@ -81,7 +87,6 @@ export default function (dataObj) {
 						}
 					}
 					else return false;
-
 				});
 			}
             return c;
@@ -107,24 +112,25 @@ export default function (dataObj) {
 			let event;
 			switch (c.type) {
 				case 'cancel':
-					Comment.activate({id: 'comment_' + this.id, index: this.index});
+					Comment.activate({id: 'comment_' + c.id, index: c.index});
 					HighlightNode.removeLinearColor();
-					this.$el.addClass('active-block');
+					c.$el.addClass('active-block');
 
 					event = new CustomEvent(EVENT.CORRECTION_ACTIVATE, {
-							detail:{id: this.id, text: this.getCorrectionText(), reactivate: true, type:'cancel'} }
+							detail:{id: c.id, text: c.getCorrectionText(), reactivate: true, type:'cancel'} }
 					);
-					this.$ta_correction.get(0).dispatchEvent(event);
+					c.$ta_correction.get(0).dispatchEvent(event);
 					break;
 				case 'paragraph':
-					Comment.activate({id: 'comment_' + this.id, index: this.index});
+					Comment.activate({id: 'comment_' + c.id, index: c.index});
 					HighlightNode.removeLinearColor();
 					Correction.deactivate();
 					c.$el.addClass('active-block');
 					break;
 				case 'linear':
-					Comment.activate({id: 'comment_' + this.id, index: this.index});
+					Comment.activate({id: 'comment_' + c.id, index: c.index});
 					HighlightNode.removeLinearColor();
+                    Correction.deactivate();
 					c.$el.addClass('active-block');
 					break;
 				case 'spacing':
@@ -161,6 +167,7 @@ export default function (dataObj) {
 				case 'linear':
 					Comment.add({id: 'comment_' + this.id, index: this.index});
 					HighlightNode.removeLinearColor();
+                    Correction.deactivate();
 					c.$el.on('click', this.clicked).addClass('cursor active-block');
 					break;
 				case 'spacing':
@@ -201,11 +208,13 @@ export default function (dataObj) {
 		remove() {
 			c.removeCommentIndex();
 			c.removeCorrection();
+			console.log('c.el = ',c.$el);
 			c.$el.removeMark();
+
 
 			let event = new CustomEvent(EVENT.MARK_REMOVE, {
 				detail: {
-					id: c.id, type: c.type
+					id: c.id, type: c.type, commentIndex: c.commentIndex
 				}
 			});
 			$('#text_area').trigger(EVENT.MARK_REMOVE, [event]);
@@ -218,6 +227,10 @@ export default function (dataObj) {
 		setIndex(number) {
 			this.index = number;
 			return c;
+		},
+		setCommentIndex(num) {
+			c.commentIndex = num;
+			c.$el.children('.mark-number').text('('+num+')');
 		},
 		getText() {
 			return this.text;
