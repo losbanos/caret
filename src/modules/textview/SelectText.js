@@ -15,7 +15,7 @@ const c = {
 			.mouseup(c.mark)
 	},
 	mark (ev) {
-		let nonOccurs = ['correction-msg', 'comment-msg', 'paragraph-line', 'info', 'mark-number'],
+		let nonOccurs = ['correction-msg', 'comment-msg', 'paragraph-line', 'info', 'mark-number', 'period', 'comman', 'linebreak'],
 			$target = $(ev.target),
 			stopOccur = false
 		;
@@ -34,6 +34,7 @@ const c = {
 			ori_range = '',
 			sel_text = ''
 		;
+
 		if (sel) {
 			if (sel.rangeCount) {
 				ori_range = sel.getRangeAt(0);

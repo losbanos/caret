@@ -240,9 +240,12 @@ h2 span{
             }
             .spacing > .correction-msg.info:before{
                 content: '┌';
-                /*top: -18px;*/
             }
             .active-block.spacing .correction-msg{
+                min-width: 40px;
+                max-width: 80px;
+                text-indent: 10px;
+                margin-left: -0px;
                 background: rgba(16, 154, 163, 0.2);
             }
             .period:after{
@@ -265,6 +268,9 @@ h2 span{
                 left: 100%;top: -3px;
                 background: url("../images/ico_caret.png")no-repeat right -110px;
                 width: 20px; height: 17px;
+            }
+            .period, .comma, .indent, .linebreak{
+                cursor: pointer;
             }
         /* Comment */
         .comment-area{
@@ -342,9 +348,13 @@ h2 span{
         .text-area .correction-msg{
             position: absolute;
             left: 0; top: 26px;
-            height: auto; width: auto;
+            min-width: 60px;
+            max-width: 80px;
+            height: auto;
             margin-left: 6px;
             line-height:1.2;
+            -ms-word-break: break-all;
+            word-break: break-all;
         }
         .text-area .correction-msg:before{
             content: '└';

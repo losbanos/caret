@@ -95,5 +95,12 @@
 				$owner.after(text)[options.method]();
 			}
 		})
+	};
+	$.fn.removeMark = function () {
+		return this.each(function () {
+			let $this = $(this);
+			$this.children('.f, .e').removeClass('f e');
+			$this.replaceWith($this.html());
+		})
 	}
 })(jQuery, window, document);

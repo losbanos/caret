@@ -14,9 +14,11 @@ const c = {
 		this.$container = $('#comment_area');
 		this.$list = $('#comments');
 		this.template = $('#tpl_comment').html();
+		this.$list.on(EVENT.MARK_REMOVE, this.remove);
 	},
 	reset() {
-
+		init();
+		this.$list.on(EVENT.MARK_REMOVE, this.remove);
 	},
 	add (data) {
 		data.index = this.items.length ? this.items.length + 1 : 1;
@@ -75,6 +77,9 @@ const c = {
 	},
 	getCommentLength() {
 		return this.items.length;
+	},
+	remove () {
+		console.log('comment remove');
 	}
 }
 export default c;

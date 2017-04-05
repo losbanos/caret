@@ -3,7 +3,7 @@ import HighlightNode from './HighlightNode';
 import Comment from '../comment/Comment';
 import Correction from '../correction/Correction';
 import EVENT from '../common/Events';
-const cnt = 0;
+
 export default function (dataObj) {
 	let c = {
 		id: '',
@@ -19,28 +19,58 @@ export default function (dataObj) {
 			switch(c.type) {
 				case 'cancel': c.displayCommentIndex(); break;
 				case 'paragraph': c.displayCommentIndex(); break;
+				case 'linear': c.displayCommentIndex(); break;
 			}
 			c.$ta_correction = $('#ta_correction');
-			c.$el.get(0).addEventListener(EVENT.MARK_ACTIVE, c.activeByComment);
+
+			if(c.$el.length) {
+				c.$el.get(0).addEventListener(EVENT.MARK_ACTIVE, c.activeByComment);
+
+				c.$el.on('contextmenu', function(ev) {
+					ev.stopImmediatePropagation();
+					let m = confirm('Are you sure you want to delete?');
+					if(m) {
+						console.log('삭제한다!')
+						let event = new CustomEvent(EVENT.MARK_REMOVE, {
+							detail: {
+								id: c.id, type: c.type
+							}
+						});
+						try{
+							c.removeCommentIndex();
+							c.remove();
+						}
+						catch(e){
+							console.log(e);
+						}
+						finally {
+							return false;
+						}
+					}
+					else return false;
+
+				});
+			}
 			return c;
 		},
 		reset(){
             c.$ta_correction = $('#ta_correction');
             c.$el= $('#'+c.$el.attr('id'));
+            if(c.$el.length) {
+				c.$el.get(0).removeEventListener(EVENT.MARK_ACTIVE, c.activeByComment);
+				c.$el.get(0).addEventListener(EVENT.MARK_ACTIVE, c.activeByComment, true);
 
-			c.$el.get(0).removeEventListener(EVENT.MARK_ACTIVE, c.activeByComment);
-            c.$el.get(0).addEventListener(EVENT.MARK_ACTIVE, c.activeByComment, true);
-
-            switch(c.type) {
-				case 'cancel':
-                    this.$el.on('click', this.clicked.bind(this));
-					break;
-				case 'paragraph':
-                    this.$el.on('click', this.clicked);
-					break;
-				case 'spacing':
-					this.$el.on('click', this.clicked);
-					break;
+				switch(c.type) {
+					case 'cancel':
+						this.$el.on('click', this.clicked.bind(this));
+						break;
+					case 'paragraph':
+						this.$el.on('click', this.clicked);
+						break;
+					case 'spacing':
+						this.$el.on('click', this.clicked);
+						break;
+				}
 			}
             return c;
 		},
@@ -53,6 +83,9 @@ export default function (dataObj) {
 					break;
 				case 'paragraph':
 						this.$el.append($num);
+					break;
+				case 'linear':
+					this.$el.append($num);
 					break;
 			}
 		},
@@ -78,6 +111,9 @@ export default function (dataObj) {
 					c.$el.addClass('active-block');
 					break;
 				case 'linear':
+					Comment.activate({id: 'comment_' + this.id, index: this.index});
+					HighlightNode.removeLinearColor();
+					c.$el.addClass('active-block');
 					break;
 				case 'spacing':
 					HighlightNode.removeLinearColor();
@@ -111,6 +147,9 @@ export default function (dataObj) {
 					c.$el.on('click', this.clicked).addClass('cursor active-block');
 					break;
 				case 'linear':
+					Comment.add({id: 'comment_' + this.id, index: this.index});
+					HighlightNode.removeLinearColor();
+					c.$el.on('click', this.clicked).addClass('cursor active-block');
 					break;
 				case 'spacing':
 					event = new CustomEvent(EVENT.CORRECTION_ACTIVATE, {
@@ -123,24 +162,30 @@ export default function (dataObj) {
 
 			return c;
 		},
+		removeCommentIndex() {
+			try{
+				let $msg = c.$el.children('.mark-number');
+				if($msg.length) {
+					$msg.remove();
+				}
+			}
+			catch(e) {
+				console.warn(e)
+			}
+		},
+		remove() {
+			c.$el.removeMark();
+
+			$('#text_area').trigger(EVENT.MARK_REMOVE, [event]);
+			$('#ta_correction').trigger(EVENT.MARK_REMOVE, [event]);
+			$('#comments').trigger(EVENT.MARK_REMOVE, [event]);
+		},
 		getIndex() {
 			return this.index;
 		},
 		setIndex(number) {
 			this.index = number;
 			return c;
-		},
-		getComment() {
-
-		},
-		setComment() {
-
-		},
-		removeComment() {
-
-		},
-		removeCorrection() {
-
 		},
 		getText() {
 			return this.text;
@@ -154,9 +199,7 @@ export default function (dataObj) {
 				return '';
 			}
 		},
-		remove() {
 
-		},
 		activeByMark() {
 			console.log('active By Mark');
 		},
@@ -176,6 +219,9 @@ export default function (dataObj) {
 							from:'mark', reactivate: true} });
 					break;
 				case 'paragraph':
+					event = new CustomEvent(EVENT.CORRECTION_DEACTIVATE, { detail: {id: c.id}});
+					break;
+				case 'linear':
 					event = new CustomEvent(EVENT.CORRECTION_DEACTIVATE, { detail: {id: c.id}});
 					break;
 			}

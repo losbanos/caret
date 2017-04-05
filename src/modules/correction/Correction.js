@@ -16,9 +16,8 @@ const c = {
 		this.deactivate();
 		this.$applyBtn.on('click', this.apply.bind(this));
 
-		let ta = this.$ta.get(0);
-		ta.addEventListener(EVENT.CORRECTION_ACTIVATE, c.activate.bind(this), true);
-		ta.addEventListener(EVENT.CORRECTION_DEACTIVATE, c.deactivate.bind(this), true);
+		this.$ta.get(0).addEventListener(EVENT.CORRECTION_ACTIVATE, c.activate.bind(this), true);
+		this.$ta.get(0).addEventListener(EVENT.CORRECTION_DEACTIVATE, c.deactivate.bind(this), true);
 	},
 	reset() {
         this.$container = $('#correction');
@@ -27,12 +26,11 @@ const c = {
         this.$moveBtn = $('#btn_change_message_position');
         this.$applyBtn.on('click', this.apply.bind(this));
 
-        let ta = this.$ta.get(0);
-		ta.removeEventListener(EVENT.CORRECTION_ACTIVATE, c.activate);
-		ta.removeEventListener(EVENT.CORRECTION_DEACTIVATE, c.deactivate);
+		this.$ta.get(0).removeEventListener(EVENT.CORRECTION_ACTIVATE, c.activate);
+		this.$ta.get(0).removeEventListener(EVENT.CORRECTION_DEACTIVATE, c.deactivate);
 
-        ta.addEventListener(EVENT.CORRECTION_ACTIVATE, c.activate.bind(this), true);
-        ta.addEventListener(EVENT.CORRECTION_DEACTIVATE, c.deactivate.bind(this), true);
+		this.$ta.get(0).addEventListener(EVENT.CORRECTION_ACTIVATE, c.activate.bind(this), true);
+		this.$ta.get(0).addEventListener(EVENT.CORRECTION_DEACTIVATE, c.deactivate.bind(this), true);
 	},
 	apply() {
 		let id = this.markID;
@@ -50,8 +48,8 @@ const c = {
 		else {
 			$msg = $mark.children('.correction-msg');
 		}
-		let w = $mark.width()? $mark.width(): 40;
-		$msg.width(w);
+		// let w = $mark.width()? $mark.width(): 40;
+		// $msg.width(w);
 
 		if (this.$ta.val().length) {
 			$msg.html(this.$ta.val().convertLineBreakToBR());
