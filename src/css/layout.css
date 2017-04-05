@@ -235,6 +235,16 @@ h2 span{
             }
             .spacing:after{
                 display: none;}
+            .spacing > .correction-msg.info{
+                top: -20px;
+            }
+            .spacing > .correction-msg.info:before{
+                content: '┌';
+                /*top: -18px;*/
+            }
+            .active-block .correction-msg{
+                background: rgba(16, 154, 163, 0.4);
+            }
             .period:after{
                 top: 12px ;bottom: 0;left: -4px;
                 background: url("../images/ico_caret.png")no-repeat left -50px;
@@ -386,6 +396,9 @@ h2 span{
                     width: 302px;
                     height: 129px;
                     overflow-y: auto;
+                }
+                .btn-apply-correction{
+                    cursor: pointer;
                 }
 
             /* Tab */

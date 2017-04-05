@@ -47,7 +47,8 @@ const c = {
 		else {
 			$msg = $mark.children('.correction-msg');
 		}
-		$msg.width($mark.width());
+		let w = $mark.width()? $mark.width(): 40;
+		$msg.width(w);
 
 		if (this.$ta.val().length) {
 			$msg.html(this.$ta.val().convertLineBreakToBR());

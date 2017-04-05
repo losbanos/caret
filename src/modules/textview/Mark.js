@@ -32,7 +32,10 @@ export default function (dataObj) {
                     this.$el.on('click', this.clicked.bind(this));
 					break;
 				case 'paragraph':
-                    this.$el.on('click', this.clicked)
+                    this.$el.on('click', this.clicked);
+					break;
+				case 'spacing':
+					this.$el.on('click', this.clicked);
 					break;
 			}
             return c;
@@ -65,9 +68,15 @@ export default function (dataObj) {
 					Comment.activate({id: 'comment_' + this.id, index: this.index});
 					HighlightNode.removeLinearColor();
 					Correction.deactivate();
-					c.$el.addClass('active-block')
+					c.$el.addClass('active-block');
 					break;
 				case 'linear':
+					break;
+				case 'spacing':
+					console.log('on')
+					HighlightNode.removeLinearColor();
+					c.$el.addClass('active-block');
+					Correction.deactivate();
 					break;
 			}
 			return c;
