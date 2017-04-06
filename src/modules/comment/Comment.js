@@ -46,11 +46,21 @@ const c = {
 		});
 
 		this.items.push($li);
-		this.$list.find('li').removeClass('active').each(function (i){
-			let $this = $(this);
-		});
 		$li.addClass('active');
 
+		this.sortDOMList($li);
+	},
+	sortDOMList($li) {
+		let num = parseInt($li.find('.comment-index').text().replace('.', ''));
+		this.$list.find('li').removeClass('active').each(function () {
+			let $this = $(this),
+				li_num = parseInt($this.find('.comment-index').text().replace('.', '')),
+				isBefore = (num - li_num== -1)? true: false
+			;
+			if(isBefore) {
+				$li.insertBefore($this);
+			}
+		});
 	},
 	activate (data) {
 		let $el = _.find(this.items, function (n) {
