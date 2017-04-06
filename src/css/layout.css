@@ -515,5 +515,6 @@ h2 span{
                     margin-top: 10px;
                     color: #fff; background-color: #888;
                     text-align: center;
+                    cursor: pointer;
                 }
 
