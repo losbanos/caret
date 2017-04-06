@@ -44,30 +44,18 @@ const h = {
 
 		sc.setAttribute('class', 'f');
 		ec.setAttribute('class', 'e');
-		let $sc = $(sc);
-		let result = $sc.nextUntil(ec).add($sc).add(ec);
-		try {
-			result.each(function (i, n) {
-				let $this = $(this);
-				let eid = $el.attr('id');
-				let pid = $this.parent('span').length ? $this.parent().attr('id') : eid;
-
-				if ($this.parent('span').length) {
-					if (pid !== eid) {
-						sc.setAttribute('class', '');
-						ec.setAttribute('class', '');
-						throw new Error('nested select');
-					}
-				}
-			});
-			result = result.wrapAll($el);
-			return $el;
+		let $sc = $(sc), $ec = $(ec),
+			result = $sc.nextUntil(ec).add($sc).add(ec),
+			parentID_f = $sc.parent().attr('id'),
+			parentID_e = $ec.parent().attr('id')
+		;
+		if(parentID_f!==parentID_e) {
+			sc.setAttribute('class', '');
+			ec.setAttribute('class', '');
+			throw new Error('nested select');
 		}
-		catch (e) {
-			alert('Not Selectable');
-			console.warn(e);
-		}
-		return false;
+		result = result.wrapAll($el);
+		return $el;
 	},
 	doubleClicked() {
 		let $this = $(this);
