@@ -16,6 +16,7 @@ const c = {
 		this.template = $('#tpl_comment').html();
 
 		this.$list.on(EVENT.MARK_REMOVE, this.remove);
+		this.$list.on(EVENT.SNIPPET_CLICK, this.addSnippet);
 	},
 	reset() {
 		this.init();
@@ -97,11 +98,10 @@ const c = {
 		c.removeItem(id);
 		c.reset();
 	},
-	// sortItems() {
-     //    this.$list = this.$list? this.$list: $('#comments');
-     //    this.$list.find('li').each(function (i, n) {
-     //        $(n).find('.comment-index').text(i+1+'.');
-     //    })
-	// }
+	addSnippet(ev, htmls) {
+		console.log('active= ',c.$list.find('.active'))
+		console.log('html snippet = ', htmls);
+		c.$list.find('.active').find('textarea').html(htmls);
+	}
 }
 export default c;

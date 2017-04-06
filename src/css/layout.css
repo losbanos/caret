@@ -435,10 +435,19 @@ h2 span{
                 }
                 .tab-contents{
                     clear: both;
-                    width: 404px; height: 123px;
+                    width: 404px;
                     border-top:1px solid #ccc;
                     background-color: #fff;
                     overflow-y: auto;
+                }
+                .tab-content{
+                    display: none;
+                    width: 400px;height: 122px;
+                    overflow-y: auto;
+                    cursor: pointer;
+                }
+                .tab-content:first-child{
+                    display: block;
                 }
 
             /* Mark Button Box */

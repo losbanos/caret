@@ -4,6 +4,7 @@ export default {
 	'MARK_CLICK'            : 'mark-click',
 	'CORRECTION_ACTIVATE'   : 'correction-activate',
 	'CORRECTION_DEACTIVATE' : 'correction-deactivate',
-	'MARK_REMOVE'           : 'mark-remove'
+	'MARK_REMOVE'           : 'mark-remove',
+	'SNIPPET_CLICK'         : 'snippet-click'
 };
 
