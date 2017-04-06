@@ -15,7 +15,7 @@ module.exports = {
     },
     output: {
         path: resolve(__dirname, 'dist'),
-        filename: 'modules/[name][hash].js'
+        filename: 'modules/[name].[hash].js'
     },
     plugins: [
         new webpack.DefinePlugin({
