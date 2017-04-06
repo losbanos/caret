@@ -17,11 +17,6 @@ export default function (dataObj) {
 		$ta_correction: '',
 
 		init () {
-			switch(c.type) {
-				case 'cancel': c.displayCommentIndex(); break;
-				case 'paragraph': c.displayCommentIndex(); break;
-				case 'linear': c.displayCommentIndex(); break;
-			}
 			c.$ta_correction = $('#ta_correction');
 
 			if(c.$el && c.$el.length) {
@@ -92,7 +87,8 @@ export default function (dataObj) {
             return c;
 		},
 		displayCommentIndex() {
-			this.commentIndex = Comment.getCommentLength() + 1;
+			this.commentIndex = HighlightNode.getCommentedLength();
+
             let $num = $('<span />', {class: 'mark-number info', text: '(' + this.commentIndex + ')'});
             switch(c.type) {
 				case 'cancel':
@@ -112,7 +108,7 @@ export default function (dataObj) {
 			let event;
 			switch (c.type) {
 				case 'cancel':
-					Comment.activate({id: 'comment_' + c.id, index: c.index});
+					Comment.activate({id: 'comment_' + c.id, index: c.index, commentIndex: c.commentIndex});
 					HighlightNode.removeLinearColor();
 					c.$el.addClass('active-block');
 
@@ -122,13 +118,13 @@ export default function (dataObj) {
 					c.$ta_correction.get(0).dispatchEvent(event);
 					break;
 				case 'paragraph':
-					Comment.activate({id: 'comment_' + c.id, index: c.index});
+					Comment.activate({id: 'comment_' + c.id, index: c.index, commentIndex: c.commentIndex});
 					HighlightNode.removeLinearColor();
 					Correction.deactivate();
 					c.$el.addClass('active-block');
 					break;
 				case 'linear':
-					Comment.activate({id: 'comment_' + c.id, index: c.index});
+					Comment.activate({id: 'comment_' + c.id, index: c.index, commentIndex: c.commentIndex});
 					HighlightNode.removeLinearColor();
                     Correction.deactivate();
 					c.$el.addClass('active-block');
@@ -146,10 +142,16 @@ export default function (dataObj) {
 			return c;
 		},
 		openEdit() {
-			let event;
+			let event,
+				$msg = this.$el ? this.$el.children('.mark-number'): $('#'+this.id).children('.mark-number');
+			;
+			if($msg.length) {
+				this.commentIndex = $msg.text().match(/\d+/g)[0]
+			}
 			switch (c.type) {
 				case 'cancel':
-					Comment.add({id: 'comment_' + this.id, index: this.index});
+					this.displayCommentIndex();
+					Comment.add({id: 'comment_' + this.id, index: this.index, commentIndex: this.commentIndex});
 					HighlightNode.removeLinearColor();
 
 					event = new CustomEvent(EVENT.CORRECTION_ACTIVATE, {
@@ -159,13 +161,15 @@ export default function (dataObj) {
 					this.$el.on('click', this.clicked.bind(this)).addClass('cursor active-block');
 					break;
 				case 'paragraph':
-					Comment.add({id: 'comment_' + this.id, index: this.index});
+					this.displayCommentIndex();
+					Comment.add({id: 'comment_' + this.id, index: this.index, commentIndex: this.commentIndex});
 					HighlightNode.removeLinearColor();
 					Correction.deactivate();
 					c.$el.on('click', this.clicked).addClass('cursor active-block');
 					break;
 				case 'linear':
-					Comment.add({id: 'comment_' + this.id, index: this.index});
+					this.displayCommentIndex();
+					Comment.add({id: 'comment_' + this.id, index: this.index, commentIndex: this.commentIndex});
 					HighlightNode.removeLinearColor();
                     Correction.deactivate();
 					c.$el.on('click', this.clicked).addClass('cursor active-block');

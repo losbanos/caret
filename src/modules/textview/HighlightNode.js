@@ -36,7 +36,6 @@ const h = {
             let $el = $('#'+v.id);
             v.$el = $el;
             v.reset();
-			v.setCommentIndex(i + 1);
         });
         return this.items;
 	},
@@ -133,6 +132,16 @@ const h = {
 			return n.id === param.detail.id;
 		});
 		h.reset();
+	},
+	getCommentedLength () {
+		let sum = 0;
+		this.items.forEach(function (n, i) {
+			let type = n.type;
+			if((/(cancel|paragraph|linear)/g).test(type)){
+				sum++;
+			}
+		})
+		return sum;
 	}
 };
 let $ta = $('#text_area');
