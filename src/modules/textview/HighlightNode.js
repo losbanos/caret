@@ -145,8 +145,10 @@ const h = {
 	}
 };
 let $ta = $('#text_area');
-$ta.get(0).addEventListener(EVENT.COMMENT_ACTIVE, h.activeByComment, true);
-$ta.on(EVENT.MARK_REMOVE, h.remove);
+if($ta.length) {
+	$ta.get(0).addEventListener(EVENT.COMMENT_ACTIVE, h.activeByComment, true);
+	$ta.on(EVENT.MARK_REMOVE, h.remove);
+}
 
 export default h;
 
