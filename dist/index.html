@@ -119,5 +119,36 @@
             </div>
         </div>
     </div>
-<script type="text/javascript" src="modules/jquery.1a44a2d33728f1d80476.js"></script><script type="text/javascript" src="modules/app.1a44a2d33728f1d80476.js"></script></body>
+<script type="text/javascript" src="modules/jquery.64993c2b50ad9a87390c.js"></script><script type="text/javascript" src="modules/app.64993c2b50ad9a87390c.js"></script>
+    <script>
+		$(document).ready(function () {
+			$('#net').on('click', 'button', function (ev) {
+				$.preventActions(ev);
+				var type = $(this).attr('id').replace('btn_', '');
+
+				var datas = {
+					essay: $('#text_area').html(),
+					comment: $('#comments').html()
+				};
+				console.log('essay = ', JSON.stringify(datas.essay));
+				console.log('-------------------------------');
+				console.log('comment = ', JSON.stringify(datas.comment));
+				switch(type) {
+					case 'save':
+						$.ajax({
+							type:'',
+							url: '',
+							data: datas,
+							success: function (result) {
+
+							}
+						})
+						break;
+					case 'next':
+						break;
+				}
+			})
+		})
+    </script>
+</body>
 </html>
