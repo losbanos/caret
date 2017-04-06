@@ -47,9 +47,10 @@ const c = {
 		});
 
 		this.items.push($li);
+		this.sortDOMList($li);
+		/*sortDOMList 이후에 active */
 		$li.addClass('active');
 
-		this.sortDOMList($li);
 	},
 	sortDOMList($li) {
 		let num = parseInt($li.find('.comment-index').text().replace('.', ''));
@@ -99,8 +100,6 @@ const c = {
 		c.reset();
 	},
 	addSnippet(ev, htmls) {
-		console.log('active= ',c.$list.find('.active'))
-		console.log('html snippet = ', htmls);
 		c.$list.find('.active').find('textarea').html(htmls);
 	}
 }

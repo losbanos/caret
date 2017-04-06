@@ -42,19 +42,19 @@
                         </div>
                         <div class="comment-area" id="comment_area">
                             <h5>Comment</h5>
+                            <script type="text/x-template" id="tpl_comment">
+                                <li id="{{id}}" class="">
+                                    <div class="comment-head">
+                                        <p class="comment-index">{{index}}.</p>
+                                        <button type="button" class="btn-remove-comment">삭제</button>
+                                    </div>
+                                    <div class="comment-text">
+                                        <div class="view"></div>
+                                        <textarea></textarea>
+                                    </div>
+                                </li>
+                            </script>
                             <ul id="comments" class="comments">
-                                <script type="text/x-template" id="tpl_comment">
-                                    <li id="{{id}}" class="">
-                                        <div class="comment-head">
-                                            <p class="comment-index">{{index}}.</p>
-                                            <button type="button" class="btn-remove-comment">삭제</button>
-                                        </div>
-                                        <div class="comment-text">
-                                            <div class="view"></div>
-                                            <textarea></textarea>
-                                        </div>
-                                    </li>
-                                </script>
                             </ul>
                             <!--<label for="ta_comment" class="ass-lbl">Comment TextArea</label>-->
                             <!--<textarea id="ta_comment" class="ta-comment"></textarea>-->
