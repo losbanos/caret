@@ -28,11 +28,8 @@ const c = {
 		this.sortNumbering();
 	},
 	add (data) {
-		// data.index = this.items.length ? this.items.length + 1 : 1;
-
 		let comm = Mustache.render(this.template, data);
 		this.$list.append(comm);
-
 		let $li = $('#' + data.id);
 		$li.comment({
 			$removeBtn: $li.find('button'),
@@ -47,7 +44,7 @@ const c = {
 			let event = new CustomEvent(EVENT.MARK_ACTIVE, {
 				detail: {id: $el.attr('id').replace('comment_', ''), $el: $el, $list: c.$list, from: 'comment'}
 			});
-			$('#'+event.detail.id).get(0).dispatchEvent(event);
+			$('#' + event.detail.id).get(0).dispatchEvent(event);
 		});
 
 		this.items.push($li);
@@ -61,9 +58,9 @@ const c = {
 		this.$list.find('li').removeClass('active').each(function () {
 			let $this = $(this),
 				li_num = parseInt($this.find('.comment-index').text().replace('.', '')),
-				isBefore = (num - li_num== -1)? true: false
+				isBefore = (num - li_num == -1) ? true : false
 			;
-			if(isBefore) {
+			if (isBefore) {
 				$li.insertBefore($this);
 			}
 		});
@@ -82,9 +79,10 @@ const c = {
 		}
 	},
 	removeItem(id) {
-		return _.remove(this.items, function (n) {
+		let removed = _.remove(this.items, function (n) {
 			return n.attr('id') === id;
-		})
+		});
+		$('#text_area').trigger(EVENT.COMMENT_REMOVE, [id.replace('comment_', '')]);
 	},
 	sortNumbering() {
 		this.items.forEach(function (n, i) {
@@ -97,12 +95,15 @@ const c = {
 		return this.items.length;
 	},
 	remove (ev, params) {
-		let id = 'comment_'+params.detail.id;
+		let id = 'comment_' + params.detail.id;
 
-		$('#'+id).remove();
-		c.removeItem(id);
+		$('#' + id).remove();
+		_.remove(c.items, function (n) {
+			return n.attr('id') === id;
+		});
 		c.reset();
 	},
+
 	addSnippet(ev, htmls) {
 		c.$list.find('.active').find('textarea').html(htmls);
 	}

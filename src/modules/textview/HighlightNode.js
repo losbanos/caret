@@ -109,21 +109,29 @@ const h = {
 			return n.id === param.detail.id;
 		});
 		h.reset();
-		h.setAllMarkIndex()
+		h.setAllMarkCommentIndex()
 	},
-	setAllMarkIndex () {
+	setAllMarkCommentIndex () {
 		let arr = _.filter(this.items, function (n) {
 			let type = n.type;
-			return (/(cancel|paragraph|linear)/g).test(type);
+			let len = n.$el.children('.mark-number').length;
+			return (/(cancel|paragraph|linear)/g).test(type) && len > 0;
 		});
 		arr.forEach(function (n, i) {
 			n.setMarkNumbering(i + 1);
 		});
+	},
+	removeMarkByCommentRemove (ev, id) {
+		let willRemovedMark = _.find(h.items, function (n) {
+			return n.id === id;
+		});
+		willRemovedMark.remove({caller: 'comment'});
 	}
 };
 let $ta = $('#text_area');
 if($ta.length) {
 	$ta.get(0).addEventListener(EVENT.COMMENT_ACTIVE, h.activeByComment, true);
+	$ta.on(EVENT.COMMENT_REMOVE, h.removeMarkByCommentRemove);
 	$ta.on(EVENT.MARK_REMOVE, h.remove);
 }
 

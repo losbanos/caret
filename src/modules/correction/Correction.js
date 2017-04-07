@@ -49,11 +49,10 @@ const c = {
 		else {
 			$msg = $mark.children('.correction-msg');
 		}
-		// let w = $mark.width()? $mark.width(): 40;
-		// $msg.width(w);
 
 		if (this.$ta.val().length) {
-			$msg.html(this.$ta.val().convertLineBreakToBR());
+			let htmls = this.$ta.val().convertLineBreakToBR();
+			$msg.html(htmls);
 			$msg.insertBefore($f);
 		}
 		else {

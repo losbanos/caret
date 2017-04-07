@@ -87,7 +87,6 @@ export default function (dataObj) {
             return c;
 		},
 		addNumbering() {
-			HighlightNode.setAllMarkIndex();
 
             let $num = $('<span />', {class: 'mark-number info', text: '(' + this.commentIndex + ')'});
             switch(c.type) {
@@ -101,6 +100,7 @@ export default function (dataObj) {
 					this.$el.append($num);
 					break;
 			}
+			HighlightNode.setAllMarkCommentIndex();
 		},
 
 		clicked(ev) {
@@ -185,12 +185,22 @@ export default function (dataObj) {
 
 			return c;
 		},
-		remove() {
-			HighlightNode.setAllMarkIndex();
-			c.removeCommentIndex();
-			c.removeCorrection();
-			c.$el.removeMark();
-
+		remove(caller) {
+			if(caller === void 0) {
+				c.removeCommentIndex();
+				c.removeCorrection();
+				c.$el.removeMark();
+			}
+			else {
+				if(!c.getCorrectionText().length) {
+					c.removeCommentIndex();
+					c.removeCorrection();
+					c.$el.removeMark();
+				}
+				else {
+					c.removeCommentIndex();
+				}
+			}
 			let event = new CustomEvent(EVENT.MARK_REMOVE, {
 				detail: {
 					id: c.id, type: c.type, commentIndex: c.commentIndex
@@ -240,24 +250,24 @@ export default function (dataObj) {
 		getText() {
 			return this.text;
 		},
+		setCorrectionTextLog(text) {
+			let $msg = this.$el.children('.correction-msg');
+			this.correctionText = text;
+		},
 		getCorrectionText() {
 			let $msg = this.$el.children('.correction-msg');
 			if($msg.length) {
-				return this.correctionText = $msg.text();
+				this.correctionText = $msg.html();
 			}
 			else {
-				return '';
+				this.correctionText = '';
 			}
-		},
-
-		activeByMark() {
-			console.log('active By Mark');
+			return this.correctionText;
 		},
 		activeByComment() {
 			let event,
 				ta = $('#ta_correction').get(0)
 			;
-			console.log('activebyComment')
 			HighlightNode.removeLinearColor();
 			c.$el.addClass('active-block');
 
@@ -275,6 +285,7 @@ export default function (dataObj) {
 					event = new CustomEvent(EVENT.CORRECTION_DEACTIVATE, { detail: {id: c.id}});
 					break;
 			}
+			console.log('Event = ', event);
 			ta.dispatchEvent(event);
 		},
 		update(obj) {
