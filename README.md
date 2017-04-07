@@ -4,13 +4,14 @@ This README would normally document whatever steps are necessary to get your app
 
 ### What is this repository for? ###
 
-* Quick summary
-* Version
+* 해커스 인강 첨삭 프로젝트 ( Private )
+* Current Version 0.8.2 ( distribute Begin version 1.0 or later )
+* 서버 언어 추가 전 Front Task History 
 * [Learn Markdown](https://bitbucket.org/tutorials/markdowndemo)
 
 ### How do I get set up? ###
 
-* Summary of set up
+* [node 다운로드](https://nodejs.org/ko/)
 * Configuration
 * Dependencies
 * Database configuration
@@ -19,9 +20,7 @@ This README would normally document whatever steps are necessary to get your app
 
 ### Contribution guidelines ###
 
-* Writing tests
 * Code review
-* Other guidelines
 
 ### Who do I talk to? ###
 
