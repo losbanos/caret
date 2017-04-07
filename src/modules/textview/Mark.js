@@ -21,31 +21,14 @@ export default function (dataObj) {
 
 			if(c.$el && c.$el.length) {
 				c.$el.get(0).addEventListener(EVENT.MARK_ACTIVE, c.activeByComment);
-
-				c.$el.on('contextmenu', function(ev) {
-					ev.stopImmediatePropagation();
-					let m = confirm('Are you sure you want to delete?');
-					if(m) {
-						console.log('삭제한다!')
-						try{
-							c.remove();
-						}
-						catch(e){
-							console.log(e);
-						}
-						finally {
-							return false;
-						}
-					}
-					else return false;
-
-				});
+				c.addRemoveHandler();
 			}
 			return c;
 		},
 		reset(){
             c.$ta_correction = $('#ta_correction');
-            c.$el= $('#'+c.$el.attr('id'));
+            c.$el = $('#'+c.$el.attr('id'));
+
             if(c.$el.length) {
 				c.$el.get(0).removeEventListener(EVENT.MARK_ACTIVE, c.activeByComment);
 				c.$el.get(0).addEventListener(EVENT.MARK_ACTIVE, c.activeByComment, true);
@@ -66,28 +49,30 @@ export default function (dataObj) {
 					default:
 						this.$el.on('click', this.clicked);
 				}
-				c.$el.on('contextmenu', function(ev) {
-					ev.stopImmediatePropagation();
-					let m = confirm('Are you sure you want to delete?');
-					if(m) {
-						console.log('삭제한다!')
-						try{
-							c.remove();
-						}
-						catch(e){
-							console.log(e);
-						}
-						finally {
-							return false;
-						}
-					}
-					else return false;
-				});
+				c.addRemoveHandler();
 			}
             return c;
 		},
+		addRemoveHandler() {
+            c.$el.on('contextmenu', function(ev) {
+                ev.stopImmediatePropagation();
+                let m = confirm('Are you sure you want to delete?');
+                if(m) {
+                    console.log('삭제한다!')
+                    try{
+                        c.remove();
+                    }
+                    catch(e){
+                        console.log(e);
+                    }
+                    finally {
+                        return false;
+                    }
+                }
+                else return false;
+            });
+		},
 		addNumbering() {
-
             let $num = $('<span />', {class: 'mark-number info', text: '(' + this.commentIndex + ')'});
             switch(c.type) {
 				case 'cancel':
@@ -100,12 +85,16 @@ export default function (dataObj) {
 					this.$el.append($num);
 					break;
 			}
+
 			HighlightNode.setAllMarkCommentIndex();
 		},
 
 		clicked(ev) {
 			ev.stopImmediatePropagation();
 			let event;
+			if(!c.$el.children('.mark-number').length) {
+				c.addNumbering();
+			}
 			switch (c.type) {
 				case 'cancel':
 					Comment.activate({id: 'comment_' + c.id, index: c.index, commentIndex: c.commentIndex});

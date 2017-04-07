@@ -19,6 +19,11 @@ const c = {
 		this.$ta.get(0).addEventListener(EVENT.CORRECTION_ACTIVATE, c.activate.bind(this), true);
 		this.$ta.get(0).addEventListener(EVENT.CORRECTION_DEACTIVATE, c.deactivate.bind(this), true);
 		this.$ta.on(EVENT.MARK_REMOVE, this.deactivate);
+
+		this.$ta.on('keydown', function (ev) {
+			if(ev.which === 13 && ev.ctrlKey) {
+				c.apply();
+			}});
 	},
 	reset() {
         this.$container = $('#correction');
@@ -32,6 +37,10 @@ const c = {
 
 		this.$ta.get(0).addEventListener(EVENT.CORRECTION_ACTIVATE, c.activate.bind(this), true);
 		this.$ta.get(0).addEventListener(EVENT.CORRECTION_DEACTIVATE, c.deactivate.bind(this), true);
+        this.$ta.on('keydown', function (ev) {
+            if(ev.which === 13 && ev.ctrlKey) {
+                c.apply();
+            }});
 	},
 	apply() {
 		let id = this.markID;
