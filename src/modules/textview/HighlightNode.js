@@ -33,8 +33,6 @@ const h = {
 	},
 	reset() {
         this.items.forEach(function (v, i) {
-            let $el = $('#'+v.id);
-            v.$el = $el;
             v.reset();
         });
         return this.items;
@@ -56,15 +54,6 @@ const h = {
 		}
 		result = result.wrapAll($el);
 		return $el;
-	},
-	doubleClicked() {
-		let $this = $(this);
-		$this.replaceWith($this.text());
-
-		_.remove(h.items, function (n) {
-			if (n.id === $this.attr('id')) {
-			}
-		});
 	},
 	getCurrentItem() {
 		return this.items[this.items.length - 1];
@@ -120,16 +109,16 @@ const h = {
 			return n.id === param.detail.id;
 		});
 		h.reset();
+		h.setAllMarkIndex()
 	},
-	getCommentedLength () {
-		let sum = 0;
-		this.items.forEach(function (n, i) {
+	setAllMarkIndex () {
+		let arr = _.filter(this.items, function (n) {
 			let type = n.type;
-			if((/(cancel|paragraph|linear)/g).test(type)){
-				sum++;
-			}
-		})
-		return sum;
+			return (/(cancel|paragraph|linear)/g).test(type);
+		});
+		arr.forEach(function (n, i) {
+			n.setMarkNumbering(i + 1);
+		});
 	}
 };
 let $ta = $('#text_area');

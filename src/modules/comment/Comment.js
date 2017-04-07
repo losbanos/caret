@@ -19,8 +19,13 @@ const c = {
 		this.$list.on(EVENT.SNIPPET_CLICK, this.addSnippet);
 	},
 	reset() {
-		this.init();
-		this.sortItems();
+		this.$container = $('#comment_area');
+		this.$list = $('#comments');
+		this.template = $('#tpl_comment').html();
+
+		this.$list.on(EVENT.MARK_REMOVE, this.remove);
+		this.$list.on(EVENT.SNIPPET_CLICK, this.addSnippet);
+		this.sortNumbering();
 	},
 	add (data) {
 		// data.index = this.items.length ? this.items.length + 1 : 1;
@@ -35,7 +40,6 @@ const c = {
 			$ta: $li.find('textarea'),
 			onRemove: function () {
 				c.removeItem(data.id);
-				// c.sortItems()
 			},
 		}).on('edit', function (ev, $el) {
 			c.$list.find('li').removeClass('active');
@@ -82,7 +86,7 @@ const c = {
 			return n.attr('id') === id;
 		})
 	},
-	sortItems() {
+	sortNumbering() {
 		this.items.forEach(function (n, i) {
 			let num = i + 1;
 			n.find('.comment-index').text(num + '.');

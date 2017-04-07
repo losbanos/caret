@@ -86,8 +86,8 @@ export default function (dataObj) {
 			}
             return c;
 		},
-		displayCommentIndex() {
-			this.commentIndex = HighlightNode.getCommentedLength();
+		addNumbering() {
+			HighlightNode.setAllMarkIndex();
 
             let $num = $('<span />', {class: 'mark-number info', text: '(' + this.commentIndex + ')'});
             switch(c.type) {
@@ -150,7 +150,7 @@ export default function (dataObj) {
 			}
 			switch (c.type) {
 				case 'cancel':
-					this.displayCommentIndex();
+					this.addNumbering();
 					Comment.add({id: 'comment_' + this.id, index: this.index, commentIndex: this.commentIndex});
 					HighlightNode.removeLinearColor();
 
@@ -161,14 +161,14 @@ export default function (dataObj) {
 					this.$el.on('click', this.clicked.bind(this)).addClass('cursor active-block');
 					break;
 				case 'paragraph':
-					this.displayCommentIndex();
+					this.addNumbering();
 					Comment.add({id: 'comment_' + this.id, index: this.index, commentIndex: this.commentIndex});
 					HighlightNode.removeLinearColor();
 					Correction.deactivate();
 					c.$el.on('click', this.clicked).addClass('cursor active-block');
 					break;
 				case 'linear':
-					this.displayCommentIndex();
+					this.addNumbering();
 					Comment.add({id: 'comment_' + this.id, index: this.index, commentIndex: this.commentIndex});
 					HighlightNode.removeLinearColor();
                     Correction.deactivate();
@@ -185,6 +185,22 @@ export default function (dataObj) {
 
 			return c;
 		},
+		remove() {
+			HighlightNode.setAllMarkIndex();
+			c.removeCommentIndex();
+			c.removeCorrection();
+			c.$el.removeMark();
+
+			let event = new CustomEvent(EVENT.MARK_REMOVE, {
+				detail: {
+					id: c.id, type: c.type, commentIndex: c.commentIndex
+				}
+			});
+			$('#text_area').trigger(EVENT.MARK_REMOVE, [event]);
+			$('#ta_correction').trigger(EVENT.MARK_REMOVE, [event]);
+			$('#comments').trigger(EVENT.MARK_REMOVE, [event]);
+		},
+
 		removeCommentIndex() {
 			try{
 				c.$el = c.$el? c.$el : $('#'+c.id);
@@ -209,22 +225,6 @@ export default function (dataObj) {
 				console.log(e);
 			}
 		},
-		remove() {
-			c.removeCommentIndex();
-			c.removeCorrection();
-			console.log('c.el = ',c.$el);
-			c.$el.removeMark();
-
-
-			let event = new CustomEvent(EVENT.MARK_REMOVE, {
-				detail: {
-					id: c.id, type: c.type, commentIndex: c.commentIndex
-				}
-			});
-			$('#text_area').trigger(EVENT.MARK_REMOVE, [event]);
-			$('#ta_correction').trigger(EVENT.MARK_REMOVE, [event]);
-			$('#comments').trigger(EVENT.MARK_REMOVE, [event]);
-		},
 		getIndex() {
 			return this.index;
 		},
@@ -232,9 +232,10 @@ export default function (dataObj) {
 			this.index = number;
 			return c;
 		},
-		setCommentIndex(num) {
+		setMarkNumbering(num) {
 			c.commentIndex = num;
 			c.$el.children('.mark-number').text('('+num+')');
+			//Comments
 		},
 		getText() {
 			return this.text;
