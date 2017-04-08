@@ -111,7 +111,17 @@ const h = {
 		h.reset();
 		h.setAllMarkCommentIndex()
 	},
-	setAllMarkCommentIndex () {
+	setAllMarkCommentIndex (param) {
+		let a;
+		if(param && param.last) {
+			a = _.remove(h.items, function (n) {
+				return n.id === param.last
+			});
+			$.each(a, function(i, n) {
+				h.items.push(n);
+			})
+		}
+
 		let arr = _.filter(this.items, function (n) {
 			let type = n.type;
 			let len = n.$el.children('.mark-number').length;

@@ -86,7 +86,7 @@ export default function (dataObj) {
 					break;
 			}
 
-			HighlightNode.setAllMarkCommentIndex();
+			HighlightNode.setAllMarkCommentIndex({last: c.id});
 		},
 
 		clicked(ev) {
