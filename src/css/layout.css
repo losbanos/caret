@@ -243,7 +243,7 @@ h2 span{
             }
             .active-block.spacing .correction-msg{
                 min-width: 40px;
-                max-width: 80px;
+                /*max-width: 80px;*/
                 text-indent: 10px;
                 margin-left: -0px;
                 background: rgba(16, 154, 163, 0.2);
@@ -347,14 +347,17 @@ h2 span{
         /* Corrections */
         .text-area .correction-msg{
             position: absolute;
-            left: 0; top: 26px;
+            left: 14px; top: 16px;
             min-width: 60px;
-            max-width: 80px;
+            /*max-width: 80px;*/
             height: auto;
             margin-left: 6px;
             line-height:1.2;
-            -ms-word-break: break-all;
-            word-break: break-all;
+            /*-ms-word-break: break-all;*/
+            /*word-break: break-all;*/
+        }
+        .text-area .correction-msg.up{
+            top: -16px;
         }
         .text-area .correction-msg:before{
             content: '└';
@@ -365,6 +368,9 @@ h2 span{
         }
         .text-area .correction-msg:after {
             display: none;
+        }
+        .text-area .correction-msg.up:before{
+            content: '┌';
         }
         /* Controller */
         .controller{
@@ -407,8 +413,12 @@ h2 span{
                     height: 129px;
                     overflow-y: auto;
                 }
-                .btn-apply-correction{
+                .btn-apply-correction,
+                .btn-change-position{
                     cursor: pointer;
+                }
+                .btn-change-position{
+                    margin-right: 5px;
                 }
 
             /* Tab */

@@ -30,7 +30,6 @@ const h = {
 			o.update(obj);
 		}
 		this.reset();
-		console.log('h items = ', this.items);
 		return this.items;
 	},
 	reset() {

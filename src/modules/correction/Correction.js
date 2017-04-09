@@ -5,16 +5,17 @@ import highLightNode from '../textview/HighlightNode';
 const c = {
 	text: '',
 	$ta: null,
-	$applyBtn: null, $moveBtn: null,
+	$applyBtn: null, $changePositionBtn: null,
 	markID: '',
 	init() {
 		this.$container = $('#correction');
 		this.$ta = $('#ta_correction');
 		this.$applyBtn = $('#btn_apply_correction');
-		this.$moveBtn = $('#btn_change_message_position');
+		this.$changePositionBtn = $('#btn_change_position');
 
 		this.deactivate();
 		this.$applyBtn.on('click', this.apply.bind(this));
+		this.$changePositionBtn.on('click', this.changePosition);
 
 		this.$ta.get(0).addEventListener(EVENT.CORRECTION_ACTIVATE, c.activate.bind(this), true);
 		this.$ta.get(0).addEventListener(EVENT.CORRECTION_DEACTIVATE, c.deactivate.bind(this), true);
@@ -29,7 +30,7 @@ const c = {
         this.$container = $('#correction');
         this.$ta = $('#ta_correction');
         this.$applyBtn = $('#btn_apply_correction');
-        this.$moveBtn = $('#btn_change_message_position');
+        this.$changePositionBtn = $('#btn_change_position');
         this.$applyBtn.on('click', this.apply.bind(this));
 
 		this.$ta.get(0).removeEventListener(EVENT.CORRECTION_ACTIVATE, c.activate);
@@ -63,6 +64,9 @@ const c = {
 			let htmls = this.$ta.val().convertLineBreakToBR();
 			$msg.html(htmls);
 			$msg.insertBefore($f);
+			if($msg.hasClass('up')) {
+				$msg.css('top', $msg.height() * -1);
+			}
 		}
 		else {
 			$msg.remove();
@@ -88,6 +92,19 @@ const c = {
 		this.$ta = $('#ta_correction');
 		this.$ta.attr('readonly', 'readonly');
 		this.$ta.val('');
+	},
+	changePosition() {
+		let $mark = $('#'+c.markID);
+		let $msg = $mark.children('.correction-msg');
+		if($mark.length && $msg.length) {
+			let h = $msg.height();
+			if($msg.hasClass('up')) {
+				$msg.removeClass('up').removeAttr('style');
+			}
+			else {
+				$msg.addClass('up').css('top', -1*h);;
+			}
+		}
 	}
 
 };
