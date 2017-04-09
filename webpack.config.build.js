@@ -11,8 +11,7 @@ process.traceDeprecation = true;
 module.exports = {
     entry: {
         jquery: 'jquery',
-        app: './src/entry.js',
-        write: './src/write.html'
+        app: './src/entry.js'
     },
     output: {
         path: resolve(__dirname, 'dist'),
@@ -44,6 +43,11 @@ module.exports = {
         new HtmlWebpackPlugin({
             template: './src/write.html',
             filename: 'write.html',
+            chunks: ['jquery']
+        }),
+        new HtmlWebpackPlugin({
+            template: './src/view.html',
+            filename: 'view.html',
             chunks: ['jquery']
         }),
         ExtractCSS

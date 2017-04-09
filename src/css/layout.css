@@ -236,7 +236,7 @@ h2 span{
             .spacing:after{
                 display: none;}
             .spacing > .correction-msg.info{
-                top: -20px;
+                top: -20px; left: 0;
             }
             .spacing > .correction-msg.info:before{
                 content: '┌';
@@ -274,6 +274,7 @@ h2 span{
             }
         /* Comment */
         .comment-area{
+            position: relative;
             float: right;
             width: 239px; height: 542px;
             padding: 8px 10px;
@@ -537,6 +538,51 @@ h2 span{
     /*line-height: 1.2;*/
 }
 .write .correction,
-.write .func-tab{
+.view .correction,
+.write .func-tab,
+.view .func-tab{
     opacity: 0.4;
+}
+
+.view .controller{
+    position: relative;
+}
+.view .btn-remove-comment,
+.view .btn-apply-correction{
+    display: none;
+}
+.view .cover{
+    position: absolute; left: 0; top: 0;
+    width: 100%;
+    height: 184px;
+    z-index:100;
+}
+
+.view .comments .active textarea{
+    display: none;
+}
+.view .comments .active .view{
+    display: block;
+}
+
+.scrollbar{
+    position: absolute;
+    right: 10px;
+    width: 2px;
+    height: 600px;
+    background: #ccc;
+    line-height: 0;
+}
+.handle{
+    width: 100%;
+    height: 100px;
+    background: #292a33;
+    cursor: pointer;
+}
+.mousearea{
+    position: absolute;
+    top: 0;
+    left: -10px;
+    width: 22px;
+    height: 100%;
 }
