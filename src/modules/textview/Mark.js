@@ -85,19 +85,16 @@ export default function (dataObj) {
 					this.$el.append($num);
 					break;
 			}
-
-			HighlightNode.setAllMarkCommentIndex({last: c.id});
+            $('#text_area').trigger(EVENT.RESET_COMMENT_INDEX, c.id);
 		},
 
 		clicked(ev) {
 			ev.stopImmediatePropagation();
 			let event;
-			if(!c.$el.children('.mark-number').length) {
-				c.addNumbering();
-			}
+
 			switch (c.type) {
 				case 'cancel':
-					Comment.activate({id: 'comment_' + c.id, index: c.index, commentIndex: c.commentIndex});
+					Comment.activate({id: 'comment_' + c.id, index: c.index});
 					HighlightNode.removeLinearColor();
 					c.$el.addClass('active-block');
 
@@ -107,13 +104,13 @@ export default function (dataObj) {
 					c.$ta_correction.get(0).dispatchEvent(event);
 					break;
 				case 'paragraph':
-					Comment.activate({id: 'comment_' + c.id, index: c.index, commentIndex: c.commentIndex});
+					Comment.activate({id: 'comment_' + c.id, index: c.index});
 					HighlightNode.removeLinearColor();
 					Correction.deactivate();
 					c.$el.addClass('active-block');
 					break;
 				case 'linear':
-					Comment.activate({id: 'comment_' + c.id, index: c.index, commentIndex: c.commentIndex});
+					Comment.activate({id: 'comment_' + c.id, index: c.index});
 					HighlightNode.removeLinearColor();
                     Correction.deactivate();
 					c.$el.addClass('active-block');
@@ -128,19 +125,21 @@ export default function (dataObj) {
 					c.$ta_correction.get(0).dispatchEvent(event);
 					break;
 			}
+            if(!c.$el.children('.mark-number').length) {
+                c.addNumbering();
+            }
 			return c;
 		},
 		openEdit() {
 			let event,
 				$msg = this.$el ? this.$el.children('.mark-number'): $('#'+this.id).children('.mark-number');
-			;
-			if($msg.length) {
-				this.commentIndex = $msg.text().match(/\d+/g)[0]
-			}
+			// if($msg.length) {
+			// 	this.commentIndex = $msg.text().match(/\d+/g)[0]
+			// }
 			switch (c.type) {
 				case 'cancel':
+					Comment.add({id: 'comment_' + this.id, index: this.index});
 					this.addNumbering();
-					Comment.add({id: 'comment_' + this.id, index: this.index, commentIndex: this.commentIndex});
 					HighlightNode.removeLinearColor();
 
 					event = new CustomEvent(EVENT.CORRECTION_ACTIVATE, {
@@ -150,15 +149,15 @@ export default function (dataObj) {
 					this.$el.on('click', this.clicked.bind(this)).addClass('cursor active-block');
 					break;
 				case 'paragraph':
+					Comment.add({id: 'comment_' + this.id, index: this.index});
 					this.addNumbering();
-					Comment.add({id: 'comment_' + this.id, index: this.index, commentIndex: this.commentIndex});
 					HighlightNode.removeLinearColor();
 					Correction.deactivate();
 					c.$el.on('click', this.clicked).addClass('cursor active-block');
 					break;
 				case 'linear':
+					Comment.add({id: 'comment_' + this.id, index: this.index});
 					this.addNumbering();
-					Comment.add({id: 'comment_' + this.id, index: this.index, commentIndex: this.commentIndex});
 					HighlightNode.removeLinearColor();
                     Correction.deactivate();
 					c.$el.on('click', this.clicked).addClass('cursor active-block');
@@ -174,32 +173,33 @@ export default function (dataObj) {
 
 			return c;
 		},
-		remove(caller) {
-			if(caller === void 0) {
-				c.removeCommentIndex();
-				c.removeCorrection();
-				c.$el.removeMark();
-			}
-			else {
-				if(!c.getCorrectionText().length) {
-					c.removeCommentIndex();
-					c.removeCorrection();
-					c.$el.removeMark();
-				}
-				else {
-					c.removeCommentIndex();
-				}
-			}
+		remove() {
+			c.removeCommentIndex();
+			c.removeCorrection();
+			c.$el.removeMark();
+
 			let event = new CustomEvent(EVENT.MARK_REMOVE, {
-				detail: {
-					id: c.id, type: c.type, commentIndex: c.commentIndex
-				}
-			});
+				detail: {id: c.id, type: c.type}
+            });
 			$('#text_area').trigger(EVENT.MARK_REMOVE, [event]);
 			$('#ta_correction').trigger(EVENT.MARK_REMOVE, [event]);
 			$('#comments').trigger(EVENT.MARK_REMOVE, [event]);
 		},
+		removeFromComment () {
+			if(c.$el.children('.mark-number').length) {
+                c.removeCommentIndex();
+			}
+			else {
+				c.removeCommentIndex()
+				c.removeCorrection();
+				c.$el.removeMark();
 
+				let event = new CustomEvent(EVENT.MARK_REMOVE, {
+					detail: { id: c.id, type: c.type, commentIndex: c.commentIndex}
+				});
+                $('#text_area').trigger(EVENT.MARK_REMOVE, [event]);
+			}
+		},
 		removeCommentIndex() {
 			try{
 				c.$el = c.$el? c.$el : $('#'+c.id);
@@ -234,7 +234,6 @@ export default function (dataObj) {
 		setMarkNumbering(num) {
 			c.commentIndex = num;
 			c.$el.children('.mark-number').text('('+num+')');
-			//Comments
 		},
 		getText() {
 			return this.text;

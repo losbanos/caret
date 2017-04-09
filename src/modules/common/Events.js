@@ -6,6 +6,7 @@ export default {
 	'MARK_CLICK'            : 'mark-click',
 	'SNIPPET_CLICK'         : 'snippet-click',
 	'MARK_REMOVE'           : 'mark-remove',
-	'COMMENT_REMOVE'        : 'comment-remove'
+	'COMMENT_REMOVE'        : 'comment-remove',
+	'RESET_COMMENT_INDEX'   : 'reset-comment-index'
 };
 

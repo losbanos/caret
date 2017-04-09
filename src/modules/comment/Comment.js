@@ -25,7 +25,6 @@ const c = {
 
 		this.$list.on(EVENT.MARK_REMOVE, this.remove);
 		this.$list.on(EVENT.SNIPPET_CLICK, this.addSnippet);
-		this.sortNumbering();
 	},
 	add (data) {
 		let comm = Mustache.render(this.template, data);
@@ -36,7 +35,7 @@ const c = {
 			$view: $li.find('.view'),
 			$ta: $li.find('textarea'),
 			onRemove: function () {
-				c.removeItem(data.id);
+				c.removeItem(this.attr('id'));
 			},
 		}).on('edit', function (ev, $el) {
 			c.$list.find('li').removeClass('active');
@@ -51,6 +50,7 @@ const c = {
 		this.sortDOMList($li);
 		/*sortDOMList 이후에 active */
 		$li.addClass('active');
+		this.sortNumbering();
 
 	},
 	sortDOMList($li) {
@@ -82,7 +82,13 @@ const c = {
 		let removed = _.remove(this.items, function (n) {
 			return n.attr('id') === id;
 		});
-		$('#text_area').trigger(EVENT.COMMENT_REMOVE, [id.replace('comment_', '')]);
+		c.sortNumbering();
+		let arr = [];
+		$.each(this.items, function (i, n) {
+			arr[i] = n.attr('id').replace('comment_', '');
+		});
+
+		$('#text_area').trigger(EVENT.COMMENT_REMOVE, [id.replace('comment_', ''), arr]);
 	},
 	sortNumbering() {
 		this.items.forEach(function (n, i) {
@@ -94,6 +100,13 @@ const c = {
 	getCommentLength() {
 		return this.items.length;
 	},
+	getCommentNumbering() {
+        let arr = [];
+        $.each(this.items, function (i, n) {
+            arr[i] = {id: n.attr('id').replace('comment_', ''), commentIndex: i + 1}
+        });
+        return arr;
+	},
 	remove (ev, params) {
 		let id = 'comment_' + params.detail.id;
 
@@ -101,7 +114,8 @@ const c = {
 		_.remove(c.items, function (n) {
 			return n.attr('id') === id;
 		});
-		c.reset();
+		c.sortNumbering();
+        $('#text_area').trigger(EVENT.RESET_COMMENT_INDEX, [id.replace('comment_', '')]);
 	},
 
 	addSnippet(ev, htmls) {

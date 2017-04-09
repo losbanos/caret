@@ -2,6 +2,7 @@ import uuid from 'uuid';
 import _ from 'lodash';
 
 import Mark from './Mark';
+import Comment from '../comment/Comment';
 import EVENT from '../common/Events';
 
 const h = {
@@ -29,6 +30,7 @@ const h = {
 			o.update(obj);
 		}
 		this.reset();
+		console.log('h items = ', this.items);
 		return this.items;
 	},
 	reset() {
@@ -111,31 +113,38 @@ const h = {
 		h.reset();
 		h.setAllMarkCommentIndex()
 	},
-	setAllMarkCommentIndex (param) {
-		let a;
-		if(param && param.last) {
-			a = _.remove(h.items, function (n) {
-				return n.id === param.last
-			});
-			$.each(a, function(i, n) {
-				h.items.push(n);
+	setAllMarkCommentIndex (ev, mark_id) {
+		let comments = Comment.getCommentNumbering();
+		if(comments.length){
+			comments.forEach(function (n, i) {
+				let matched = _.find(h.items, function (m) {
+					return m.id === n.id;
+				});
+				if(matched) {
+					matched.setMarkNumbering(n.commentIndex);
+                }
 			})
 		}
-
-		let arr = _.filter(this.items, function (n) {
-			let type = n.type;
-			let len = n.$el.children('.mark-number').length;
-			return (/(cancel|paragraph|linear)/g).test(type) && len > 0;
-		});
-		arr.forEach(function (n, i) {
-			n.setMarkNumbering(i + 1);
-		});
+		else {
+			let matched = _.find(h.items, function(m) {
+				return m.id === mark_id;
+			});
+			matched.setMarkNumbering(1);
+		}
 	},
-	removeMarkByCommentRemove (ev, id) {
-		let willRemovedMark = _.find(h.items, function (n) {
-			return n.id === id;
+	removeMarkByCommentRemove (ev, removeCommentedID, arr) {
+		let willRemoveMark = _.find(h.items, function (n) {
+			return n.id === removeCommentedID;
 		});
-		willRemovedMark.remove({caller: 'comment'});
+		willRemoveMark.removeFromComment();
+		arr.forEach( function (a, i) {
+            let matched = _.find(h.items, function (n) {
+            	return n.id === a;
+			});
+            if(matched) {
+            	matched.setMarkNumbering(i + 1);
+			}
+		});
 	}
 };
 let $ta = $('#text_area');
@@ -143,6 +152,7 @@ if($ta.length) {
 	$ta.get(0).addEventListener(EVENT.COMMENT_ACTIVE, h.activeByComment, true);
 	$ta.on(EVENT.COMMENT_REMOVE, h.removeMarkByCommentRemove);
 	$ta.on(EVENT.MARK_REMOVE, h.remove);
+	$ta.on(EVENT.RESET_COMMENT_INDEX, h.setAllMarkCommentIndex)
 }
 
 export default h;
