@@ -57,7 +57,7 @@ const c = {
 					sel.addRange(range);
 
 					let $cur_el = $('#' + $sp.attr('id'));
-					$cur_el.data('ty', $cur_el.position().top);
+					$cur_el.data({'ty': $cur_el.position().top, 'h': $cur_el.height()});
 					HighLightNode.add({
 						id: $sp.attr('id'),
 						text: sel_text,

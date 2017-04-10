@@ -50,11 +50,9 @@ const c = {
                     $ta = $('#text_area'),
                     ty = $ta.scrollTop()
                 ;
-                let h = $cur.height();
+                let h = $cur.data('h');
                 let data_ty = $cur.data('ty');
-                // console.log('data ty = ', $cur.data('ty'));
-                // console.log('h = ', $cur.height());
-                // return;
+
                 $line.appendTo($ta)
                     .css({top: data_ty + ty, height: h})
                     .attr('id', cur.id);
