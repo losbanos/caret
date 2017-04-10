@@ -76,7 +76,10 @@ const c = {
 		// console.log('Correction activate from [', ev.detail.type,']');
 		this.markID = ev.detail.id;
 		if (!ev.detail.reactivate) this.$ta.val('');
-		else c.$ta.val(ev.detail.text.convertBRtoLineBreak());
+		else {
+			console.log(ev.detail.text.convertBRtoLineBreak());
+			c.$ta.val(ev.detail.text.convertBRtoLineBreak());
+		}
 
 		this.$applyBtn.attr('disabled', false);
 		this.$moveBtn.attr('disabled', false);

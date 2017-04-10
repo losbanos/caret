@@ -10,7 +10,7 @@
 		return this.replace(/<br\s?\/?>/ig,'\|').replace(/(.)/g, '<span>$1</span>').replace(/\<span\>\|\<\/span\>/g, '<br>');
 	};
 	String.prototype.convertBRtoLineBreak = function () {
-		if(!this.length) return false;
+		if(!this.length) return '';
 		return this.replace(/\<br\s?\/?\>/g, '\r\n');
 	};
 	let $win = $(win), $doc = $(doc);
