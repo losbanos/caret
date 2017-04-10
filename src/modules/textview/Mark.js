@@ -252,12 +252,16 @@ export default function (dataObj) {
 			}
 			return this.correctionText;
 		},
-		activeByComment() {
+		activeByComment(ev) {
 			let event,
-				ta = $('#ta_correction').get(0)
+				$ta_correction = $('#ta_correction'),
+				ta_correction = $ta_correction.get(0)
 			;
 			HighlightNode.removeLinearColor();
 			c.$el.addClass('active-block');
+			let $ta = $('#text_area');
+			let ty = $ta.scrollTop() + $('#'+ev.detail.id).position().top;
+			$ta.animate({scrollTop: ty}, 400);
 
 			switch(c.type) {
 				case 'cancel':
@@ -273,8 +277,8 @@ export default function (dataObj) {
 					event = new CustomEvent(EVENT.CORRECTION_DEACTIVATE, { detail: {id: c.id}});
 					break;
 			}
-			console.log('Event = ', event);
-			ta.dispatchEvent(event);
+			// console.log('Event = ', event);
+			ta_correction.dispatchEvent(event);
 		},
 		update(obj) {
 			_.forEach(obj, function (v, k) {

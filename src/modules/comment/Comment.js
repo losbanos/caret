@@ -70,7 +70,8 @@ const c = {
 			return n.attr('id') === data.id
 		});
 		if ($el !== void 0) {
-			this.$container.animate({scrollTop: $el.position().top + 100}, 400);
+			let ty = $el.position().top + this.$container.scrollTop()
+			this.$container.animate({scrollTop: ty}, 400);
 			this.$list.find('li').removeClass('active');
 			$el.addClass('active');
 		}
