@@ -189,7 +189,7 @@ export default function (dataObj) {
 			$('#comments').trigger(EVENT.MARK_REMOVE, [event]);
 		},
 		removeFromComment () {
-			if(c.$el.children('.mark-number').length) {
+			if(c.$el.children('.correction-msg').length) {
                 c.removeCommentIndex();
 			}
 			else {

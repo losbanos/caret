@@ -57,14 +57,10 @@ const c = {
 					sel.addRange(range);
 
 					let $cur_el = $('#' + $sp.attr('id'));
-					$cur_el.data({'ty': $cur_el.position().top, 'h': $cur_el.height()});
-					HighLightNode.add({
-						id: $sp.attr('id'),
-						text: sel_text,
-						$el: $cur_el,
-						marked: false
-					});
-					sel.removeAllRanges();
+					$cur_el.data({'ty': $cur_el.position().top, 'h': $cur_el.children('.e').position().top});
+
+					HighLightNode.add({ id: $sp.attr('id'), text: sel_text, $el: $cur_el, marked: false});
+                    sel.removeAllRanges();
 
 					c.activateController(sel_text);
 				}
