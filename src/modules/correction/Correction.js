@@ -77,7 +77,6 @@ const c = {
 		this.markID = ev.detail.id;
 		if (!ev.detail.reactivate) this.$ta.val('');
 		else {
-			console.log(ev.detail.text.convertBRtoLineBreak());
 			c.$ta.val(ev.detail.text.convertBRtoLineBreak());
 		}
 

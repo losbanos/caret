@@ -23,7 +23,7 @@ import '../addons/Utils';
 				init() {
 					$owner.on('click', '.comment-head, .comment-text', function (ev) {
 						$owner.addClass(options.activeClass);
-						$ta.html($view.html());
+						$ta.html($view.html().convertBRtoLineBreak());
 						status = 'edit';
 						$owner.trigger('edit', [$owner]);
 					});
