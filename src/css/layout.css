@@ -543,7 +543,7 @@ h2 span{
 .view .func-tab{
     opacity: 0.4;
 }
-
+.write .controller,
 .view .controller{
     position: relative;
 }
@@ -551,6 +551,7 @@ h2 span{
 .view .btn-apply-correction{
     display: none;
 }
+.write .cover,
 .view .cover{
     position: absolute; left: 0; top: 0;
     width: 100%;
