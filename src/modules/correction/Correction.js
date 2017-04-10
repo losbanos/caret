@@ -104,7 +104,7 @@ const c = {
 				$msg.removeClass('up').removeAttr('style');
 			}
 			else {
-				$msg.addClass('up').css('top', -1*h);;
+				$msg.addClass('up').css('top', -1* h);
 			}
 		}
 	}

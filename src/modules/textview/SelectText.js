@@ -56,10 +56,12 @@ const c = {
 					sel.removeAllRanges();
 					sel.addRange(range);
 
+					let $cur_el = $('#' + $sp.attr('id'));
+					$cur_el.data('ty', $cur_el.position().top);
 					HighLightNode.add({
 						id: $sp.attr('id'),
 						text: sel_text,
-						$el: $('#' + $sp.attr('id')),
+						$el: $cur_el,
 						marked: false
 					});
 					sel.removeAllRanges();
