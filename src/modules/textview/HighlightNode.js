@@ -144,6 +144,11 @@ const h = {
             	matched.setMarkNumbering(i + 1);
 			}
 		});
+	},
+	reload () {
+		h.items.forEach( function (n, i) {
+			n.reset();
+		})
 	}
 };
 let $ta = $('#text_area');

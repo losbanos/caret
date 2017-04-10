@@ -15,13 +15,22 @@ if (process.env.NODE_ENV !== 'production') {
 
 $(document).ready(function () {
 	let $ta = $('#text_area'),
-		texts = SortText.init($ta.text())
+		htmls
 	;
-
-	MarkButtons.init();
-	SelectText.init($ta.html(texts));
-	Comment.init();
-	TabContainer.init();
+	if(!$('#reload').length) {
+		htmls = SortText.init($ta.text());
+		MarkButtons.init();
+		SelectText.init($ta.html(htmls));
+		Comment.init();
+		TabContainer.init();
+	}
+	else {
+		htmls = $ta.html();
+		MarkButtons.init();
+		SelectText.init($ta,{reload: true});
+		Comment.init();
+		TabContainer.init();
+	}
 
 	if (process.env.NODE_ENV !== 'production') {
 		FormButtons.init();

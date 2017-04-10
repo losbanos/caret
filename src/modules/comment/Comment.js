@@ -15,6 +15,9 @@ const c = {
 		this.$list = $('#comments');
 		this.template = $('#tpl_comment').html();
 
+		this.$list.off(EVENT.MARK_REMOVE);
+		this.$list.off(EVENT.SNIPPET_CLICK);
+
 		this.$list.on(EVENT.MARK_REMOVE, this.remove);
 		this.$list.on(EVENT.SNIPPET_CLICK, this.addSnippet);
 	},
@@ -22,6 +25,9 @@ const c = {
 		this.$container = $('#comment_area');
 		this.$list = $('#comments');
 		this.template = $('#tpl_comment').html();
+
+		this.$list.off(EVENT.MARK_REMOVE);
+		this.$list.off(EVENT.SNIPPET_CLICK);
 
 		this.$list.on(EVENT.MARK_REMOVE, this.remove);
 		this.$list.on(EVENT.SNIPPET_CLICK, this.addSnippet);
@@ -121,6 +127,30 @@ const c = {
 
 	addSnippet(ev, htmls) {
 		c.$list.find('.active').find('textarea').val(htmls);
+	},
+
+	reload() {
+		this.reset();
+		this.items = this.items || [];
+		this.$list.find('li').each(function () {
+			let $li = $(this);
+			$li.comment({
+				$removeBtn: $li.find('button'),
+				$view: $li.find('.view'),
+				$ta: $li.find('textarea'),
+				onRemove: function () {
+					c.removeItem(this.attr('id'));
+				},
+			}).on('edit', function (ev, $el) {
+				c.$list.find('li').removeClass('active');
+				$el.addClass('active');
+				let event = new CustomEvent(EVENT.MARK_ACTIVE, {
+					detail: {id: $el.attr('id').replace('comment_', ''), $el: $el, $list: c.$list, from: 'comment'}
+				});
+				$('#' + event.detail.id).get(0).dispatchEvent(event);
+			});
+			c.items.push($li);
+		});
 	}
-}
+};
 export default c;

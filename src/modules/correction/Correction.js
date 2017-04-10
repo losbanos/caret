@@ -77,7 +77,6 @@ const c = {
 		this.markID = ev.detail.id;
 		if (!ev.detail.reactivate) this.$ta.val('');
 		else {
-			console.log(ev.detail.text.convertBRtoLineBreak());
 			c.$ta.val(ev.detail.text.convertBRtoLineBreak());
 		}
 
@@ -105,7 +104,7 @@ const c = {
 				$msg.removeClass('up').removeAttr('style');
 			}
 			else {
-				$msg.addClass('up').css('top', -1*h);;
+				$msg.addClass('up').css('top', -1* h);
 			}
 		}
 	}

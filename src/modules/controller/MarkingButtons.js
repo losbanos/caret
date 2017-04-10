@@ -46,13 +46,17 @@ const c = {
 
             /*  paragraph 예외처리 시작 */
             if (mark_id === 'paragraph') {
-                let $line = $('<span />', {class: 'paragraph-line'}),
+                let $line = $('<span />', {class: 'paragraph'}),
                     $ta = $('#text_area'),
                     ty = $ta.scrollTop()
                 ;
-                let h = $cur.children('.e').position().top;
+                let h = $cur.height();
+                let data_ty = $cur.data('ty');
+                // console.log('data ty = ', $cur.data('ty'));
+                // console.log('h = ', $cur.height());
+                // return;
                 $line.appendTo($ta)
-                    .css({top: $cur.position().top + ty, height: h})
+                    .css({top: data_ty + ty, height: h})
                     .attr('id', cur.id);
 
                 $cur.children('.f, .e').removeClass('f e');

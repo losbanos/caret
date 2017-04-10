@@ -1,12 +1,15 @@
 import '../addons/Utils';
 import HighLightNode from './HighlightNode';
 import MarkingButtons from '../controller/MarkingButtons';
-
+import Comment from '../comment/Comment';
 const c = {
-	$target: '',
-	init ($target) {
-		this.$target = $target;
-		$target.mousedown(function () {
+	$ta: '',
+	init ($ta, obj) {
+		this.$ta = $ta;
+		if (obj && obj.reload) {
+			this.reload();
+		}
+		$ta.mousedown(function () {
 			if (HighLightNode.items.length) {
 				c.removeNonMarked();
 				c.deactivateController();
@@ -15,19 +18,19 @@ const c = {
 			.mouseup(c.mark)
 	},
 	mark (ev) {
-		let nonOccurs = ['correction-msg', 'comment-msg', 'paragraph-line', 'info', 'mark-number', 'period', 'comman', 'linebreak'],
-			$target = $(ev.target),
+		let nonOccurs = ['correction-msg', 'comment-msg', 'paragraph', 'info', 'mark-number', 'period', 'comman', 'linebreak'],
+			$ta = $(ev.target),
 			stopOccur = false
 		;
-		if($target.is('span')){
+		if ($ta.is('span')) {
 			$.each(nonOccurs, function (i, n) {
-				if($target.hasClass(n)){
+				if ($ta.hasClass(n)) {
 					stopOccur = true;
 					return false
 				}
 			})
 		}
-		if(stopOccur) return false;
+		if (stopOccur) return false;
 
 		let $sp = HighLightNode.create(),
 			sel = window.getSelection(),
@@ -42,9 +45,9 @@ const c = {
 				let range = ori_range.cloneRange();
 				try {
 					let sc = range.startContainer.parentNode,
-						ec= range.endContainer.parentNode
+						ec = range.endContainer.parentNode
 					;
-					if(sel_text) {
+					if (sel_text) {
 						$sp = HighLightNode.parse(sc, ec, $sp);
 					}
 					else {
@@ -53,21 +56,28 @@ const c = {
 					sel.removeAllRanges();
 					sel.addRange(range);
 
-					HighLightNode.add({id: $sp.attr('id'), text: sel_text, $el: $('#'+$sp.attr('id')), marked: false});
+					let $cur_el = $('#' + $sp.attr('id'));
+					$cur_el.data('ty', $cur_el.position().top);
+					HighLightNode.add({
+						id: $sp.attr('id'),
+						text: sel_text,
+						$el: $cur_el,
+						marked: false
+					});
 					sel.removeAllRanges();
 
 					c.activateController(sel_text);
 				}
 				catch (e) {
 					console.warn(e);
-					if($sp) alert('Not Selectable');
+					if ($sp) alert('Not Selectable');
 					sel.removeAllRanges()
 				}
 			}
 		}
 	},
 	destory() {
-		this.$target.off('click');
+		this.$ta.off('click');
 	},
 	removeNonMarked () {
 		HighLightNode.removeNonMarked().forEach(function (n) {
@@ -82,6 +92,18 @@ const c = {
 	},
 	deactivateController() {
 		MarkingButtons.deactivate();
+	},
+
+	reload() {
+		let $sp = this.$ta.find('.cancel, .stitch, .removeletter, .paragraph, .linear, .spacing, .period, .comma, .linebreak, .indent');
+
+		$sp.each(function () {
+			let $this = $(this);
+			let type = $this.attr('class').replace('cursor', '').replace('active-block', '').replace(/\s+/g, '');
+			HighLightNode.add({id: $this.attr('id'), text: $this.text(), $el: $('#'+$this.attr('id')), marked: true, type: type});
+		});
+		HighLightNode.reload();
+		Comment.reload();
 	}
 };
 
