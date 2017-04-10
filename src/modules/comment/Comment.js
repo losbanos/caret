@@ -120,7 +120,7 @@ const c = {
 	},
 
 	addSnippet(ev, htmls) {
-		c.$list.find('.active').find('textarea').html(htmls);
+		c.$list.find('.active').find('textarea').val(htmls);
 	}
 }
 export default c;

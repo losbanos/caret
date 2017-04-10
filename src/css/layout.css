@@ -65,6 +65,32 @@ h2 span{
 .mast-head .gutter{
     overflow: hidden;
 }
+.page-tab{
+    float: right;
+    margin-top:12px;
+    border:1px solid #888888;
+}
+.page-tab a{
+    float: left;
+    display: inline-block;
+    background: #fff;
+    padding: 6px 16px;
+    text-align: center;
+    color: #000;
+    height: 12px;
+    line-height: 12px;
+    vertical-align: middle;
+}
+.page-tab a:first-child{
+    border-right: 1px solid #888;
+}
+.page-tab a:hover,
+.page-tab a.active{
+    background-color: rgba(16, 154, 163, 0.4);
+}
+.page-tab a.active{
+    font-weight: bold;
+}
 .main-head{
     padding: 18px;
     margin-top: 10px;
@@ -460,6 +486,22 @@ h2 span{
                 }
                 .tab-content:first-child{
                     display: block;
+                }
+                .comment-tpl-tit{
+                    margin-top: 10px;
+                    margin-bottom:5px;
+                }
+                .comment-tpl{
+                    margin-top: 2px;
+                    text-decoration: underline;
+                }
+                .comment-tpl:hover{
+                    /*color: rgba(16, 154, 163, 0.4);*/
+                    text-decoration: none;
+                }
+                .comment-tpl .desc-text{
+                    display: none;
+                    text-decoration: none;
                 }
 
             /* Mark Button Box */

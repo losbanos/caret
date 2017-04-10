@@ -12,9 +12,9 @@ const c = {
 		this.copyTextToComment();
 	},
 	copyTextToComment () {
-		this.$tabContents.on('click','.tab-content', function (ev) {
+		this.$tabContents.on('click','.comment-tpl', function (ev) {
 			ev.stopImmediatePropagation();
-			let htmls = $(this).html();
+			let htmls = $(this).find('.desc-text').html();
 			c.$comments.trigger(EVENT.SNIPPET_CLICK, [htmls]);
 		})
 	}
