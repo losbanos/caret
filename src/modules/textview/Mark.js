@@ -94,7 +94,6 @@ export default function (dataObj) {
 			let event;
 			switch (c.type) {
 				case 'cancel':
-					console.log('cancel');
 					Comment.activate({id: 'comment_' + c.id, index: c.index});
 					HighlightNode.removeLinearColor();
 					c.$el.addClass('active-block');
@@ -283,8 +282,10 @@ export default function (dataObj) {
 				case 'linear':
 					event = new CustomEvent(EVENT.CORRECTION_DEACTIVATE, { detail: {id: c.id}});
 					break;
+				default:
+					event = new CustomEvent(EVENT.CORRECTION_DEACTIVATE, { detail: {id: c.id}});
+					break;
 			}
-			// console.log('Event = ', event);
 			ta_correction.dispatchEvent(event);
 		},
 		update(obj) {
