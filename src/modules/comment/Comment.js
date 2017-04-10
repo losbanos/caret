@@ -121,6 +121,10 @@ const c = {
 
 	addSnippet(ev, htmls) {
 		c.$list.find('.active').find('textarea').html(htmls);
+	},
+
+	reload() {
+
 	}
 }
 export default c;

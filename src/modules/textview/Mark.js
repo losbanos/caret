@@ -33,6 +33,7 @@ export default function (dataObj) {
 				c.$el.get(0).removeEventListener(EVENT.MARK_ACTIVE, c.activeByComment);
 				c.$el.get(0).addEventListener(EVENT.MARK_ACTIVE, c.activeByComment, true);
 
+				this.$el.off('click');
 				switch(c.type) {
 					case 'cancel':
 						this.$el.on('click', this.clicked.bind(this));
@@ -91,9 +92,9 @@ export default function (dataObj) {
 		clicked(ev) {
 			ev.stopImmediatePropagation();
 			let event;
-
 			switch (c.type) {
 				case 'cancel':
+					console.log('cancel');
 					Comment.activate({id: 'comment_' + c.id, index: c.index});
 					HighlightNode.removeLinearColor();
 					c.$el.addClass('active-block');
@@ -169,6 +170,9 @@ export default function (dataObj) {
 					this.$ta_correction.get(0).dispatchEvent(event);
 					c.$el.on('click', this.clicked).addClass('cursor active-block');
 					break;
+				default:
+					c.$el.addClass('cursor');
+					break;
 			}
 
 			return c;
@@ -234,6 +238,9 @@ export default function (dataObj) {
 		setMarkNumbering(num) {
 			c.commentIndex = num;
 			c.$el.children('.mark-number').text('('+num+')');
+		},
+		setType(type) {
+			c.type = type;
 		},
 		getText() {
 			return this.text;

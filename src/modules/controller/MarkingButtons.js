@@ -46,7 +46,7 @@ const c = {
 
             /*  paragraph 예외처리 시작 */
             if (mark_id === 'paragraph') {
-                let $line = $('<span />', {class: 'paragraph-line'}),
+                let $line = $('<span />', {class: 'paragraph'}),
                     $ta = $('#text_area'),
                     ty = $ta.scrollTop()
                 ;
