@@ -12,7 +12,7 @@ This README would normally document whatever steps are necessary to get your app
 ### How do I get set up? ###
 
 * [node 다운로드](https://nodejs.org/ko/)
-* Configuration
+* install webpack
 * Dependencies
 * Database configuration
 * How to run tests
