@@ -380,6 +380,7 @@ h2 span{
             height: auto;
             margin-left: 6px;
             line-height:1.2;
+            white-space: nowrap;
             /*-ms-word-break: break-all;*/
             /*word-break: break-all;*/
         }
