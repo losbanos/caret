@@ -25,6 +25,7 @@ import EVENT from '../common/Events';
 					$owner.on('click', '.comment-head, .comment-text', function (ev) {
 						$owner.addClass(options.activeClass);
 						$ta.html($view.html().convertBRtoLineBreak());
+						$ta.height($view.height() + 20);
 						status = 'edit';
 						$owner.trigger('edit', [$owner]);
 					});
@@ -67,6 +68,7 @@ import EVENT from '../common/Events';
 				},
 				inputText () {
 					$view.html($ta.val().convertLineBreakToBR());
+					$ta.height($view.height() + 20);
 				}
 			};
 			c.init().show();
