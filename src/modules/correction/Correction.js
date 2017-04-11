@@ -97,6 +97,7 @@ const c = {
 	},
 	changePosition() {
 		let $mark = $('#'+c.markID);
+		if($mark.attr('class').indexOf('spacing') > -1) { return; }
 		let $msg = $mark.children('.correction-msg');
 		if($mark.length && $msg.length) {
 			let h = $msg.height();

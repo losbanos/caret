@@ -346,6 +346,7 @@ h2 span{
                 padding: 8px 8px 8px;
                 clear: both;
                 line-height: 1.4;
+                word-break: break-all;
             }
                 .comment-text textarea,
                 .comment-text .view{
@@ -381,6 +382,7 @@ h2 span{
             margin-left: 6px;
             line-height:1.2;
             white-space: nowrap;
+            color: #df0000;
             /*-ms-word-break: break-all;*/
             /*word-break: break-all;*/
         }

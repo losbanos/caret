@@ -177,7 +177,6 @@
         </div>
     </div>
 </div>
-<script type="text/javascript" src="modules/jquery.js"></script>
 <script>
     $(document).ready(function () {
         var $ta = $('#text_area'),
@@ -186,37 +185,26 @@
             $comments = $list.find('li'),
             marks = []
         ;
-        var $sp = $ta.find('span');
-        var s = '';
-        $sp.each(function(i) {
-        	var $this = $(this);
-        	if($this.parent().attr('id') == 'text_area' && !$this.find('span').length) {
-        		$this.replaceWith($this.html());
-            }
-        });
-
         $comments.each(function (n,i) {
             var idstr = $(this).attr('id').replace('comment_', '');
             marks.push('#'+idstr);
         });
-        var mark_str = marks.join(',');
-        var $marks = $(mark_str);
+        var $marks = $(marks.join(','));
 
-        $ta.on('click',mark_str, function (ev) {
+        $marks.on('click', function (ev) {
             ev.stopImmediatePropagation();
-            ev.stopPropagation();
             $marks.removeClass('active-block');
             $comments.removeClass('active');
-            var $this = $(this).addClass('active-block');
-            var mark_id = $this.attr('id');
-            var $comment = $('#comment_'+mark_id).addClass('active');
-            var ty = $comment.position().top + $container.scrollTop();
 
+            var $this = $(this).addClass('active-block'),
+                mark_id = $this.attr('id'),
+                $comment = $('#comment_'+mark_id).addClass('active'),
+                ty = $comment.position().top + $container.scrollTop()
+            ;
             $container.animate({scrollTop: ty}, 400);
         });
         $comments.on('click', function (ev) {
             ev.stopImmediatePropagation();
-			ev.stopPropagation();
             $marks.removeClass('active-block');
             $comments.removeClass('active');
 
@@ -229,5 +217,5 @@
         })
     })
 </script>
-</body>
+<script type="text/javascript" src="modules/jquery.js"></script></body>
 </html>
