@@ -128,7 +128,7 @@ const h = {
 			let matched = _.find(h.items, function(m) {
 				return m.id === mark_id;
 			});
-			matched.setMarkNumbering(1);
+			if(matched) matched.setMarkNumbering(1);
 		}
 	},
 	removeMarkByCommentRemove (ev, removeCommentedID, arr) {
