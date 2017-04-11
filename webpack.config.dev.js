@@ -30,7 +30,7 @@ module.exports = {
     plugins: [
         new webpack.HotModuleReplacementPlugin(),
         new HtmlWebpackPlugin({
-            template: './src/index_reload.html',
+            template: './src/index.html',
             chunks: ['jquery', 'app'],
             chunksSortMode: function (a, b) {
                 if(a.names[0] > b.names[0]) { return -1;}
