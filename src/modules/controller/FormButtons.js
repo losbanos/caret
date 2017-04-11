@@ -7,7 +7,7 @@ const c = {
 		this.$saveBtn = $('#btn_save');
 		this.$nextBtn = $('#btn_next');
 
-		this.$container.on('click', '#btn_save', function (ev) {
+		this.$container.on('click', 'button', function (ev) {
 			ev.stopImmediatePropagation()
 			$.preventActions(ev);
 			// var type = $(this).attr('id').replace('btn_', '');
