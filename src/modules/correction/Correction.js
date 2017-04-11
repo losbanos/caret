@@ -67,6 +67,7 @@ const c = {
 			if($msg.hasClass('up')) {
 				$msg.css('top', $msg.height() * -1);
 			}
+			this.$ta.val('');
 		}
 		else {
 			$msg.remove();
