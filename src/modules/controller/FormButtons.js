@@ -18,20 +18,7 @@ const c = {
 			console.log('essay = ', JSON.stringify(datas.essay));
 			console.log('-------------------------------');
 			console.log('comment = ', JSON.stringify(datas.comment));
-			switch(type) {
-				case 'save':
-					$.ajax({
-						type:'',
-						url: '',
-						data: datas,
-						success: function (result) {
 
-						}
-					})
-					break;
-				case 'next':
-					break;
-			}
 		})
 	}
 };

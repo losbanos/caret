@@ -127,7 +127,8 @@ const c = {
 	},
 
 	addSnippet(ev, htmls) {
-		c.$list.find('.active').find('textarea').val(htmls);
+		c.$list.find('.active').find('textarea').val(htmls)
+			.end().data('comment').inputText();
 	},
 
 	reload() {

@@ -1,4 +1,5 @@
 import '../addons/Utils';
+import EVENT from '../common/Events';
 
 ;(function ($) {
 	'use strict';
@@ -39,6 +40,8 @@ import '../addons/Utils';
 						}
 						$owner.trigger('comment-added', )
 					});
+
+					$owner.on(EVENT.COMMENT_INPUT_TEXT, c.inputText);
 					options.$removeBtn.one('click', this.remove);
 
 					return c;
@@ -61,6 +64,9 @@ import '../addons/Utils';
 					}
 
 					return c;
+				},
+				inputText () {
+					$view.html($ta.val().convertLineBreakToBR());
 				}
 			};
 			c.init().show();
