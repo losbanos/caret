@@ -80,6 +80,7 @@ const c = {
 			this.$container.animate({scrollTop: ty}, 400);
 			this.$list.find('li').removeClass('active');
 			$el.addClass('active');
+			$el.find('.comment-head').click();
 		}
 		else {
 			this.add(data);

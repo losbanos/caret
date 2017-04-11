@@ -137,12 +137,11 @@ const h = {
 		});
 		willRemoveMark.removeFromComment();
 		arr.forEach( function (a, i) {
-            let matched = _.find(h.items, function (n) {
-            	return n.id === a;
+            _.forEach(h.items, function (n) {
+            	if(n.id === a){
+            		n.setMarkNumbering(i + 1);
+				}
 			});
-            if(matched) {
-            	matched.setMarkNumbering(i + 1);
-			}
 		});
 	},
 	reload () {

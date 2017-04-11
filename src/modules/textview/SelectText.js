@@ -57,7 +57,11 @@ const c = {
 					sel.addRange(range);
 
 					let $cur_el = $('#' + $sp.attr('id'));
-					$cur_el.data({'ty': $cur_el.position().top, 'h': $cur_el.children('.e').position().top});
+					let h = 16;
+					if($cur_el.children('.e').length) {
+						h = $cur_el.children('.e').position().top;
+					}
+					$cur_el.data({'ty': $cur_el.position().top, 'h': h});
 
 					HighLightNode.add({ id: $sp.attr('id'), text: sel_text, $el: $cur_el, marked: false});
                     sel.removeAllRanges();
@@ -92,7 +96,6 @@ const c = {
 
 	reload() {
 		let $sp = this.$ta.find('.cancel, .stitch, .removeletter, .paragraph, .linear, .spacing, .period, .comma, .linebreak, .indent');
-
 		$sp.each(function () {
 			let $this = $(this);
 			let type = $this.attr('class').replace('cursor', '').replace('active-block', '').replace(/\s+/g, '');
