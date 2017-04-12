@@ -13,6 +13,16 @@
 		if(!this.length) return '';
 		return this.replace(/\<br\s?\/?\>/g, '\r\n');
 	};
+	function CustomEvent ( event, params ) {
+		params = params || { bubbles: false, cancelable: false, detail: undefined };
+		var evt = document.createEvent( 'CustomEvent' );
+		evt.initCustomEvent( event, params.bubbles, params.cancelable, params.detail );
+		return evt;
+	}
+
+	CustomEvent.prototype = window.Event.prototype;
+	window.CustomEvent = CustomEvent;
+
 	let $win = $(win), $doc = $(doc);
 	$.preventActions = function (ev) {
 		ev = ev || window.event;

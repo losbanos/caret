@@ -1,4 +1,6 @@
 import _ from 'lodash';
+
+import '../addons/Utils';
 import HighlightNode from './HighlightNode';
 import Comment from '../comment/Comment';
 import Correction from '../correction/Correction';
@@ -19,22 +21,22 @@ export default function (dataObj) {
 		init () {
 			c.$ta_correction = $('#ta_correction');
 
-			if(c.$el && c.$el.length) {
+			if (c.$el && c.$el.length) {
 				c.$el.get(0).addEventListener(EVENT.MARK_ACTIVE, c.activeByComment);
 				c.addRemoveHandler();
 			}
 			return c;
 		},
 		reset(){
-            c.$ta_correction = $('#ta_correction');
-            c.$el = $('#'+c.$el.attr('id'));
+			c.$ta_correction = $('#ta_correction');
+			c.$el = $('#' + c.$el.attr('id'));
 
-            if(c.$el.length) {
+			if (c.$el.length) {
 				c.$el.get(0).removeEventListener(EVENT.MARK_ACTIVE, c.activeByComment);
 				c.$el.get(0).addEventListener(EVENT.MARK_ACTIVE, c.activeByComment, true);
 
 				this.$el.off('click');
-				switch(c.type) {
+				switch (c.type) {
 					case 'cancel':
 						this.$el.on('click', this.clicked.bind(this));
 						break;
@@ -52,41 +54,41 @@ export default function (dataObj) {
 				}
 				c.addRemoveHandler();
 			}
-            return c;
+			return c;
 		},
 		addRemoveHandler() {
-            c.$el.on('contextmenu', function(ev) {
-                ev.stopImmediatePropagation();
-                let m = confirm('Are you sure you want to delete?');
-                if(m) {
-                    console.log('삭제한다!')
-                    try{
-                        c.remove();
-                    }
-                    catch(e){
-                        console.log(e);
-                    }
-                    finally {
-                        return false;
-                    }
-                }
-                else return false;
-            });
+			c.$el.on('contextmenu', function (ev) {
+				ev.stopImmediatePropagation();
+				let m = confirm('Are you sure you want to delete?');
+				if (m) {
+					console.log('삭제한다!')
+					try {
+						c.remove();
+					}
+					catch (e) {
+						console.log(e);
+					}
+					finally {
+						return false;
+					}
+				}
+				else return false;
+			});
 		},
 		addNumbering() {
-            let $num = $('<span />', {class: 'mark-number info', text: '(' + this.commentIndex + ')'});
-            switch(c.type) {
+			let $num = $('<span />', {class: 'mark-number info', text: '(' + this.commentIndex + ')'});
+			switch (c.type) {
 				case 'cancel':
-						$num.insertBefore($(this.$el).children('.f'));
+					$num.insertBefore($(this.$el).children('.f'));
 					break;
 				case 'paragraph':
-						this.$el.append($num);
+					this.$el.append($num);
 					break;
 				case 'linear':
 					this.$el.append($num);
 					break;
 			}
-            $('#text_area').trigger(EVENT.RESET_COMMENT_INDEX, c.id);
+			$('#text_area').trigger(EVENT.RESET_COMMENT_INDEX, c.id);
 		},
 
 		clicked(ev) {
@@ -99,7 +101,8 @@ export default function (dataObj) {
 					c.$el.addClass('active-block');
 
 					event = new CustomEvent(EVENT.CORRECTION_ACTIVATE, {
-							detail:{id: c.id, text: c.getCorrectionText(), reactivate: true, type:'cancel'} }
+							detail: {id: c.id, text: c.getCorrectionText(), reactivate: true, type: 'cancel'}
+						}
 					);
 					c.$ta_correction.get(0).dispatchEvent(event);
 					break;
@@ -112,7 +115,7 @@ export default function (dataObj) {
 				case 'linear':
 					Comment.activate({id: 'comment_' + c.id, index: c.index});
 					HighlightNode.removeLinearColor();
-                    Correction.deactivate();
+					Correction.deactivate();
 					c.$el.addClass('active-block');
 					break;
 				case 'spacing':
@@ -120,19 +123,20 @@ export default function (dataObj) {
 					c.$el.addClass('active-block');
 
 					event = new CustomEvent(EVENT.CORRECTION_ACTIVATE, {
-						detail:{id: this.id, text: c.getCorrectionText(), reactivate: true, type: 'spacing'} }
+							detail: {id: this.id, text: c.getCorrectionText(), reactivate: true, type: 'spacing'}
+						}
 					);
 					c.$ta_correction.get(0).dispatchEvent(event);
 					break;
 			}
-            if(!c.$el.children('.mark-number').length) {
-                c.addNumbering();
-            }
+			if (!c.$el.children('.mark-number').length) {
+				c.addNumbering();
+			}
 			return c;
 		},
 		openEdit() {
 			let event,
-				$msg = this.$el ? this.$el.children('.mark-number'): $('#'+this.id).children('.mark-number');
+				$msg = this.$el ? this.$el.children('.mark-number') : $('#' + this.id).children('.mark-number');
 			// if($msg.length) {
 			// 	this.commentIndex = $msg.text().match(/\d+/g)[0]
 			// }
@@ -143,7 +147,8 @@ export default function (dataObj) {
 					HighlightNode.removeLinearColor();
 
 					event = new CustomEvent(EVENT.CORRECTION_ACTIVATE, {
-						detail:{id: this.id, text: this.getCorrectionText(), reactivate: false, from:'mark'} }
+							detail: {id: this.id, text: this.getCorrectionText(), reactivate: false, from: 'mark'}
+						}
 					);
 					this.$ta_correction.get(0).dispatchEvent(event);
 					this.$el.on('click', this.clicked.bind(this)).addClass('cursor active-block');
@@ -159,12 +164,13 @@ export default function (dataObj) {
 					Comment.add({id: 'comment_' + this.id, index: this.index});
 					this.addNumbering();
 					HighlightNode.removeLinearColor();
-                    Correction.deactivate();
+					Correction.deactivate();
 					c.$el.on('click', this.clicked).addClass('cursor active-block');
 					break;
 				case 'spacing':
 					event = new CustomEvent(EVENT.CORRECTION_ACTIVATE, {
-						detail:{id: this.id, text: this.getCorrectionText(), reactivate: false, from:'mark'} }
+							detail: {id: this.id, text: this.getCorrectionText(), reactivate: false, from: 'mark'}
+						}
 					);
 					this.$ta_correction.get(0).dispatchEvent(event);
 					c.$el.on('click', this.clicked).addClass('cursor active-block');
@@ -183,14 +189,14 @@ export default function (dataObj) {
 
 			let event = new CustomEvent(EVENT.MARK_REMOVE, {
 				detail: {id: c.id, type: c.type}
-            });
+			});
 			$('#text_area').trigger(EVENT.MARK_REMOVE, [event]);
 			$('#ta_correction').trigger(EVENT.MARK_REMOVE, [event]);
 			$('#comments').trigger(EVENT.MARK_REMOVE, [event]);
 		},
 		removeFromComment () {
-			if(c.$el.children('.correction-msg').length) {
-                c.removeCommentIndex();
+			if (c.$el.children('.correction-msg').length) {
+				c.removeCommentIndex();
 			}
 			else {
 				c.removeCommentIndex()
@@ -198,32 +204,32 @@ export default function (dataObj) {
 				c.$el.removeMark();
 
 				let event = new CustomEvent(EVENT.MARK_REMOVE, {
-					detail: { id: c.id, type: c.type, commentIndex: c.commentIndex}
+					detail: {id: c.id, type: c.type, commentIndex: c.commentIndex}
 				});
-                $('#text_area').trigger(EVENT.MARK_REMOVE, [event]);
+				$('#text_area').trigger(EVENT.MARK_REMOVE, [event]);
 			}
 		},
 		removeCommentIndex() {
-			try{
-				c.$el = c.$el? c.$el : $('#'+c.id);
+			try {
+				c.$el = c.$el ? c.$el : $('#' + c.id);
 				let $number = c.$el.children('.mark-number');
-				if($number.length && $number) {
+				if ($number.length && $number) {
 					$number.remove();
 				}
 			}
-			catch(e) {
+			catch (e) {
 				console.warn(e)
 			}
 		},
 		removeCorrection() {
-			try{
-				c.$el = c.$el? c.$el : $('#'+c.id);
+			try {
+				c.$el = c.$el ? c.$el : $('#' + c.id);
 				let $msg = c.$el.children('.correction-msg');
-				if($msg.length && $msg) {
+				if ($msg.length && $msg) {
 					$msg.remove();
 				}
 			}
-			catch(e) {
+			catch (e) {
 				console.log(e);
 			}
 		},
@@ -236,7 +242,7 @@ export default function (dataObj) {
 		},
 		setMarkNumbering(num) {
 			c.commentIndex = num;
-			c.$el.children('.mark-number').text('('+num+')');
+			c.$el.children('.mark-number').text('(' + num + ')');
 		},
 		setType(type) {
 			c.type = type;
@@ -250,7 +256,7 @@ export default function (dataObj) {
 		},
 		getCorrectionText() {
 			let $msg = this.$el.children('.correction-msg');
-			if($msg.length) {
+			if ($msg.length) {
 				this.correctionText = $msg.html();
 			}
 			else {
@@ -266,24 +272,26 @@ export default function (dataObj) {
 			HighlightNode.removeLinearColor();
 			c.$el.addClass('active-block');
 			let $ta = $('#text_area');
-			let ty = $ta.scrollTop() + $('#'+ev.detail.id).position().top;
+			let ty = $ta.scrollTop() + $('#' + ev.detail.id).position().top;
 			$ta.animate({scrollTop: ty}, 400);
 
-			switch(c.type) {
+			switch (c.type) {
 				case 'cancel':
 					event = new CustomEvent(EVENT.CORRECTION_ACTIVATE, {
-						detail:{
+						detail: {
 							id: c.id, text: c.getCorrectionText(),
-							from:'mark', reactivate: true} });
+							from: 'mark', reactivate: true
+						}
+					});
 					break;
 				case 'paragraph':
-					event = new CustomEvent(EVENT.CORRECTION_DEACTIVATE, { detail: {id: c.id}});
+					event = new CustomEvent(EVENT.CORRECTION_DEACTIVATE, {detail: {id: c.id}});
 					break;
 				case 'linear':
-					event = new CustomEvent(EVENT.CORRECTION_DEACTIVATE, { detail: {id: c.id}});
+					event = new CustomEvent(EVENT.CORRECTION_DEACTIVATE, {detail: {id: c.id}});
 					break;
 				default:
-					event = new CustomEvent(EVENT.CORRECTION_DEACTIVATE, { detail: {id: c.id}});
+					event = new CustomEvent(EVENT.CORRECTION_DEACTIVATE, {detail: {id: c.id}});
 					break;
 			}
 			ta_correction.dispatchEvent(event);
