@@ -41,9 +41,7 @@ const h = {
 	parse (sc, ec, $el) {
 		if (!$el) $el = this.$el;
 
-		sc.setAttribute('class', 'f');
-		ec.setAttribute('class', 'e');
-		let $sc = $(sc), $ec = $(ec),
+		let $sc = $(sc).addClass('f'), $ec = $(ec).addClass('e'),
 			result = $sc.nextUntil(ec).add($sc).add(ec),
 			parentID_f = $sc.parent().attr('id'),
 			parentID_e = $ec.parent().attr('id')
