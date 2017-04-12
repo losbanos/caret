@@ -151,6 +151,7 @@ const c = {
 				});
 				$('#' + event.detail.id).get(0).dispatchEvent(event);
 			});
+			$li.data('comment').hide();
 			c.items.push($li);
 		});
 	}
