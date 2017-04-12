@@ -377,12 +377,12 @@ h2 span{
             position: absolute;
             left: 14px; top: 16px;
             min-width: 60px;
-            /*max-width: 80px;*/
             height: auto;
             margin-left: 6px;
             line-height:1.2;
             white-space: nowrap;
             color: #df0000;
+            user-select: none;
             /*-ms-word-break: break-all;*/
             /*word-break: break-all;*/
         }
