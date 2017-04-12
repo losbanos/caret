@@ -69,9 +69,12 @@ import EVENT from '../common/Events';
 				inputText () {
 					$view.html($ta.val().convertLineBreakToBR());
 					$ta.height($view.height() + 20);
+
+					return c;
 				},
 				hide() {
 					$owner.removeClass(options.activeClass);
+					return c;
 				}
 			};
 			c.init();
