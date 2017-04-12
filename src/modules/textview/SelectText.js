@@ -95,6 +95,11 @@ const c = {
 	},
 
 	reload() {
+		let $hl = this.$ta.find('.highlight').each(function () {
+			$(this).children('.f, .e').removeClass('f e');
+		});
+		$hl.replaceWith($hl.html());
+
 		let $sp = this.$ta.find('.cancel, .stitch, .removeletter, .paragraph, .linear, .spacing, .period, .comma, .linebreak, .indent');
 		$sp.each(function () {
 			let $this = $(this);

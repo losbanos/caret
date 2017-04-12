@@ -19,8 +19,9 @@ const c = {
 			// console.log('essay = ', JSON.stringify(datas.essay));
 			// console.log('-------------------------------');
 			// console.log('comment = ', JSON.stringify(datas.comment));
-			let $h = $('#text_area').find('.highlight');
-			$h.find('.e, .f').removeClass('e f').end();
+			let $h = $('#text_area').find('.highlight').each(function () {
+				$(this).children('.e, .f').removeClass('e f');
+			});
 			$h.replaceWith($h.html());
 		})
 	}

@@ -22,18 +22,15 @@ $(document).ready(function () {
 		htmls = SortText.init($ta.text());
 		MarkButtons.init();
 		SelectText.init($ta.html(htmls));
-		Comment.init();
-		TabContainer.init();
-		FormButtons.init();
 	}
 	else {
 		htmls = $ta.html();
 		MarkButtons.init();
 		SelectText.init($ta, {reload: true});
-		Comment.init();
-		TabContainer.init();
-		FormButtons.init();
 	}
+	Comment.init();
+	TabContainer.init();
+	FormButtons.init();
 	//
 	// if (process.env.NODE_ENV !== 'production') {
 	// 	FormButtons.init();
