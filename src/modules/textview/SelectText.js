@@ -9,7 +9,7 @@ const c = {
 		if (obj && obj.reload) {
 			this.reload();
 		}
-		$ta.mousedown(function (ev) {
+		$ta.mousedown(function () {
 			if (HighLightNode.items.length) {
 				c.removeNonMarked();
 				c.deactivateController();
