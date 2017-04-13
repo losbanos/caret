@@ -23,6 +23,7 @@ import EVENT from '../common/Events';
 				taText: '',
 				init() {
 					$owner.on('click', '.comment-head, .comment-text', function (ev) {
+						ev.stopImmediatePropagation();
 						$owner.addClass(options.activeClass);
 						$ta.html($view.html().convertBRtoLineBreak());
 						$ta.height($view.height() + 20);
