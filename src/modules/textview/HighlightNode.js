@@ -47,8 +47,8 @@ const h = {
 			parentID_e = $ec.parent().attr('id')
 		;
 		if(parentID_f!==parentID_e) {
-			sc.setAttribute('class', '');
-			ec.setAttribute('class', '');
+			sc.removeClass('f');
+			ec.removeClass('e');
 			throw new Error('nested select');
 		}
 		result = result.wrapAll($el);

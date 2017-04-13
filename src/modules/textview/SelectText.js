@@ -9,13 +9,17 @@ const c = {
 		if (obj && obj.reload) {
 			this.reload();
 		}
-		$ta.mousedown(function () {
+		$ta.mousedown(function (ev) {
 			if (HighLightNode.items.length) {
 				c.removeNonMarked();
 				c.deactivateController();
 			}
 		})
 			.mouseup(c.mark)
+			.on('mouseleave', function () {
+				let sel = window.getSelection();
+				sel.removeAllRanges();
+			})
 	},
 	mark (ev) {
 		let nonOccurs = ['correction-msg', 'comment-msg', 'paragraph', 'info', 'mark-number', 'period', 'comman', 'linebreak'],
