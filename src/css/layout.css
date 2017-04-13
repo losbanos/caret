@@ -441,6 +441,7 @@ h2 span{
             }
             .controller .gutter-in{
                 padding: 10px;
+                overflow: hidden;
             }
             .controller .col{
                 float: left;
