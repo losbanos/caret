@@ -192,6 +192,9 @@ h2 span{
             .removeletter{
                 position: relative;
             }
+            .removeletter > span{
+                position: relative;
+            }
             .removeletter > span:before,
             .removeletter > span:after{
                 position: absolute;
