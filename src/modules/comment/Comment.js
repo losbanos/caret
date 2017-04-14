@@ -58,6 +58,8 @@ const c = {
 		$li.addClass('active');
 		this.sortNumbering();
 
+		let ty = $li.position().top + this.$container.scrollTop();
+		this.$container.animate({scrollTop: ty}, 400);
 	},
 	sortDOMList($li) {
 		let num = parseInt($li.find('.comment-index').text().replace('.', ''));
@@ -76,11 +78,11 @@ const c = {
 			return n.attr('id') === data.id
 		});
 		if ($el !== void 0) {
-			let ty = $el.position().top + this.$container.scrollTop()
+			$el.find('.comment-head').click();
+			let ty = $el.position().top + this.$container.scrollTop();
 			this.$container.animate({scrollTop: ty}, 400);
 			this.$list.find('li').removeClass('active');
 			$el.addClass('active');
-			$el.find('.comment-head').click();
 		}
 		else {
 			this.add(data);
