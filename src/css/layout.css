@@ -148,7 +148,7 @@ h2 span{
         .text-area{
             float: left;
             position: relative;
-            width: 675px; height: 228px;
+            width: 675px; height: 206px;
             overflow-y: auto;
             padding: 20px 40px 40px 24px;
             line-height: 60px;
@@ -333,7 +333,7 @@ h2 span{
         .comment-area{
             position: relative;
             float: right;
-            width: 239px; height: 272px;
+            width: 239px; height: 250px;
             padding: 8px 10px;
             overflow-y: auto;
         }
