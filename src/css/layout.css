@@ -148,7 +148,7 @@ h2 span{
         .text-area{
             float: left;
             position: relative;
-            width: 675px; height: 238px;
+            width: 675px; height: 228px;
             overflow-y: auto;
             padding: 20px 40px 40px 24px;
             line-height: 60px;
@@ -331,7 +331,7 @@ h2 span{
         .comment-area{
             position: relative;
             float: right;
-            width: 239px; height: 282px;
+            width: 239px; height: 272px;
             padding: 8px 10px;
             overflow-y: auto;
         }
@@ -598,7 +598,7 @@ h2 span{
                 clear: both;
             }
                 .net button{
-                    width: 118px;
+                    width: 116px;
                     height: 30px;
                     margin-top: 10px;
                     color: #fff; background-color: #888;
