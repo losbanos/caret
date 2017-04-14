@@ -154,7 +154,6 @@ h2 span{
             line-height: 60px;
         }
         .text-area br{
-            content: '';
             display: block;
             margin: 0; line-height: 12px;
         }
