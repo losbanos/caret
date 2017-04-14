@@ -51,6 +51,13 @@ const c = {
 					let sc = range.startContainer.parentNode,
 						ec = range.endContainer.parentNode
 					;
+
+					/*text-area 더블클릭 으로 인한 오류처리*/
+					if($(sc).attr('class') === 'contents-body' || $(ec).attr('class') === 'contents-body') {
+						return false;
+					}
+					/*text-area 더블클릭 으로 인한 오류처리 끝*/
+
 					if (sel_text) {
 						$sp = HighLightNode.parse(sc, ec, $sp);
 					}
