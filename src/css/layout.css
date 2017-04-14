@@ -627,10 +627,10 @@ h2 span{
     display: none;
 }
 .view .text-area{
-    height: 412px;
+    height: 512px;
 }
 .view .comment-area{
-    height: 456px;
+    height: 556px;
 }
 .view .btn-remove-comment,
 .view .btn-apply-correction{
