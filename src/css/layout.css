@@ -322,7 +322,7 @@ h2 span{
                 content: '';
                 position: absolute;
                 overflow: hidden;
-                left: 100%;top: -3px;
+                left: -6px;top: -3px;
                 background: url("../images/ico_caret.png")no-repeat right -110px;
                 width: 20px; height: 17px;
             }
