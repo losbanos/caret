@@ -624,6 +624,15 @@ h2 span{
 .view .controller{
     position: relative;
 }
+.view .controller{
+    display: none;
+}
+.view .text-area{
+    height: 412px;
+}
+.view .comment-area{
+    height: 456px;
+}
 .view .btn-remove-comment,
 .view .btn-apply-correction{
     display: none;
@@ -641,26 +650,4 @@ h2 span{
 }
 .view .comments .active .view{
     display: block;
-}
-
-.scrollbar{
-    position: absolute;
-    right: 10px;
-    width: 2px;
-    height: 600px;
-    background: #ccc;
-    line-height: 0;
-}
-.handle{
-    width: 100%;
-    height: 100px;
-    background: #292a33;
-    cursor: pointer;
-}
-.mousearea{
-    position: absolute;
-    top: 0;
-    left: -10px;
-    width: 22px;
-    height: 100%;
 }

@@ -99,6 +99,7 @@ const c = {
 	},
 
 	reload() {
+		this.$ta.find('.active-block').removeClass('active-block');
 		let $hl = this.$ta.find('.highlight').each(function () {
 			$(this).children('.f, .e').removeClass('f e');
 		});
