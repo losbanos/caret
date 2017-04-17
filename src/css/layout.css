@@ -49,8 +49,9 @@ a:hover{
     display: none;}
 h1{
     float: left;
-    width: 113px; height: 50px;
-    background: url("../images/logo.png")no-repeat left top;
+    margin-top: 13px;
+    width: 97px; height: 20px;
+    background: url("../images/logo.gif")no-repeat left top;
     text-indent: -9999px;
     overflow: hidden;
 }
@@ -387,6 +388,7 @@ h2 span{
                     width: -webkit-calc(100% - 10px);
                     margin: 0; padding: 5px 5px;
                     min-height: 20px;
+                    word-break: break-word;
                 }
                 .comment-text textarea{
                     display: none;
