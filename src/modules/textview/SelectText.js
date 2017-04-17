@@ -54,6 +54,7 @@ const c = {
 
 					/*text-area 더블클릭 으로 인한 오류처리*/
 					if($(sc).attr('class') === 'contents-body' || $(ec).attr('class') === 'contents-body') {
+						sel.removeAllRanges();
 						return false;
 					}
 					/*text-area 더블클릭 으로 인한 오류처리 끝*/
