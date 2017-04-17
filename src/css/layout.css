@@ -2,7 +2,7 @@ div,h1,h2,h3,h4,h5,h6, ul, ol, li, p, textarea, button{
     margin: 0; padding: 0;
 }
 div, textarea, input, span, h1,h2,h3,h4,h5,h6, ul, li{
-    font-family: '굴림', gulim, dotum, Verdana, sans-serif;
+    font-family: 'Malgun Gothic','맑은 고딕', '굴림', gulim, dotum, Verdana, sans-serif;
     color: black;
     font-size: 12px;
 }
@@ -49,7 +49,7 @@ a:hover{
     display: none;}
 h1{
     float: left;
-    margin-top: 13px;
+    margin-top: 14px;
     width: 97px; height: 20px;
     background: url("../images/logo.gif")no-repeat left top;
     text-indent: -9999px;
@@ -57,8 +57,9 @@ h1{
 }
 h2{
     float: left;
-    margin-left: 14px; margin-top: 14px;
+    margin-left: 14px; margin-top: 13px;
     font-size: 20px; line-height: 1.0;
+    font-weight: bold;
 }
 h2 span{
     font-size: 15px;
