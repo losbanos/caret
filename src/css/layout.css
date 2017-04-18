@@ -2,7 +2,7 @@ div,h1,h2,h3,h4,h5,h6, ul, ol, li, p, textarea, button{
     margin: 0; padding: 0;
 }
 div, textarea, input, span, h1,h2,h3,h4,h5,h6, ul, li{
-    font-family: '굴림', gulim, dotum, Verdana, sans-serif;
+    font-family: Tahoma, Arial, Verdana, sans-serif;
     color: black;
     font-size: 12px;
 }
