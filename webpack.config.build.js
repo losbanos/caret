@@ -80,11 +80,12 @@ module.exports = {
             { test: /\.(jpe?g|gif|png)$/, use: [
                 {loader: 'file-loader', options: {name: '[folder]/[name].[ext]'}},
                 {loader: 'image-webpack-loader',
-                    options: {
-                        progressive: true,
-                        pngquant: {quality: '65-80', speed: 4}
+					options: {
+                        mozjpeg: {progressive: true},
+                        gifsicle: {interlaced: true},
+                        optipng: { optimizationLevel: 7}
                     }
-                }
+				}
             ]},
             { test: /\.html$/, use: [
                 {loader: 'html-loader', options: {attrs: ['img:src']}}
