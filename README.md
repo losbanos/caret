@@ -30,8 +30,7 @@
 
 
 ### 5. Demo ###  
-* [기본 화면](http://losbanos.github.io/)  
-* [강사 에디팅 중간 저장후](http://losbanos.github.io/saved/) 
+* [기본 화면](http://losbanos.github.io/)   
 
 ### 6. How do I get set up? ###
 * [node 다운로드](https://nodejs.org/ko/)  
