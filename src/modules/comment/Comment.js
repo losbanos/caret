@@ -129,8 +129,9 @@ const c = {
 	},
 
 	addSnippet(ev, htmls) {
-		c.$list.find('.active').find('textarea').val(htmls)
-			.end().data('comment').inputText();
+		let commentBox = c.$list.find('.active').find('textarea').val(htmls)
+			.end().data('comment');
+		if(commentBox) commentBox.inputText();
 	},
 
 	reload() {
