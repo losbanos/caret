@@ -87,12 +87,12 @@ h2 span{
     margin-right: 4px;
 }
 .page-tab a:hover,
-.page-tab a.active{
+.page-tab a.current{
     background-color: rgba(16, 154, 163, 1);
     border: 1px solid rgba(16, 154, 163, 1);
     color: #fff;
 }
-.page-tab a.active{
+.page-tab a.current{
     color: #fff;
     font-weight: bold;
 }
