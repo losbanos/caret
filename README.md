@@ -23,7 +23,8 @@
   
 ![screenshot](./src/images/caret_guide4.jpg)  
 ### 4. Demo ###  
-* [기본 화면](http://losbanos.github.io/)
+* [기본 화면](http://losbanos.github.io/)  
+* [첨삭 중간 저장 후](https://losbanos.github.io/index_reload.html)
 
 ### 5. 개발 및 테스트 환경 ###  
 * Build by [Webpack](https://webpack.js.org/) 2.4 ~ 2.8

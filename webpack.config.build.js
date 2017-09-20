@@ -40,6 +40,22 @@ module.exports = {
                 xhtml: true
             }
         }),
+		new HtmlWebpackPlugin({
+			template: './src/index_reload.html',
+			filename: 'index_reload.html',
+			chunks: ['app', 'jquery'],
+			chunksSortMode: function (a, b) {
+				if (a.names[0] > b.names[0]) { return -1;}
+				if (a.names[0] < b.names[0]) { return 1; }
+				return 0;
+			},
+			minify: {
+				collapseWhitespace: false,
+				removeComments: true,
+				keepClosingSlash: true,
+				xhtml: true
+			}
+		}),
         new HtmlWebpackPlugin({
             template: './src/write.html',
             filename: 'write.html',
