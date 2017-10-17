@@ -12,9 +12,13 @@
 ### 2. 서비스 대상 및 호환 ###  
 * 대상 : 해커스 강사
 * 목적 : 학생들이 작성한 영문 에세이에 대한 첨삭 서비스 제공.
-* 대상 브라우저 : chrome, firefox, ie 9 이상 - 강사 사용 환경인 맥용 크롬에 최적화 되었습니다(Chrome for Mac os)  
-
-### 3. Features, Usage ###  
+* 대상 브라우저 : chrome, firefox, ie 9 이상 - 강사 사용 환경인 맥용 크롬에 최적화 되었습니다(Chrome for Mac os)
+    
+### 3. Demo ###  
+* [기본 화면](http://losbanos.github.io/)  
+* [첨삭 중간 저장 후](https://losbanos.github.io/index_reload.html)
+  
+### 4. Features, Usage ###  
 1. 첨삭이 필요한 본문 텍스트 드래그 및 클릭 후 첨삭 부호 선택
 2. 텍스트 선택 영역에 따라 각각 다른 첨삭 부호의 활성화
 3. 특정 첨삭 부호 (취소,문단, 삽입)등에는 comment 및 correction 의 추가 가능  
@@ -22,9 +26,6 @@
 5. 마우스 오른 버튼으로 첨삭 부호 삭제
   
 ![screenshot](./src/images/caret_guide4.jpg)  
-### 4. Demo ###  
-* [기본 화면](http://losbanos.github.io/)  
-* [첨삭 중간 저장 후](https://losbanos.github.io/index_reload.html)
 
 ### 5. 개발 및 테스트 환경 ###  
 * Build by [Webpack](https://webpack.js.org/) 2.4 ~ 2.8
