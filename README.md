@@ -15,8 +15,8 @@
 * 대상 브라우저 : chrome, firefox, ie 9 이상 - 강사 사용 환경인 맥용 크롬에 최적화 되었습니다(Chrome for Mac os)
     
 ### 3. Demo ###  
-* [기본 화면](http://losbanos.github.io/)  
-* [첨삭 중간 저장 후](https://losbanos.github.io/index_reload.html)
+* [첨삭 진행 화면](http://losbanos.github.io/)  
+* [첨삭 초기 화면](https://losbanos.github.io/index_init.html)
   
 ### 4. Features, Usage ###  
 1. 첨삭이 필요한 본문 텍스트 드래그 및 클릭 후 첨삭 부호 선택
