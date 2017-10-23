@@ -27,6 +27,7 @@ module.exports = {
         new UglifyJSPlugin({compress: true, exclude: 'jquery'}),
         new HtmlWebpackPlugin({
             template: './src/index.html',
+            filename: 'index_init.html',
             chunks: ['app', 'jquery'],
             chunksSortMode: function (a, b) {
                 if (a.names[0] > b.names[0]) { return -1;}
@@ -42,7 +43,7 @@ module.exports = {
         }),
 		new HtmlWebpackPlugin({
 			template: './src/index_reload.html',
-			filename: 'index_reload.html',
+			filename: 'index.html',
 			chunks: ['app', 'jquery'],
 			chunksSortMode: function (a, b) {
 				if (a.names[0] > b.names[0]) { return -1;}

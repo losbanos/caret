@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1,maximum-scale=1,minimum-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Hackers Essay Evaluation Service</title>
+<link href="css/style.css" rel="stylesheet"></head>
+<body>
+    <div class="root">
+        <div class="mast-head">
+            <div class="gutter">
+                <h1><a href="">해커스 인강</a></h1>
+                <h2>Writing Practice Test</h2>
+                <span class="page-tab">
+                    <a href="" class="current">첨삭프로그램</a>
+                    <a href="">성적확인</a>
+                </span>
+            </div>
+        </div>
+        <div class="body">
+            <div class="gutter">
+                <section class="main-head">
+                    <header class="main-title-row">
+                        <h4>Question</h4>
+                        <span class="user-info">suji120 : 8096-141398</span>
+                    </header>
+                    <div class="main-title-comment">
+                        Multicultural societies contain many different ethnic groups that all have their own distinct cultures. What are the advantages and disadvantages of multicultural societies? Give reasons for your answer and include any relevant examples from your own know
+                    </div>
+                </section>
+                <section class="contents">
+                    <header class="contents-head">
+                        <h4>Essay</h4>
+                        <span class="word-counter">0 word</span>
+                    </header>
+                    <div class="contents-body">
+                        <div class="text-area" id="text_area">I've been living in Los Angeles for two years, and I've never been this cold in my life. I will pay anyone here $300 for GORE-TEX gloves. Anybody. I'm serious. I have the cash.
+                            Before I begin, I must point out that behind me sits a highly admired President of the United States and decorated war hero while I, a cable television talk show host, has been chosen to stand here and impart wisdom. I pray I never witness a more damning example of what is wrong with America today.
+                            Graduates, faculty, parents, relatives, undergraduates, and old people that just come to these things: Good morning and congratulations to the Dartmouth Class of 2011. Today, you have achieved something special, something only 92 percent of Americans your age will ever know: a college diploma. That’s right, with your college diploma you now have a crushing advantage over 8 percent of the workforce. I'm talking about dropout losers like Bill Gates, Steve Jobs, and Mark Zuckerberg. Incidentally, speaking of Mr. Zuckerberg, only at Harvard would someone have to invent a massive social network just to talk with someone in the next room.
+                        </div>
+                        <div class="comment-area" id="comment_area">
+                            <h5>Comment</h5>
+                            <script type="text/x-template" id="tpl_comment">
+                                <li id="{{id}}" class="">
+                                    <div class="comment-head">
+                                        <p class="comment-index">{{commentIndex}}.</p>
+                                        <button type="button" class="btn-remove-comment">삭제</button>
+                                    </div>
+                                    <div class="comment-text">
+                                        <div class="view"></div>
+                                        <textarea></textarea>
+                                    </div>
+                                </li>
+                            </script>
+                            <ul id="comments" class="comments">
+
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+        <div class="controller">
+            <div class="gutter">
+                <div class="gutter-in">
+                    <div class="correction col" id="correction">
+                        <div class="correction-head">
+                            <h6>Correction</h6>
+                            <button type="button" id="btn_apply_correction" class="btn-apply-correction" disabled="disabled">적용</button>
+                            <button type="button" id="btn_change_position" class="btn-change-position">위치변경</button>
+                        </div>
+                        <div class="correction-body">
+                            <label for="ta_correction" class="ass-lbl">Correction TextArea</label>
+                            <textarea id="ta_correction" readonly="readonly"></textarea>
+                        </div>
+                    </div>
+                    <div class="func-tab col" id="tab">
+                        <div class="tab-tit" id="tab_tit">
+                            <a href="#org_dev" class="active"><span>Organization&<br/>Develop</span></a>
+                            <a href="#style_voca"><span>Style&<br/>Vocabulary</span></a>
+                            <a href="#sent_struc"><span>Sentence&<br/>Struction</span></a>
+                            <a href="#grammar"><span>Grammar</span></a>
+                            <a href="#mechanics"><span>Mechanics</span></a>
+                        </div>
+                        <div class="tab-contents" id="tab_contents">
+                            <div class="tab-content" id="org_dev">
+                                
+                                <h5 class="comment-tpl-tit">Organization/Develop</h5>
+                                <div class="comment-tpl">
+                                    1. Sample Marco
+                                    <div class="desc-text">Organization/Develop
+
+1. 자주 사용하는 코멘트 리스트에서 복사된 코멘트 입니다.
+
+2. 첫번째 Sample 입니다.</div></div>
+                                <div class="comment-tpl">
+                                    2. Sample Marco
+                                    <div class="desc-text">Organization/Develop
+
+1. 자주 사용하는 코멘트 리스트에서 복사된 코멘트 입니다.
+
+2. 두번째 Sample 입니다.</div></div>
+                                <h5 class="comment-tpl-tit">Organization & Develop 2</h5>
+                                <div class="comment-tpl">
+                                    3. Sample Marco
+                                    <div class="desc-text">Organization/Develop 2
+
+1. 자주 사용하는 코멘트 리스트에서 복사된 코멘트 입니다.
+
+2. 세번째 Sample 입니다.</div></div>
+                                <div class="comment-tpl">
+                                    4. Sample Marco
+                                    <div class="desc-text">Organization/Develop 2
+
+1. 자주 사용하는 코멘트 리스트에서 복사된 코멘트 입니다.
+
+2. 네번째 Sample 입니다.</div></div>
+                                <h5 class="comment-tpl-tit">Organization & Develop 3</h5>
+                                <div class="comment-tpl">
+                                    5. Sample Marco
+                                    <div class="desc-text">Organization/Develop 3
+
+1. 자주 사용하는 코멘트 리스트에서 복사된 코멘트 입니다.
+
+2. 다섯째 Sample 입니다.</div></div>
+                                <div class="comment-tpl">
+                                    6. Sample Marco
+                                    <div class="desc-text">Organization/Develop 3
+
+1. 자주 사용하는 코멘트 리스트에서 복사된 코멘트 입니다.
+
+2. 여섯번째 Sample 입니다.</div></div>
+                            </div>
+                            <div class="tab-content" id="style_voca">
+                                <h5 class="comment-tpl-tit">Style & Vocabulary</h5>
+                                <div class="comment-tpl">
+                                    1. Sample Marco
+                                    <div class="desc-text">Style / Vocabulary
+
+1. 자주 사용하는 코멘트 리스트에서 복사된 코멘트 입니다.
+
+2. 첫번째 Sample 입니다.
+                                    </div>
+                                </div>
+                                <div class="comment-tpl">
+                                    2. Sample Marco
+                                    <div class="desc-text">Style / Vocabulary
+
+1. 자주 사용하는 코멘트 리스트에서 복사된 코멘트 입니다.
+
+2. 두번째 Sample 입니다.
+                                    </div>
+                                </div>
+                                <h5 class="comment-tpl-tit">Style / Vocabulary 2</h5>
+                                <div class="comment-tpl">
+                                    3. Sample Marco
+                                    <div class="desc-text">Style / Vocabulary 2
+
+1. 자주 사용하는 코멘트 리스트에서 복사된 코멘트 입니다.
+
+2. 세번째 Sample 입니다.
+                                    </div>
+                                </div>
+                                <div class="comment-tpl">
+                                    4. Sample Marco
+                                    <div class="desc-text">Style / Vocabulary 2
+
+1. 자주 사용하는 코멘트 리스트에서 복사된 코멘트 입니다.
+
+2. 네번째 Sample 입니다.
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tab-content" id="sent_struc">
+                                <h5 class="comment-tpl-tit">Sentence & Struction</h5>
+                                <div class="comment-tpl">
+                                    1. Sample Marco
+                                    <div class="desc-text">Sentence / Struction
+
+1. 자주 사용하는 코멘트 리스트에서 복사된 코멘트 입니다.
+
+2. 첫번째 Sample 입니다.
+                                    </div>
+                                </div>
+                                <div class="comment-tpl">
+                                    2. Sample Marco
+                                    <div class="desc-text">Sentence / Struction
+
+1. 자주 사용하는 코멘트 리스트에서 복사된 코멘트 입니다.
+
+2. 두번째 Sample 입니다.
+                                    </div>
+                                </div>
+                                <h5 class="comment-tpl-tit">Sentence / Struction 2</h5>
+                                <div class="comment-tpl">
+                                    3. Sample Marco
+                                    <div class="desc-text">Sentence / Struction 2
+
+1. 자주 사용하는 코멘트 리스트에서 복사된 코멘트 입니다.
+
+2. 세번째 Sample 입니다.
+                                    </div>
+                                </div>
+                                <div class="comment-tpl">
+                                    4. Sample Marco
+                                    <div class="desc-text">Sentence / Struction 2
+
+1. 자주 사용하는 코멘트 리스트에서 복사된 코멘트 입니다.
+
+2. 네번째 Sample 입니다.
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tab-content" id="grammar">
+                                <h5 class="comment-tpl-tit">Grammar</h5>
+                                <div class="comment-tpl">
+                                    1. Sample Marco
+                                    <div class="desc-text">Grammer
+
+1. 자주 사용하는 코멘트 리스트에서 복사된 코멘트 입니다.
+
+2. 첫번째 Sample 입니다.
+                                    </div>
+                                </div>
+                                <div class="comment-tpl">
+                                    2. Sample Marco
+                                    <div class="desc-text">Grammer
+
+1. 자주 사용하는 코멘트 리스트에서 복사된 코멘트 입니다.
+
+2. 두번째 Sample 입니다.
+                                    </div>
+                                </div>
+                                <h5 class="comment-tpl-tit">Grammer 2</h5>
+                                <div class="comment-tpl">
+                                    3. Sample Marco
+                                    <div class="desc-text">Grammer 2
+
+1. 자주 사용하는 코멘트 리스트에서 복사된 코멘트 입니다.
+
+2. 세번째 Sample 입니다.
+                                    </div>
+                                </div>
+                                <div class="comment-tpl">
+                                    4. Sample Marco
+                                    <div class="desc-text">Grammer 2
+
+1. 자주 사용하는 코멘트 리스트에서 복사된 코멘트 입니다.
+
+2. 네번째 Sample 입니다.
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tab-content" id="mechanics">
+                                <h5 class="comment-tpl-tit">Mechanics</h5>
+                                <div class="comment-tpl">
+                                    1. Sample Marco
+                                    <div class="desc-text">Mechanics
+
+1. 자주 사용하는 코멘트 리스트에서 복사된 코멘트 입니다.
+
+2. 첫번째 Sample 입니다.
+                                    </div>
+                                </div>
+                                <div class="comment-tpl">
+                                    2. Sample Marco
+                                    <div class="desc-text">Mechanics
+
+1. 자주 사용하는 코멘트 리스트에서 복사된 코멘트 입니다.
+
+2. 두번째 Sample 입니다.
+                                    </div>
+                                </div>
+                                <h5 class="comment-tpl-tit">Mechanics 2</h5>
+                                <div class="comment-tpl">
+                                    3. Sample Marco
+                                    <div class="desc-text">Mechanics 2
+
+1. 자주 사용하는 코멘트 리스트에서 복사된 코멘트 입니다.
+
+2. 세번째 Sample 입니다.
+                                    </div>
+                                </div>
+                                <div class="comment-tpl">
+                                    4. Sample Marco
+                                    <div class="desc-text">Mechanics 2
+
+1. 자주 사용하는 코멘트 리스트에서 복사된 코멘트 입니다.
+
+2. 네번째 Sample 입니다.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="btn-box col" id="btn_box">
+                        <div class="caret-box" id="caret_box">
+                            <div class="paragraph-caret">
+                                <button type="button" class="multi" id="paragraph">Paragraph Comment</button>
+                                <button type="button" class="multi" id="linear">Linear</button>
+                            </div>
+                            <div class="marking-caret">
+                                <button type="button" class="multi" id="removeletter"></button>
+                                <button type="button" class="multi" id="stitch"></button>
+                                <button type="button" class="multi" id="cancel"></button>
+                                <button type="button" class="" id="none1"></button>
+                                <button type="button" class="" id="none2"></button>
+                                <button type="button" class="single" id="spacing"></button>
+                                <button type="button" class="single" id="period"></button>
+                                <button type="button" class="single" id="comma"></button>
+                                <button type="button" class="single" id="indent"></button>
+                                <button type="button" class="single" id="linebreak"></button>
+                            </div>
+                        </div>
+                        <div class="net" id="net">
+                            <button type="submit" id="btn_save">Save</button>
+                            <button type="button" id="btn_next">Next</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+<script type="text/javascript" src="modules/jquery.js"></script><script type="text/javascript" src="modules/app.js"></script></body>
+</html>
